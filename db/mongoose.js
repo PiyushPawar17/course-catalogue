@@ -4,10 +4,13 @@ const { mongoURI } = require('../config/keys_dev');
 mongoose.Promise = global.Promise;
 
 mongoose
-	.connect(mongoURI)
+	.connect(
+		mongoURI,
+		{ useNewUrlParser: true }
+	)
 	.then(() => {
 		console.log('MongoDB Connected');
 	})
 	.catch(err => console.log(err));
 
-module.exports = { mongoose };
+module.exports = mongoose;

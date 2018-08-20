@@ -19,9 +19,11 @@
 	"homepage": "https://github.com/PiyushPawar17/course-catalogue#readme",
 	"dependencies": {
 		"body-parser": "^1.18.3",
+		"cookie-session": "^2.0.0-beta.3",
 		"express": "^4.16.3",
 		"mongoose": "^5.2.9",
-		"passport": "^0.4.0"
+		"passport": "^0.4.0",
+		"passport-google-oauth20": "^1.0.0"
 	},
 	"devDependencies": {
 		"nodemon": "^1.18.3"
