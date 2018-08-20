@@ -1,0 +1,29 @@
+{
+	"name": "course-catalogue",
+	"version": "0.1.0",
+	"description": "",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js",
+		"server": "nodemon server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/PiyushPawar17/course-catalogue.git"
+	},
+	"author": "Piyush Pawar",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/PiyushPawar17/course-catalogue/issues"
+	},
+	"homepage": "https://github.com/PiyushPawar17/course-catalogue#readme",
+	"dependencies": {
+		"body-parser": "^1.18.3",
+		"express": "^4.16.3",
+		"mongoose": "^5.2.9",
+		"passport": "^0.4.0"
+	},
+	"devDependencies": {
+		"nodemon": "^1.18.3"
+	}
+}
