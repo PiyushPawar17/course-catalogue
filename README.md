@@ -23,19 +23,7 @@ npm run client-install
 
 -   Run Local MongoDB Server
 
--   Run Backend Server
-
-```sh
-npm run server
-```
-
--   Run Frontend Server
-
-```sh
-npm run client
-```
-
--   Run both Backend and Frontend Server
+-   Run Development Server
 
 ```sh
 npm run dev
