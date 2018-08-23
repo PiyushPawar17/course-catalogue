@@ -7,6 +7,10 @@ const TopicSchema = new Schema({
 		required: true,
 		unique: true,
 		trim: true
+	},
+	addedBy: {
+		type: Schema.Types.ObjectId,
+		ref: 'user'
 	}
 });
 

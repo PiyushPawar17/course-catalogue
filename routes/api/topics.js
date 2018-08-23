@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+const authenticate = require('../../middleware/authenticate');
 const Topic = require('../../models/Topic');
 
 // Routes for /api/topics
@@ -20,9 +21,10 @@ router.get('/', (req, res) => {
 // Type		POST
 // URL		/api/topics
 // Desc		Adds a new topic to the database
-router.post('/', (req, res) => {
+router.post('/', authenticate, (req, res) => {
 	const topic = new Topic({
-		name: req.body.name
+		name: req.body.name,
+		addedBy: req.user._id
 	});
 
 	topic
@@ -39,13 +41,23 @@ router.post('/', (req, res) => {
 // Type		DELETE
 // URL		/api/topics/:topic
 // Desc		Removes the topic from the database
-router.delete('/:topic', (req, res) => {
-	Topic.findOneAndRemove({ name: req.params.topic })
+router.delete('/:topic', authenticate, (req, res) => {
+	Topic.findOne({ name: req.params.topic })
 		.then(topic => {
-			res.json({ topic });
+			if (topic.addedBy.toString() === req.user._id.toString()) {
+				Topic.findOneAndRemove({ name: req.params.topic })
+					.then(topic => {
+						res.json({ deletedTopic: topic });
+					})
+					.catch(err => {
+						res.json({ err });
+					});
+			} else {
+				res.json({ msg: 'You cant remove this topic' });
+			}
 		})
 		.catch(err => {
-			res.json({ err });
+			res.json({ err: 'Unable to find topic' });
 		});
 });
 
