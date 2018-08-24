@@ -1,6 +1,5 @@
 const router = require('express').Router();
 
-const authenticate = require('../../middleware/authenticate');
 const Topic = require('../../models/Topic');
 
 // Routes for /api/topics
@@ -21,7 +20,7 @@ router.get('/', (req, res) => {
 // Type		POST
 // URL		/api/topics
 // Desc		Adds a new topic to the database
-router.post('/', authenticate, (req, res) => {
+router.post('/', (req, res) => {
 	const topic = new Topic({
 		name: req.body.name,
 		addedBy: req.user._id
@@ -41,7 +40,7 @@ router.post('/', authenticate, (req, res) => {
 // Type		DELETE
 // URL		/api/topics/:topic
 // Desc		Removes the topic from the database
-router.delete('/:topic', authenticate, (req, res) => {
+router.delete('/:topic', (req, res) => {
 	Topic.findOne({ name: req.params.topic })
 		.then(topic => {
 			if (topic.addedBy.toString() === req.user._id.toString()) {

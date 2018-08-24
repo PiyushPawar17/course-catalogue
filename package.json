@@ -5,10 +5,7 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js",
-		"server": "nodemon server.js",
-		"client-install": "npm install --prefix client",
-		"client": "npm start --prefix client",
-		"dev": "concurrently \"npm run server\" \"npm run client\""
+		"server": "nodemon server.js"
 	},
 	"repository": {
 		"type": "git",
@@ -21,13 +18,14 @@
 	},
 	"homepage": "https://github.com/PiyushPawar17/course-catalogue#readme",
 	"dependencies": {
+		"bcryptjs": "^2.4.3",
 		"body-parser": "^1.18.3",
 		"concurrently": "^3.6.1",
-		"cookie-session": "^2.0.0-beta.3",
 		"express": "^4.16.3",
+		"jsonwebtoken": "^8.3.0",
 		"mongoose": "^5.2.9",
 		"passport": "^0.4.0",
-		"passport-google-oauth20": "^1.0.0"
+		"passport-jwt": "^4.0.0"
 	},
 	"devDependencies": {
 		"nodemon": "^1.18.3"

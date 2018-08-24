@@ -1,45 +1,23 @@
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20');
-const { google } = require('./keys');
-const User = require('../models/User');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const mongoose = require('mongoose');
 
-passport.serializeUser((user, done) => {
-	done(null, user.id);
-});
+const User = mongoose.model('user');
+const { secretOrKey } = require('./keys');
 
-passport.deserializeUser((id, done) => {
-	User.findById(id).then(user => {
-		done(null, user);
-	});
-});
+const opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = secretOrKey;
 
-passport.use(
-	new GoogleStrategy(
-		{
-			// Options for Google Strategy
-			callbackURL: '/auth/google/redirect',
-			clientID: google.clientID,
-			clientSecret: google.clientSecret
-		},
-		(accessToken, refreshToken, profile, done) => {
-			// Passport callback function
-			User.findOne({ googleId: profile.id }).then(currentUser => {
-				if (currentUser) {
-					done(null, currentUser);
-				} else {
-					const user = new User({
-						name: profile.displayName,
-						googleId: profile.id,
-						email: profile.emails[0].value
-					});
-
-					user.save()
-						.then(user => {
-							done(null, user);
-						})
-						.catch(err => console.log(err));
-				}
-			});
-		}
-	)
-);
+module.exports = passport => {
+	passport.use(
+		new JwtStrategy(opts, (jwt_payload, done) => {
+			User.findById(jwt_payload.id)
+				.then(user => {
+					if (user) return done(null, user);
+					return done(null, false);
+				})
+				.catch(err => console.log(err));
+		})
+	);
+};
