@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const passport = require('passport');
 
 const Topic = require('../../models/Topic');
 
@@ -9,18 +10,19 @@ const Topic = require('../../models/Topic');
 // Desc		Returns list of all topics
 router.get('/', (req, res) => {
 	Topic.find({})
+		.populate('addedBy', ['name'])
 		.then(topics => {
 			res.json({ topics });
 		})
 		.catch(err => {
-			res.json({ err: 'Unable to get topics' });
+			res.json({ error: 'Unable to get topics' });
 		});
 });
 
 // Type		POST
 // URL		/api/topics
 // Desc		Adds a new topic to the database
-router.post('/', (req, res) => {
+router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 	const topic = new Topic({
 		name: req.body.name,
 		addedBy: req.user._id
@@ -32,7 +34,7 @@ router.post('/', (req, res) => {
 			res.json({ topic });
 		})
 		.catch(err => {
-			if (err.code === 11000) res.json({ err: 'Topic already exist' });
+			if (err.code === 11000) res.json({ error: 'Topic already exist' });
 			else res.json({ err });
 		});
 });
@@ -40,7 +42,7 @@ router.post('/', (req, res) => {
 // Type		DELETE
 // URL		/api/topics/:topic
 // Desc		Removes the topic from the database
-router.delete('/:topic', (req, res) => {
+router.delete('/:topic', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Topic.findOne({ name: req.params.topic })
 		.then(topic => {
 			if (topic.addedBy.toString() === req.user._id.toString()) {
@@ -52,11 +54,11 @@ router.delete('/:topic', (req, res) => {
 						res.json({ err });
 					});
 			} else {
-				res.json({ msg: 'You cant remove this topic' });
+				res.status(403).json({ msg: 'You cant remove this topic' });
 			}
 		})
 		.catch(err => {
-			res.json({ err: 'Unable to find topic' });
+			res.json({ error: 'Unable to find topic' });
 		});
 });
 

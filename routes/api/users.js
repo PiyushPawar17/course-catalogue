@@ -13,10 +13,15 @@ const User = require('../../models/User');
 // URL		/api/users/me
 // Desc		Return current user
 router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
+	const { submittedVideoLinks, submittedBlogLinks, favorites, _id, name, email } = req.user;
+
 	res.json({
-		id: req.user.id,
-		name: req.user.name,
-		email: req.user.email
+		submittedVideoLinks,
+		submittedBlogLinks,
+		favorites,
+		_id,
+		name,
+		email
 	});
 });
 
@@ -27,7 +32,7 @@ router.post('/login', (req, res) => {
 	const { email, password } = req.body;
 
 	User.findOne({ email }).then(user => {
-		if (!user) return res.status(404).json({ err: 'User not found' });
+		if (!user) return res.status(404).json({ error: 'User not found' });
 		bcrypt.compare(password, user.password).then(isMatch => {
 			if (isMatch) {
 				const payload = {
@@ -40,7 +45,7 @@ router.post('/login', (req, res) => {
 					res.json({ success: true, token: `Bearer ${token}` });
 				});
 			} else {
-				return res.status(400).json({ err: 'Password incorrect' });
+				return res.status(400).json({ error: 'Password incorrect' });
 			}
 		});
 	});
@@ -52,7 +57,7 @@ router.post('/login', (req, res) => {
 router.post('/register', (req, res) => {
 	User.findOne({ email: req.body.email }).then(user => {
 		if (user) {
-			return res.status(400).json({ err: 'Email already exist' });
+			return res.status(400).json({ error: 'Email already exist' });
 		} else {
 			const newUser = new User({
 				name: req.body.name,
