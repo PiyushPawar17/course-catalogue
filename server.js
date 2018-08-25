@@ -6,6 +6,7 @@ const mongoose = require('./db/mongoose');
 
 const users = require('./routes/api/users');
 const topics = require('./routes/api/topics');
+const tutorials = require('./routes/api/tutorials');
 
 const app = express();
 
@@ -21,6 +22,7 @@ require('./config/passport')(passport);
 // Routes
 app.use('/api/users', users);
 app.use('/api/topics', topics);
+app.use('/api/tutorials', tutorials);
 
 const port = process.env.PORT || 5000;
 
