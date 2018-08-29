@@ -1,0 +1,37 @@
+/* Navbar Styles */
+.navbar {
+	background-color: #1890ff;
+	color: #ffffff;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.navbar .navbar-logo {
+	font-size: 1.7rem;
+	color: #ffffff;
+}
+
+.navbar .navbar-link {
+	width: 100%;
+	height: 90%;
+	border-radius: 0;
+	border: none;
+	background-color: #1890ff;
+	color: #ffffff;
+	text-decoration: none;
+	transition-duration: 0.7s;
+	text-align: center;
+	cursor: pointer;
+	font-size: 1rem;
+}
+
+.navbar .navbar-link:hover {
+	background-color: #0781f3;
+}
+
+a {
+	text-decoration: none !important;
+}
