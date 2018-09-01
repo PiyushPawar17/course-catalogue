@@ -1,0 +1,17 @@
+.input-icon {
+	color: rgba(0, 0, 0, 0.25);
+}
+
+.form-label {
+	color: #ffffff;
+	font-size: 1rem;
+}
+
+.form-item {
+	margin-bottom: 10px;
+}
+
+.form-button {
+	width: 100%;
+	margin-top: 20px;
+}

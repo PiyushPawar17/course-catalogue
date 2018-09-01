@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from '../store';
 
 import Navbar from './Navbar';
+import Login from './Login';
 
 class App extends React.Component {
 	render() {
@@ -12,6 +13,9 @@ class App extends React.Component {
 				<Router>
 					<div>
 						<Navbar />
+						<Switch>
+							<Route path="/login" component={Login} />
+						</Switch>
 					</div>
 				</Router>
 			</Provider>

@@ -1,4 +1,3 @@
-/* Navbar Styles */
 .navbar {
 	background-color: #1890ff;
 	color: #ffffff;
@@ -7,16 +6,20 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	height: 8vh;
 }
 
 .navbar .navbar-logo {
+	display: inline-block;
+	width: 75%;
 	font-size: 1.7rem;
 	color: #ffffff;
 }
 
 .navbar .navbar-link {
-	width: 100%;
-	height: 90%;
+	width: 10%;
+	height: 100%;
+	display: inline-block;
 	border-radius: 0;
 	border: none;
 	background-color: #1890ff;
@@ -34,4 +37,8 @@
 
 a {
 	text-decoration: none !important;
+}
+
+.ant-layout-header {
+	line-height: 0;
 }

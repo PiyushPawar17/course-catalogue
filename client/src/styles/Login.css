@@ -1,0 +1,10 @@
+.login {
+	height: 92vh;
+	background: url(../img/login-background.png) no-repeat;
+}
+
+.login-signup-form {
+	color: white;
+	width: 35%;
+	padding: 70px;
+}
