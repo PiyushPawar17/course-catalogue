@@ -89,7 +89,11 @@ class SignUpForm extends React.Component {
 	}
 }
 
+const mapStateToProps = state => ({
+	auth: state.auth
+});
+
 export default connect(
-	null,
+	mapStateToProps,
 	{ signUp }
 )(withRouter(SignUpForm));

@@ -1,20 +1,26 @@
-import { SIGNUP, CLEAR } from '../actions/types';
+import { SIGNUP, CLEAR, SET_CURRENT_USER } from '../actions/types';
+import { isEmpty } from '../utils/validate';
 
 const initialState = {
 	authenticated: false,
-	newSignUp: false
+	newSignUp: false,
+	user: {}
 };
 
 export default function(state = initialState, action) {
 	switch (action.type) {
 		case SIGNUP:
-			console.log('SignUp');
 			return {
 				...state,
 				newSignUp: true
 			};
+		case SET_CURRENT_USER:
+			return {
+				...state,
+				authenticated: !isEmpty(action.payload),
+				user: action.payload
+			};
 		case CLEAR:
-			console.log('Clear');
 			return {
 				...state,
 				newSignUp: false
