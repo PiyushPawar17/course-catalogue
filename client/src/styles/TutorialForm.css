@@ -1,0 +1,25 @@
+.full-page-form {
+	width: 55%;
+	margin: 30px auto 50px auto;
+}
+
+.ant-radio-button-wrapper-checked {
+	background-color: #1890ff;
+	color: #ffffff;
+}
+
+.ant-radio-button-wrapper-checked:hover {
+	color: #ffffff;
+}
+
+.full-page-form-title {
+	text-align: center;
+}
+
+.form-action-buttons {
+	text-align: right;
+}
+
+.form-action-buttons .form-action-button:not(:last-child) {
+	margin-right: 10px;
+}

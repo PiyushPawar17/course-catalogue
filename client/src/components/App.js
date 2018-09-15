@@ -9,8 +9,12 @@ import { setCurrentUser, logOut } from '../actions/authActions';
 import Navbar from './Navbar';
 import HomePage from './HomePage';
 import Login from './Login';
+import Profile from './Profile';
+import TutorialForm from './TutorialForm';
 
-// Check for token
+import '../styles/Base.css';
+
+// Check for token in local storage
 if (localStorage.jwtToken) {
 	// Set auth token header auth
 	setAuthToken(localStorage.jwtToken);
@@ -39,6 +43,8 @@ class App extends React.Component {
 						<Switch>
 							<Route exact path="/" component={HomePage} />
 							<Route path="/login" component={Login} />
+							<Route path="/profile" component={Profile} />
+							<Route path="/tutorials/new" component={TutorialForm} />
 						</Switch>
 					</div>
 				</Router>

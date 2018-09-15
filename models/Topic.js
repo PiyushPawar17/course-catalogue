@@ -8,9 +8,15 @@ const TopicSchema = new Schema({
 		unique: true,
 		trim: true
 	},
-	addedBy: {
-		type: Schema.Types.ObjectId,
-		ref: 'user'
+	description: {
+		type: String,
+		trim: true,
+		default: ''
+	},
+	website: {
+		type: String,
+		trim: true,
+		default: ''
 	}
 });
 

@@ -34,7 +34,7 @@ class LoginForm extends React.Component {
 
 	render() {
 		return (
-			<Form onSubmit={this.logIn.bind(this)}>
+			<Form onSubmit={this.logIn.bind(this)} className="login-form">
 				<Form.Item className="form-item">
 					<div className="form-label">Email</div>
 					<Input

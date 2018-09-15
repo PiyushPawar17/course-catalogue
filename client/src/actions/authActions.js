@@ -14,7 +14,7 @@ export const signUp = (user, history) => dispatch => {
 		.catch(err => console.log(err));
 };
 
-export const logIn = (user, history) => dispatch => {
+export const logIn = user => dispatch => {
 	axios
 		.post('/api/users/login', user)
 		.then(res => {
@@ -31,13 +31,14 @@ export const logIn = (user, history) => dispatch => {
 		.catch(err => console.log(err));
 };
 
-export const logOut = () => dispatch => {
+export const logOut = history => dispatch => {
 	// Remove token from local storage
 	localStorage.removeItem('jwtToken');
 	// Remove auth header
 	setAuthToken(false);
 	// Set current user to {}
 	dispatch(setCurrentUser({}));
+	history.push('/');
 };
 
 export const setCurrentUser = decoded => {
