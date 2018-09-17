@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 // Desc		Adds a new tag to the database
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 	const tag = new Tag({
-		name: req.body.name,
+		tag: req.body.tag,
 		description: req.body.description,
 		website: req.body.website
 	});

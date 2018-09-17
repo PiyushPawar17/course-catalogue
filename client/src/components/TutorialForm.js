@@ -1,5 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Radio, Select, Modal } from 'antd';
+import { connect } from 'react-redux';
+import { addTag } from '../actions/tagActions';
 
 import '../styles/TutorialForm.css';
 
@@ -40,11 +42,14 @@ class TutorialForm extends React.Component {
 			website: this.refs.tagWebsite.input.value
 		};
 
+		this.props.addTag(tag);
+
 		this.refs.newTag.input.value = '';
 		this.refs.tagDescription.textAreaRef.value = '';
 		this.refs.tagWebsite.input.value = '';
 
 		this.closeModal();
+		window.location.reload();
 	}
 
 	submitTutorial(event) {
@@ -149,4 +154,11 @@ class TutorialForm extends React.Component {
 	}
 }
 
-export default TutorialForm;
+const mapStateToProps = state => ({
+	tag: state.tag
+});
+
+export default connect(
+	mapStateToProps,
+	{ addTag }
+)(TutorialForm);
