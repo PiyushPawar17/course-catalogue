@@ -13,7 +13,7 @@ const TutorialSchema = new Schema({
 	tags: [
 		{
 			type: Schema.Types.ObjectId,
-			ref: 'topic'
+			ref: 'tag'
 		}
 	],
 	medium: {
@@ -42,7 +42,7 @@ const TutorialSchema = new Schema({
 			}
 		}
 	],
-	typeOfCourse: {
+	type: {
 		type: String,
 		required: true
 	},

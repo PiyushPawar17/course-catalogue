@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const TopicSchema = new Schema({
-	name: {
+const TagSchema = new Schema({
+	tag: {
 		type: String,
 		required: true,
 		unique: true,
@@ -20,6 +20,6 @@ const TopicSchema = new Schema({
 	}
 });
 
-const Topic = mongoose.model('topic', TopicSchema);
+const Tag = mongoose.model('tag', TagSchema);
 
-module.exports = Topic;
+module.exports = Tag;

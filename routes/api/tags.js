@@ -1,41 +1,40 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-const Topic = require('../../models/Topic');
+const Tag = require('../../models/Tag');
 
-// Routes for /api/topics
+// Routes for /api/tags
 
 // Type		GET
-// URL		/api/topics
-// Desc		Returns list of all topics
+// URL		/api/tags
+// Desc		Returns list of all tags
 router.get('/', (req, res) => {
-	Topic.find({})
+	Tag.find({})
 		.populate('addedBy', ['name'])
-		.then(topics => {
-			res.json({ topics });
+		.then(tags => {
+			res.json({ tags });
 		})
 		.catch(err => {
-			res.json({ error: 'Unable to get topics' });
+			res.json({ error: 'Unable to get tags' });
 		});
 });
 
 // Type		POST
-// URL		/api/topics
-// Desc		Adds a new topic to the database
+// URL		/api/tags
+// Desc		Adds a new tag to the database
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
-	const topic = new Topic({
+	const tag = new Tag({
 		name: req.body.name,
 		description: req.body.description,
 		website: req.body.website
 	});
 
-	topic
-		.save()
-		.then(topic => {
-			res.json({ topic });
+	tag.save()
+		.then(tag => {
+			res.json({ tag });
 		})
 		.catch(err => {
-			if (err.code === 11000) res.json({ error: 'Topic already exist' });
+			if (err.code === 11000) res.json({ error: 'Tag already exist' });
 			else res.json({ err });
 		});
 });

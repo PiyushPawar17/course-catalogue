@@ -8,14 +8,18 @@ class TutorialForm extends React.Component {
 		super(props);
 
 		this.state = {
-			modalVisible: false
+			modalVisible: false,
+			tags: []
 		};
 
-		this.addTag = this.addTag.bind(this);
+		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
+		this.submitTutorial = this.submitTutorial.bind(this);
+		this.addTag = this.addTag.bind(this);
+		this.selectTags = this.selectTags.bind(this);
 	}
 
-	addTag() {
+	openModal() {
 		this.setState({ modalVisible: true });
 	}
 
@@ -23,39 +27,73 @@ class TutorialForm extends React.Component {
 		this.setState({ modalVisible: false });
 	}
 
+	selectTags(tags) {
+		this.setState({ tags });
+	}
+
+	addTag(event) {
+		event.preventDefault();
+
+		const tag = {
+			tag: this.refs.newTag.input.value,
+			description: this.refs.tagDescription.textAreaRef.value,
+			website: this.refs.tagWebsite.input.value
+		};
+
+		this.refs.newTag.input.value = '';
+		this.refs.tagDescription.textAreaRef.value = '';
+		this.refs.tagWebsite.input.value = '';
+
+		this.closeModal();
+	}
+
+	submitTutorial(event) {
+		event.preventDefault();
+
+		const tutorial = {
+			title: this.refs.tutorialTitle.input.value,
+			educator: this.refs.educatorsName.input.value,
+			link: this.refs.tutorialLink.input.value,
+			medium: this.refs.tutorialMedium.state.value,
+			type: this.refs.tutorialType.state.value,
+			skillLevel: this.refs.skillLevel.state.value,
+			tags: this.state.tags
+		};
+	}
+
 	render() {
 		return (
-			<Form className="full-page-form">
+			<Form className="full-page-form" onSubmit={this.submitTutorial}>
 				<h1 className="full-page-form-title">Tutorial Details</h1>
 				<Form.Item>
 					<div className="form-label">Tutorial Title</div>
-					<Input type="text" placeholder="Tutorial Title" />
+					<Input type="text" placeholder="Tutorial Title" ref="tutorialTitle" />
 				</Form.Item>
 				<Form.Item>
 					<div className="form-label">Educator's Name</div>
-					<Input type="text" placeholder="Educator's Name" />
+					<Input type="text" placeholder="Educator's Name" ref="educatorsName" />
 				</Form.Item>
 				<Form.Item>
 					<div className="form-label">Link to Original Tutorial</div>
-					<Input type="text" placeholder="Link" />
+					<Input type="text" placeholder="Link" ref="tutorialLink" />
 				</Form.Item>
 				<Form.Item>
 					<div className="form-label">Medium</div>
-					<Radio.Group defaultValue="Video">
+					<Radio.Group defaultValue="Video" ref="tutorialMedium">
 						<Radio.Button value="Video">Video</Radio.Button>
 						<Radio.Button value="Blog">Blog</Radio.Button>
 					</Radio.Group>
 				</Form.Item>
 				<Form.Item>
-					<div className="form-label">Type of Course</div>
-					<Radio.Group defaultValue="Free">
+					<div className="form-label">Type of Tutorial</div>
+					<Radio.Group defaultValue="Free" ref="tutorialType">
 						<Radio.Button value="Free">Free</Radio.Button>
 						<Radio.Button value="Paid">Paid</Radio.Button>
 					</Radio.Group>
 				</Form.Item>
 				<Form.Item>
 					<div className="form-label">Skill Level</div>
-					<Radio.Group defaultValue="Beginner">
+					<Radio.Group defaultValue="Beginner" ref="skillLevel">
 						<Radio.Button value="Beginner">Beginner</Radio.Button>
 						<Radio.Button value="Intermediate">Intermediate</Radio.Button>
 						<Radio.Button value="Advanced">Advanced</Radio.Button>
@@ -63,17 +101,17 @@ class TutorialForm extends React.Component {
 				</Form.Item>
 				<Form.Item>
 					<div className="form-label">Tags</div>
-					<Select mode="multiple">
+					<Select mode="multiple" onChange={this.selectTags}>
 						<Select.Option key="React">React</Select.Option>
 						<Select.Option key="Redux">Redux</Select.Option>
 						<Select.Option key="Node">Node</Select.Option>
 						<Select.Option key="Express">Express</Select.Option>
 						<Select.Option key="MongoDB">MongoDB</Select.Option>
 					</Select>
-					<Button onClick={this.addTag}>Add New Tag</Button>
+					<Button onClick={this.openModal}>Add New Tag</Button>
 				</Form.Item>
 				<Form.Item className="form-action-buttons">
-					<Button type="primary" className="form-action-button">
+					<Button type="primary" htmlType="submit" className="form-action-button">
 						Submit Tutorial
 					</Button>
 					<Button className="form-action-button">Cancel</Button>
@@ -83,8 +121,10 @@ class TutorialForm extends React.Component {
 					title="New Tag Details"
 					onCancel={this.closeModal}
 					footer={[
-						<Button onClick={this.closeModal}>Cancel</Button>,
-						<Button type="primary" onClick={this.closeModal}>
+						<Button key="1" onClick={this.closeModal}>
+							Cancel
+						</Button>,
+						<Button key="2" type="primary" onClick={this.addTag}>
 							Add Tag
 						</Button>
 					]}
@@ -92,15 +132,15 @@ class TutorialForm extends React.Component {
 					<Form>
 						<Form.Item>
 							<div className="form-label">Tag</div>
-							<Input type="text" placeholder="Tag" />
+							<Input type="text" placeholder="Tag" ref="newTag" />
 						</Form.Item>
 						<Form.Item>
 							<div className="form-label">Description</div>
-							<Input.TextArea placeholder="Description" rows={3} />
+							<Input.TextArea placeholder="Description" rows={3} ref="tagDescription" />
 						</Form.Item>
 						<Form.Item>
 							<div className="form-label">Official Website</div>
-							<Input type="text" placeholder="Official Website" />
+							<Input type="text" placeholder="Official Website" ref="tagWebsite" />
 						</Form.Item>
 					</Form>
 				</Modal>
