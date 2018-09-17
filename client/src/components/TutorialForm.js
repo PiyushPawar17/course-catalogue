@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Radio, Select, Modal } from 'antd';
 import { connect } from 'react-redux';
 import { addTag } from '../actions/tagActions';
+import { addTutorial } from '../actions/tutorialActions';
 
 import '../styles/TutorialForm.css';
 
@@ -64,6 +65,8 @@ class TutorialForm extends React.Component {
 			skillLevel: this.refs.skillLevel.state.value,
 			tags: this.state.tags
 		};
+
+		this.props.addTutorial(tutorial, this.props.history);
 	}
 
 	render() {
@@ -155,10 +158,11 @@ class TutorialForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	tag: state.tag
+	tag: state.tag,
+	tutorial: state.tutorial
 });
 
 export default connect(
 	mapStateToProps,
-	{ addTag }
+	{ addTag, addTutorial }
 )(TutorialForm);

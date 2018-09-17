@@ -10,12 +10,7 @@ const TutorialSchema = new Schema({
 		type: String,
 		required: true
 	},
-	tags: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: 'tag'
-		}
-	],
+	tags: [String],
 	medium: {
 		type: String,
 		required: true
