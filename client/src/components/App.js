@@ -26,8 +26,7 @@ if (localStorage.jwtToken) {
 	const currentTime = Date.now() / 1000;
 	if (decoded.exp < currentTime) {
 		// Logout user
-		store.dispatch(logOut);
-		// Clear current profile
+		store.dispatch(logOut());
 		// Redirect to homepage
 		window.location.href = '/';
 	}
