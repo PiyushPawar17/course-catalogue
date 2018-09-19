@@ -1,10 +1,12 @@
-import { SIGNUP, CLEAR, SET_CURRENT_USER } from '../actions/types';
+import { SIGNUP, CLEAR, SET_CURRENT_USER, USER_PROFILE, LOADING } from '../actions/types';
 import { isEmpty } from '../utils/validate';
 
 const initialState = {
+	loading: false,
 	authenticated: false,
 	newSignUp: false,
-	user: {}
+	user: {},
+	userProfile: {}
 };
 
 export default function(state = initialState, action) {
@@ -20,10 +22,21 @@ export default function(state = initialState, action) {
 				authenticated: !isEmpty(action.payload),
 				user: action.payload
 			};
+		case USER_PROFILE:
+			return {
+				...state,
+				userProfile: action.payload,
+				loading: false
+			};
 		case CLEAR:
 			return {
 				...state,
 				newSignUp: false
+			};
+		case LOADING:
+			return {
+				...state,
+				loading: true
 			};
 		default:
 			return state;

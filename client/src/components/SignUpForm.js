@@ -43,7 +43,7 @@ class SignUpForm extends React.Component {
 
 	render() {
 		return (
-			<Form onSubmit={this.signUp.bind(this)}>
+			<Form onSubmit={this.signUp.bind(this)} className="signup-form">
 				<Form.Item className="form-item">
 					<div className="form-label">Name</div>
 					<Input

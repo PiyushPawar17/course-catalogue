@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Layout, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { logOut } from '../actions/authActions';
 
 import '../styles/Navbar.css';

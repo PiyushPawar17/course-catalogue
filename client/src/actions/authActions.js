@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
 import setAuthToken from '../utils/setAuthToken';
-import { SIGNUP, CLEAR, SET_CURRENT_USER } from './types';
+import { SIGNUP, CLEAR, SET_CURRENT_USER, USER_PROFILE, LOADING } from './types';
 
 export const signUp = (user, history) => dispatch => {
 	axios
@@ -41,10 +41,24 @@ export const logOut = history => dispatch => {
 	history.push('/');
 };
 
+export const getUserProfile = () => dispatch => {
+	dispatch(loading());
+	axios
+		.get('/api/users/me')
+		.then(res => dispatch({ type: USER_PROFILE, payload: res.data }))
+		.catch(err => console.log(err));
+};
+
 export const setCurrentUser = decoded => {
 	return {
 		type: SET_CURRENT_USER,
 		payload: decoded
+	};
+};
+
+export const loading = () => {
+	return {
+		type: LOADING
 	};
 };
 

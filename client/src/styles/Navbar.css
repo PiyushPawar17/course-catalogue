@@ -1,5 +1,5 @@
 .navbar {
-	background-color: #1890ff;
+	background-color: #0787e6;
 	color: #ffffff;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -21,7 +21,7 @@
 	display: inline-block;
 	border-radius: 0;
 	border: none;
-	background-color: #1890ff;
+	background-color: #0787e6;
 	color: #ffffff;
 	text-decoration: none;
 	transition-duration: 0.7s;
@@ -31,7 +31,7 @@
 }
 
 .navbar .navbar-link:hover {
-	background-color: #0781f3;
+	background-color: rgba(0, 0, 0, 0.1);
 }
 
 a {
