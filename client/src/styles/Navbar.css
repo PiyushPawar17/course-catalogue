@@ -1,4 +1,9 @@
 .navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	z-index: 1;
 	background-color: #0787e6;
 	color: #ffffff;
 	-webkit-touch-callout: none;
