@@ -1,69 +1,32 @@
-.profile-sidebar {
-	position: fixed;
-	width: 18%;
-	height: 100%;
-	z-index: 1;
-	top: 8vh;
-	left: 0;
-	overflow-x: hidden;
-	background: rgb(7, 135, 230);
-	background: linear-gradient(180deg, rgba(7, 135, 230, 1) 0%, rgba(158, 209, 255, 1) 100%);
-	color: #ffffff;
+.profile {
+	width: 90%;
+	margin: 2% 5%;
 }
 
-.profile-sidebar-data {
-	margin-bottom: 50px;
+.profile-userinfo {
+	text-align: center;
+	padding: 2rem;
+	background: rgb(7, 135, 230);
+	background: radial-gradient(circle, rgba(7, 135, 230, 1) 0%, rgba(75, 170, 255, 1) 100%);
+}
+
+.profile-avatar {
+	margin: 1.2rem 0;
 }
 
 .avatar {
-	text-align: center;
-	margin-top: 20px;
-}
-
-.avatar-icon {
 	background-color: #ffffff;
 	color: #0787e6;
 }
 
-.profile-sidebar-name {
+.profile-username {
 	text-transform: capitalize;
-	text-align: center;
+	font-size: 3rem;
 	color: #ffffff;
-	margin-top: 20px;
-	font-weight: lighter;
-	font-size: 1.7rem;
+	margin-bottom: 0.8rem;
 }
 
-.sidenav ul {
-	padding: 0;
-}
-
-.sidenav li {
-	width: 100%;
-	cursor: pointer;
-	list-style-type: none;
-	text-align: center;
+.profile-useremail {
 	font-size: 1rem;
-	font-weight: lighter;
-	margin: 0;
-	padding: 30px 0;
-	transition-duration: 0.3s;
-}
-
-.sidenav li:hover {
-	background-color: rgba(0, 0, 0, 0.1);
-	transform: translateY(-5px) translateX(-5px);
-	box-shadow: 0px 1px 5px #0787e6;
-}
-
-.sidenav li:active {
-	transform: translateY(0) translateX(0);
-	box-shadow: 0px 0px 0px #0787e6;
-}
-
-.profile-details {
-	width: 80%;
-	height: 92vh;
-	margin-left: 18%;
-	margin-top: 8vh;
+	color: #ffffff;
 }

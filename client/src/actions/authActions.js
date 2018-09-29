@@ -38,7 +38,8 @@ export const logOut = history => dispatch => {
 	setAuthToken(false);
 	// Set current user to {}
 	dispatch(setCurrentUser({}));
-	history.push('/');
+	if (history) history.push('/');
+	else window.location.href = '/';
 };
 
 export const getUserProfile = () => dispatch => {
