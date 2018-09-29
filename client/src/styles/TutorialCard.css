@@ -1,10 +1,18 @@
 .tutorial-card {
+	user-select: none;
+	cursor: pointer;
 	background-color: #f8f8f8;
 	margin-top: 20px;
+	transition-duration: 0.3s;
 }
 
 .tutorial-card:hover {
-	box-shadow: 2px 2px 2px 0px #0787e6;
+	box-shadow: 2px 2px 5px 0px #0787e6;
+}
+
+.tutorial-card:active {
+	transform: translateX(2px) translateY(2px);
+	box-shadow: none;
 }
 
 .card-entries {

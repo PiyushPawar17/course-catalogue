@@ -10,7 +10,6 @@ const Tag = require('../../models/Tag');
 // Desc		Returns list of all tags
 router.get('/', (req, res) => {
 	Tag.find({})
-		.populate('addedBy', ['name'])
 		.then(tags => {
 			res.json({ tags });
 		})

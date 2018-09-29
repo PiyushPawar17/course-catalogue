@@ -9,19 +9,19 @@
 		"eject": "react-scripts eject"
 	},
 	"dependencies": {
-		"antd": "^3.8.4",
+		"antd": "^3.9.3",
 		"axios": "^0.18.0",
-		"babel-plugin-import": "^1.8.0",
+		"babel-plugin-import": "^1.9.1",
 		"jwt-decode": "^2.2.0",
-		"react": "^16.4.2",
-		"react-app-rewired": "^1.5.2",
-		"react-dom": "^16.4.2",
+		"react": "^16.5.2",
+		"react-app-rewired": "^1.6.2",
+		"react-dom": "^16.5.2",
 		"react-redux": "^5.0.7",
 		"react-router-dom": "^4.3.1",
 		"react-scripts": "1.1.5",
 		"redux": "^4.0.0",
 		"redux-thunk": "^2.3.0",
-		"validator": "^10.7.0"
+		"validator": "^10.8.0"
 	},
 	"proxy": "http://localhost:5000"
 }

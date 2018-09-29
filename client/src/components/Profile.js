@@ -16,22 +16,13 @@ class Profile extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.tutorial);
 		let profile;
 		if (this.props.auth.loading || !this.props.auth.userProfile) {
 			profile = <Icon type="loading" />;
 		} else {
 			const favorites = this.props.tutorial.userTutorials.map((tutorial, i) => (
 				<Col span={8} key={i}>
-					<TutorialCard
-						title={tutorial.title}
-						link={tutorial.link}
-						educator={tutorial.educator}
-						medium={tutorial.medium}
-						type={tutorial.type}
-						skillLevel={tutorial.skillLevel}
-						tags={tutorial.tags}
-					/>
+					<TutorialCard tutorial={tutorial} />
 				</Col>
 			));
 			profile = (
@@ -48,24 +39,18 @@ class Profile extends React.Component {
 					<main className="profile-details">
 						<Tabs defaultActiveKey="1" size="large">
 							<Tabs.TabPane tab="Favorites" key="1" className="tab-content">
-								<Row gutter={8}>
-									{favorites} {favorites}
-								</Row>
+								<Row gutter={8}>{favorites}</Row>
 							</Tabs.TabPane>
-							<Tabs.TabPane tab="Submitted Videos" key="2">
-								<Row gutter={8}>
-									{favorites} {favorites}
-								</Row>
+							<Tabs.TabPane tab="Submitted Videos" key="2" className="tab-content">
+								<Row gutter={8}>{favorites}</Row>
 							</Tabs.TabPane>
-							<Tabs.TabPane tab="Submitted Blogs" key="3">
-								<Row gutter={8}>
-									{favorites} {favorites}
-								</Row>
+							<Tabs.TabPane tab="Submitted Blogs" key="3" className="tab-content">
+								<Row gutter={8}>{favorites}</Row>
 							</Tabs.TabPane>
 						</Tabs>
-						{/* <Button>
-							<Link to="/tutorials/new">Submit a tutorial</Link>
-						</Button> */}
+						<Button type="primary" size="large">
+							<Link to="/tutorials/new">Submit A Tutorial</Link>
+						</Button>
 					</main>
 				</div>
 			);

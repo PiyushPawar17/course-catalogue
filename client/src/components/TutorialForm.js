@@ -1,7 +1,7 @@
 import React from 'react';
-import { Form, Input, Button, Radio, Select, Modal } from 'antd';
+import { Form, Input, Button, Radio, Select, Modal, message } from 'antd';
 import { connect } from 'react-redux';
-import { addTag } from '../actions/tagActions';
+import { addTag, getTags } from '../actions/tagActions';
 import { addTutorial } from '../actions/tutorialActions';
 
 import '../styles/TutorialForm.css';
@@ -22,6 +22,10 @@ class TutorialForm extends React.Component {
 		this.selectTags = this.selectTags.bind(this);
 	}
 
+	componentDidMount() {
+		this.props.getTags();
+	}
+
 	openModal() {
 		this.setState({ modalVisible: true });
 	}
@@ -36,6 +40,13 @@ class TutorialForm extends React.Component {
 
 	addTag(event) {
 		event.preventDefault();
+
+		if (this.refs.newTag.input.value.trim() === '') {
+			return message.warning('Enter Tag');
+		}
+		if (this.refs.tagDescription.textAreaRef.value.trim() === '') {
+			return message.warning('Enter Tag Description');
+		}
 
 		const tag = {
 			tag: this.refs.newTag.input.value,
@@ -55,6 +66,18 @@ class TutorialForm extends React.Component {
 
 	submitTutorial(event) {
 		event.preventDefault();
+		if (this.refs.tutorialTitle.input.value.trim() === '') {
+			return message.warning('Enter Title');
+		}
+		if (this.refs.educatorsName.input.value.trim() === '') {
+			return message.warning('Enter Educator Name');
+		}
+		if (this.refs.tutorialLink.input.value.trim() === '') {
+			return message.warning('Provide Tutorial Link');
+		}
+		if (this.state.tags.length === 0) {
+			return message.warning('Select Tags');
+		}
 
 		const tutorial = {
 			title: this.refs.tutorialTitle.input.value,
@@ -70,6 +93,16 @@ class TutorialForm extends React.Component {
 	}
 
 	render() {
+		let tags;
+		if (this.props.tag.loading || !this.props.tag.tags) {
+			tags = null;
+		} else {
+			tags = this.props.tag.tags.map(tag => (
+				<Select.Option key={tag.tag} value={tag.tag}>
+					{tag.tag}
+				</Select.Option>
+			));
+		}
 		return (
 			<Form className="full-page-form" onSubmit={this.submitTutorial}>
 				<h1 className="full-page-form-title">Tutorial Details</h1>
@@ -110,11 +143,7 @@ class TutorialForm extends React.Component {
 				<Form.Item>
 					<div className="form-label">Tags</div>
 					<Select mode="multiple" onChange={this.selectTags}>
-						<Select.Option key="React">React</Select.Option>
-						<Select.Option key="Redux">Redux</Select.Option>
-						<Select.Option key="Node">Node</Select.Option>
-						<Select.Option key="Express">Express</Select.Option>
-						<Select.Option key="MongoDB">MongoDB</Select.Option>
+						{tags}
 					</Select>
 					<Button onClick={this.openModal}>Add New Tag</Button>
 				</Form.Item>
@@ -122,7 +151,9 @@ class TutorialForm extends React.Component {
 					<Button type="primary" htmlType="submit" className="form-action-button">
 						Submit Tutorial
 					</Button>
-					<Button className="form-action-button">Cancel</Button>
+					<Button className="form-action-button" onClick={this.props.history.goBack}>
+						Cancel
+					</Button>
 				</Form.Item>
 				<Modal
 					visible={this.state.modalVisible}
@@ -164,5 +195,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ addTag, addTutorial }
+	{ getTags, addTag, addTutorial }
 )(TutorialForm);
