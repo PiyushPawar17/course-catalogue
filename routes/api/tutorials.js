@@ -5,6 +5,24 @@ const Tutorial = require('../../models/Tutorial');
 
 // Routes for /api/tutorials
 
+// Type		GET
+// URL		/api/tutorials/all
+// Desc		Returns list of all uploaded tutorials
+router.get('/all', (req, res) => {
+	Tutorial.find({})
+		.then(tutorials => res.json({ tutorials }))
+		.catch(err => console.log(err));
+});
+
+// Type		GET
+// URL		/api/tutorials
+// Desc		Returns list of uploaded tutorials by the user
+router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+	Tutorial.find({ submittedBy: req.user._id })
+		.then(tutorials => res.json({ tutorials }))
+		.catch(err => console.log(err));
+});
+
 // Type		POST
 // URL		/api/tutorials
 // Desc		Adds a new tutorial to the database

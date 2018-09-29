@@ -1,21 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, Icon, Avatar, Tabs } from 'antd';
+import { Button, Icon, Avatar, Tabs, Row, Col } from 'antd';
 import { getUserProfile } from '../actions/authActions';
+import { getUserTutorials } from '../actions/tutorialActions';
+
+import TutorialCard from './TutorialCard';
 
 import '../styles/Profile.css';
 
 class Profile extends React.Component {
 	componentDidMount() {
 		this.props.getUserProfile();
+		this.props.getUserTutorials();
 	}
 
 	render() {
+		console.log(this.props.tutorial);
 		let profile;
 		if (this.props.auth.loading || !this.props.auth.userProfile) {
 			profile = <Icon type="loading" />;
 		} else {
+			const favorites = this.props.tutorial.userTutorials.map((tutorial, i) => (
+				<Col span={8} key={i}>
+					<TutorialCard
+						title={tutorial.title}
+						link={tutorial.link}
+						educator={tutorial.educator}
+						medium={tutorial.medium}
+						type={tutorial.type}
+						skillLevel={tutorial.skillLevel}
+						tags={tutorial.tags}
+					/>
+				</Col>
+			));
 			profile = (
 				<div className="profile">
 					<div className="profile-userinfo">
@@ -29,14 +47,20 @@ class Profile extends React.Component {
 					</div>
 					<main className="profile-details">
 						<Tabs defaultActiveKey="1" size="large">
-							<Tabs.TabPane tab="Favorites" key="1">
-								Favorites
+							<Tabs.TabPane tab="Favorites" key="1" className="tab-content">
+								<Row gutter={8}>
+									{favorites} {favorites}
+								</Row>
 							</Tabs.TabPane>
 							<Tabs.TabPane tab="Submitted Videos" key="2">
-								Submitted Videos
+								<Row gutter={8}>
+									{favorites} {favorites}
+								</Row>
 							</Tabs.TabPane>
 							<Tabs.TabPane tab="Submitted Blogs" key="3">
-								Submitted Blogs
+								<Row gutter={8}>
+									{favorites} {favorites}
+								</Row>
 							</Tabs.TabPane>
 						</Tabs>
 						{/* <Button>
@@ -52,10 +76,11 @@ class Profile extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	auth: state.auth
+	auth: state.auth,
+	tutorial: state.tutorial
 });
 
 export default connect(
 	mapStateToProps,
-	{ getUserProfile }
+	{ getUserProfile, getUserTutorials }
 )(Profile);

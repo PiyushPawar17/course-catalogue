@@ -1,0 +1,13 @@
+.tutorial-card {
+	background-color: #f8f8f8;
+	margin-top: 20px;
+}
+
+.tutorial-card:hover {
+	box-shadow: 2px 2px 2px 0px #0787e6;
+}
+
+.card-entries {
+	margin-bottom: 10px;
+	font-size: 1rem;
+}

@@ -1,8 +1,9 @@
-import { ADD_TUTORIAL } from '../actions/types';
+import { ADD_TUTORIAL, USER_TUTORIALS } from '../actions/types';
 
 const initialState = {
 	tutorial: null,
-	tutorials: []
+	tutorials: [],
+	userTutorials: []
 };
 
 export default function(state = initialState, action) {
@@ -11,6 +12,11 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				tutorial: action.payload
+			};
+		case USER_TUTORIALS:
+			return {
+				...state,
+				userTutorials: action.payload
 			};
 		default:
 			return state;

@@ -5,3 +5,4 @@ export const CLEAR = 'CLEAR';
 export const ADD_TAG = 'ADD_TAG';
 export const ADD_TUTORIAL = 'ADD_TUTORIAL';
 export const LOADING = 'LOADING';
+export const USER_TUTORIALS = 'USER_TUTORIALS';

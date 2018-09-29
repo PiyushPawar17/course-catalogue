@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_TUTORIAL } from './types';
+import { ADD_TUTORIAL, USER_TUTORIALS } from './types';
 
 export const addTutorial = (tutorial, history) => dispatch => {
 	axios
@@ -8,5 +8,12 @@ export const addTutorial = (tutorial, history) => dispatch => {
 			dispatch({ type: ADD_TUTORIAL, payload: res.data });
 			history.push('/profile');
 		})
+		.catch(err => console.log(err));
+};
+
+export const getUserTutorials = () => dispatch => {
+	axios
+		.get('/api/tutorials')
+		.then(res => dispatch({ type: USER_TUTORIALS, payload: res.data.tutorials }))
 		.catch(err => console.log(err));
 };
