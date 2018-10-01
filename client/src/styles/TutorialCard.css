@@ -7,11 +7,12 @@
 }
 
 .tutorial-card:hover {
+	transform: translateX(-2px) translateY(-2px);
 	box-shadow: 2px 2px 5px 0px #0787e6;
 }
 
 .tutorial-card:active {
-	transform: translateX(2px) translateY(2px);
+	transform: translateX(0) translateY(0);
 	box-shadow: none;
 }
 

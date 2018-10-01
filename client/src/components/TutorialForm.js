@@ -103,6 +103,7 @@ class TutorialForm extends React.Component {
 				</Select.Option>
 			));
 		}
+
 		return (
 			<Form className="full-page-form" onSubmit={this.submitTutorial}>
 				<h1 className="full-page-form-title">Tutorial Details</h1>

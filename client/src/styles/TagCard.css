@@ -1,0 +1,39 @@
+.tag-card {
+	height: 260px;
+	padding: 5px;
+	margin-bottom: 15px;
+	cursor: pointer;
+	transition-duration: 0.3s;
+	user-select: none;
+}
+
+.tag-card:hover {
+	transform: translateX(-2px) translateY(-2px);
+	box-shadow: 2px 2px 5px 0px #0787e6;
+}
+
+.tag-card:active {
+	transform: translateX(0) translateY(0);
+	box-shadow: none;
+}
+
+.tag-card-title {
+	font-size: 1.8rem;
+	margin-bottom: 10px;
+}
+
+.tag-card-description {
+	height: 100px;
+	font-size: 0.8rem;
+	margin-bottom: 20px;
+}
+
+.tag-card-website {
+	font-size: 0.8rem;
+	padding-top: 10px;
+	border-top: 1px solid #0787e6;
+}
+
+.tag-card-website .website-link {
+	color: #0787e6;
+}

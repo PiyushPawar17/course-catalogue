@@ -6,17 +6,17 @@ import '../styles/TutorialCard.css';
 class TutorialCard extends React.Component {
 	render() {
 		const colors = [
-			'#722ed1',
-			'#eb2f96',
-			'#52c41a',
-			'#fa8c16',
-			'#f5222d',
-			'#fa541c',
-			'#faad14',
-			'#a0d911',
-			'#1890ff',
-			'#2f54eb',
-			'#13c2c2'
+			'#8443de',
+			'#ff46ab',
+			'#69e52c',
+			'#fc972b',
+			'#fd313c',
+			'#f5f29',
+			'#ffb420',
+			'#a6e509',
+			'#2295ff',
+			'#3359f5',
+			'#04caca'
 		];
 		const tags = this.props.tutorial.tags.map((tag, i) => (
 			<Tag key={i} color={colors[i % colors.length]}>
@@ -32,7 +32,6 @@ class TutorialCard extends React.Component {
 		return (
 			<Card title={this.props.tutorial.title} className="tutorial-card">
 				<Skeleton loading={!this.props.tutorial} active>
-					<div className="card-entries">Link : {this.props.tutorial.link}</div>
 					<div className="card-entries">Medium : {this.props.tutorial.medium}</div>
 					<div className="card-entries">Educator : {this.props.tutorial.educator}</div>
 					<div className="card-entries">Type : {this.props.tutorial.type}</div>
