@@ -18,6 +18,20 @@ router.get('/', (req, res) => {
 		});
 });
 
+// Type		GET
+// URL		/api/tags/:tag
+// Desc		Returns information of given tag
+router.get('/:tag', (req, res) => {
+	const tag = req.params.tag.split('-').join(' ');
+	Tag.findOne({ tag: { $regex: tag, $options: 'i' } })
+		.then(tag => {
+			res.json({ tag });
+		})
+		.catch(err => {
+			res.json({ error: 'Unable to get tags' });
+		});
+});
+
 // Type		POST
 // URL		/api/tags
 // Desc		Adds a new tag to the database

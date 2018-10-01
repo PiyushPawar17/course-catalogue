@@ -15,6 +15,18 @@ router.get('/all', (req, res) => {
 });
 
 // Type		GET
+// URL		/api/tutorials/:tag
+// Desc		Returns list of tutorials of the given tag
+router.get('/:tag', (req, res) => {
+	const tag = req.params.tag.split('-').join(' ');
+	Tutorial.find({ tags: { $regex: tag, $options: 'i' } })
+		.then(tutorials => {
+			res.json({ tutorials });
+		})
+		.catch(err => console.log(err));
+});
+
+// Type		GET
 // URL		/api/tutorials
 // Desc		Returns list of uploaded tutorials by the user
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {

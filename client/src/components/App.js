@@ -11,6 +11,7 @@ import HomePage from './HomePage';
 import Login from './Login';
 import Profile from './Profile';
 import TutorialForm from './TutorialForm';
+import Tutorials from './Tutorials';
 
 import '../styles/Base.css';
 
@@ -44,6 +45,7 @@ class App extends React.Component {
 							<Route path="/login" component={Login} />
 							<Route path="/profile" component={Profile} />
 							<Route path="/tutorials/new" component={TutorialForm} />
+							<Route path="/tutorials/tag/:tag" component={Tutorials} />
 						</Switch>
 					</div>
 				</Router>

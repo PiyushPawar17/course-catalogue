@@ -25,8 +25,8 @@ class HomePage extends React.Component {
 		if (this.props.tag.loading || !this.props.tag.tags) {
 			tags = <Icon type="loading" />;
 		} else {
-			tags = this.props.tag.tags.map(tag => (
-				<Col span={8}>
+			tags = this.props.tag.tags.map((tag, i) => (
+				<Col key={i} span={8}>
 					<TagCard tag={tag} />
 				</Col>
 			));
