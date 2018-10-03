@@ -10,6 +10,10 @@ const TutorialSchema = new Schema({
 		type: String,
 		required: true
 	},
+	description: {
+		type: String,
+		required: true
+	},
 	tags: [String],
 	medium: {
 		type: String,

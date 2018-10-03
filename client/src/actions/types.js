@@ -9,3 +9,4 @@ export const USER_TUTORIALS = 'USER_TUTORIALS';
 export const GET_TAGS = 'GET_TAGS';
 export const GET_TAG = 'GET_TAG';
 export const GET_TUTORIALS_BY_TAG = 'GET_TUTORIALS_BY_TAG';
+export const GET_TUTORIAL = 'GET_TUTORIAL';

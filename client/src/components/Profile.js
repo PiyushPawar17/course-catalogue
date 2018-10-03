@@ -49,7 +49,7 @@ class Profile extends React.Component {
 							</Tabs.TabPane>
 						</Tabs>
 						<Button type="primary" size="large">
-							<Link to="/tutorials/new">Submit A Tutorial</Link>
+							<Link to="/addtutorial">Submit A Tutorial</Link>
 						</Button>
 					</main>
 				</div>

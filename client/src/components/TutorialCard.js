@@ -1,9 +1,25 @@
 import React from 'react';
-import { Card, Tag, Rate, Skeleton, Tooltip } from 'antd';
+import { Card, Tag, Skeleton, Tooltip, Icon } from 'antd';
+import { withRouter } from 'react-router-dom';
 
 import '../styles/TutorialCard.css';
 
 class TutorialCard extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			theme: 'outlined'
+		};
+
+		this.changeTheme = this.changeTheme.bind(this);
+	}
+
+	changeTheme() {
+		const theme = this.state.theme === 'outlined' ? 'filled' : 'outlined';
+		this.setState({ theme });
+	}
+
 	render() {
 		const colors = [
 			'#8443de',
@@ -23,23 +39,38 @@ class TutorialCard extends React.Component {
 				{tag}
 			</Tag>
 		));
-		const star =
-			this.props.tutorial.skillLevel === 'Beginner'
-				? 1
-				: this.props.tutorial.skillLevel === 'Intermediate'
-					? 2
-					: 3;
+
 		return (
-			<Card title={this.props.tutorial.title} className="tutorial-card">
+			<Card className="tutorial-card">
 				<Skeleton loading={!this.props.tutorial} active>
-					<div className="card-entries">Medium : {this.props.tutorial.medium}</div>
-					<div className="card-entries">Educator : {this.props.tutorial.educator}</div>
-					<div className="card-entries">Type : {this.props.tutorial.type}</div>
-					<div className="card-entries">
-						<Tooltip placement="right" title={this.props.tutorial.skillLevel}>
-							Skill Level : <Rate disabled count={3} value={star} />
+					<div className="card-title">
+						<Tooltip placement="topLeft" title="Click here for more info">
+							<span
+								className="tutorial-name"
+								onClick={() =>
+									this.props.history.push(`/tutorials/${this.props.tutorial._id}`)
+								}
+							>
+								{this.props.tutorial.title}
+							</span>
+						</Tooltip>
+						<Tooltip
+							placement="top"
+							title={
+								this.state.theme === 'outlined' ? 'Add to favorites' : 'Remove from favorites'
+							}
+						>
+							<Icon
+								type="heart"
+								theme={this.state.theme}
+								className="favorite"
+								onClick={this.changeTheme}
+							/>
 						</Tooltip>
 					</div>
+					<div className="card-entries">Medium : {this.props.tutorial.medium}</div>
+					<div className="card-entries">Type : {this.props.tutorial.type}</div>
+					<div className="card-entries">Skill Level : {this.props.tutorial.skillLevel}</div>
 					<div className="card-entries">{tags}</div>
 				</Skeleton>
 			</Card>
@@ -47,4 +78,4 @@ class TutorialCard extends React.Component {
 	}
 }
 
-export default TutorialCard;
+export default withRouter(TutorialCard);

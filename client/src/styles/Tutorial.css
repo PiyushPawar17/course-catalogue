@@ -1,0 +1,17 @@
+.tutorial {
+	width: 80%;
+	margin: 2rem auto;
+}
+
+.tutorial-tags {
+	margin-bottom: 1rem;
+}
+
+.divider {
+	background-color: #1890ff;
+}
+
+.tutorial-info {
+	font-size: 1rem;
+	margin-bottom: 10px;
+}

@@ -61,7 +61,7 @@ class TutorialForm extends React.Component {
 		this.refs.tagWebsite.input.value = '';
 
 		this.closeModal();
-		window.location.reload();
+		this.props.getTags();
 	}
 
 	submitTutorial(event) {
@@ -75,6 +75,9 @@ class TutorialForm extends React.Component {
 		if (this.refs.tutorialLink.input.value.trim() === '') {
 			return message.warning('Provide Tutorial Link');
 		}
+		if (this.refs.tutorialDescription.textAreaRef.value.trim() === '') {
+			return message.warning('Enter Tutorial Description');
+		}
 		if (this.state.tags.length === 0) {
 			return message.warning('Select Tags');
 		}
@@ -83,6 +86,7 @@ class TutorialForm extends React.Component {
 			title: this.refs.tutorialTitle.input.value,
 			educator: this.refs.educatorsName.input.value,
 			link: this.refs.tutorialLink.input.value,
+			description: this.refs.tutorialDescription.textAreaRef.value,
 			medium: this.refs.tutorialMedium.state.value,
 			type: this.refs.tutorialType.state.value,
 			skillLevel: this.refs.skillLevel.state.value,
@@ -118,6 +122,10 @@ class TutorialForm extends React.Component {
 				<Form.Item>
 					<div className="form-label">Link to Original Tutorial</div>
 					<Input type="text" placeholder="Link" ref="tutorialLink" />
+				</Form.Item>
+				<Form.Item>
+					<div className="form-label">Description</div>
+					<Input.TextArea placeholder="Description" rows={3} ref="tutorialDescription" />
 				</Form.Item>
 				<Form.Item>
 					<div className="form-label">Medium</div>

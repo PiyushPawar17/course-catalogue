@@ -15,14 +15,24 @@ router.get('/all', (req, res) => {
 });
 
 // Type		GET
-// URL		/api/tutorials/:tag
+// URL		/api/tutorials/tag/:tag
 // Desc		Returns list of tutorials of the given tag
-router.get('/:tag', (req, res) => {
+router.get('/tag/:tag', (req, res) => {
 	const tag = req.params.tag.split('-').join(' ');
 	Tutorial.find({ tags: { $regex: tag, $options: 'i' } })
 		.then(tutorials => {
 			res.json({ tutorials });
 		})
+		.catch(err => console.log(err));
+});
+
+// Type		GET
+// URL		/api/tutorials/:tutorial
+// Desc		Returns the tutorial of the given ID
+router.get('/:tutorial', (req, res) => {
+	Tutorial.findById(req.params.tutorial)
+		.populate('submittedBy', 'name')
+		.then(tutorial => res.json({ tutorial }))
 		.catch(err => console.log(err));
 });
 
@@ -39,11 +49,12 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 // URL		/api/tutorials
 // Desc		Adds a new tutorial to the database
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
-	const { title, educator, link, medium, type, skillLevel, tags } = req.body;
+	const { title, educator, link, medium, type, skillLevel, tags, description } = req.body;
 	const tutorial = new Tutorial({
 		title,
 		educator,
 		link,
+		description,
 		medium,
 		type,
 		skillLevel,

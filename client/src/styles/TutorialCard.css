@@ -1,4 +1,5 @@
 .tutorial-card {
+	height: 250px;
 	user-select: none;
 	cursor: pointer;
 	background-color: #f8f8f8;
@@ -11,9 +12,24 @@
 	box-shadow: 2px 2px 5px 0px #0787e6;
 }
 
-.tutorial-card:active {
-	transform: translateX(0) translateY(0);
-	box-shadow: none;
+.card-title {
+	font-size: 1.2rem;
+	border-bottom: 1px solid #0787e6;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+.tutorial-name {
+	display: inline-block;
+	width: 90%;
+}
+
+.tutorial-name:hover {
+	color: #0787e6;
+}
+
+.favorite {
+	color: #f72b2b;
 }
 
 .card-entries {
