@@ -2,10 +2,12 @@
 
 ### Development
 
+-   Fork Repository
+
 -   Clone Repository
 
 ```sh
-git clone https://github.com/PiyushPawar17/course-catalogue.git
+git clone https://github.com/{Your_Username}/course-catalogue.git
 cd course-catalogue
 ```
 
