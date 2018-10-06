@@ -12,7 +12,11 @@ class TutorialForm extends React.Component {
 
 		this.state = {
 			modalVisible: false,
-			tags: []
+			tags: [],
+			tutorialLetters: 0,
+			tagLetters: 0,
+			tutorialDescription: '',
+			tagDescription: ''
 		};
 
 		this.openModal = this.openModal.bind(this);
@@ -20,6 +24,7 @@ class TutorialForm extends React.Component {
 		this.submitTutorial = this.submitTutorial.bind(this);
 		this.addTag = this.addTag.bind(this);
 		this.selectTags = this.selectTags.bind(this);
+		this.onChange = this.onChange.bind(this);
 	}
 
 	componentDidMount() {
@@ -36,6 +41,17 @@ class TutorialForm extends React.Component {
 
 	selectTags(tags) {
 		this.setState({ tags });
+	}
+
+	onChange() {
+		const tutorialDescription = this.refs.tutorialDescription.textAreaRef.value;
+		const tagDescription = this.refs.tagDescription.textAreaRef.value;
+		if (tutorialDescription.length <= 150) {
+			this.setState({ tutorialLetters: tutorialDescription.length, tutorialDescription });
+		}
+		if (tagDescription.length <= 150) {
+			this.setState({ tagLetters: tagDescription.length, tagDescription });
+		}
 	}
 
 	addTag(event) {
@@ -112,20 +128,27 @@ class TutorialForm extends React.Component {
 			<Form className="full-page-form" onSubmit={this.submitTutorial}>
 				<h1 className="full-page-form-title">Tutorial Details</h1>
 				<Form.Item>
-					<div className="form-label">Tutorial Title</div>
+					<div className="form-label required">Tutorial Title</div>
 					<Input type="text" placeholder="Tutorial Title" ref="tutorialTitle" />
 				</Form.Item>
 				<Form.Item>
-					<div className="form-label">Educator's Name</div>
+					<div className="form-label required">Educator's Name</div>
 					<Input type="text" placeholder="Educator's Name" ref="educatorsName" />
 				</Form.Item>
 				<Form.Item>
-					<div className="form-label">Link to Original Tutorial</div>
+					<div className="form-label required">Link to Original Tutorial</div>
 					<Input type="text" placeholder="Link" ref="tutorialLink" />
 				</Form.Item>
 				<Form.Item>
-					<div className="form-label">Description</div>
-					<Input.TextArea placeholder="Description" rows={3} ref="tutorialDescription" />
+					<div className="form-label required">Description</div>
+					<Input.TextArea
+						placeholder="Description"
+						rows={2}
+						ref="tutorialDescription"
+						onChange={this.onChange}
+						value={this.state.tutorialDescription}
+					/>
+					<small className="word-count">{this.state.tutorialLetters} / 150</small>
 				</Form.Item>
 				<Form.Item>
 					<div className="form-label">Medium</div>
@@ -150,7 +173,7 @@ class TutorialForm extends React.Component {
 					</Radio.Group>
 				</Form.Item>
 				<Form.Item>
-					<div className="form-label">Tags</div>
+					<div className="form-label required">Tags</div>
 					<Select mode="multiple" onChange={this.selectTags}>
 						{tags}
 					</Select>
@@ -179,12 +202,19 @@ class TutorialForm extends React.Component {
 				>
 					<Form>
 						<Form.Item>
-							<div className="form-label">Tag</div>
+							<div className="form-label required">Tag</div>
 							<Input type="text" placeholder="Tag" ref="newTag" />
 						</Form.Item>
 						<Form.Item>
-							<div className="form-label">Description</div>
-							<Input.TextArea placeholder="Description" rows={3} ref="tagDescription" />
+							<div className="form-label required">Description</div>
+							<Input.TextArea
+								placeholder="Description"
+								rows={3}
+								ref="tagDescription"
+								onChange={this.onChange}
+								value={this.state.tagDescription}
+							/>
+							<small className="word-count">{this.state.tagLetters} / 150</small>
 						</Form.Item>
 						<Form.Item>
 							<div className="form-label">Official Website</div>

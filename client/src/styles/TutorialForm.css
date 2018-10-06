@@ -23,3 +23,13 @@
 .form-action-buttons .form-action-button:not(:last-child) {
 	margin-right: 10px;
 }
+
+.word-count {
+	float: right;
+}
+
+.required::after {
+	content: '*';
+	color: #ee1717;
+	margin-left: 2px;
+}

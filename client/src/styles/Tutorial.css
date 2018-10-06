@@ -15,3 +15,16 @@
 	font-size: 1rem;
 	margin-bottom: 10px;
 }
+
+.bold {
+	font-weight: bold;
+}
+
+.reviews {
+	margin-top: 20px;
+}
+
+.review-text {
+	width: 90%;
+	margin-right: 1rem;
+}

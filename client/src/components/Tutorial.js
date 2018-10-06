@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Tag, Divider, Button } from 'antd';
+import { Icon, Tag, Divider, Button, Rate, Input } from 'antd';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { getTutorial } from '../actions/tutorialActions';
@@ -40,16 +40,52 @@ class Tutorial extends React.Component {
 				<div>
 					<h1>{tutorial.title}</h1>
 					<div className="tutorial-tags">{tags}</div>
-					<div className="tutorial-info">Submitted By : {tutorial.submittedBy.name}</div>
 					<div className="tutorial-info">
-						Submitted On : {moment(tutorial.submittedOn).format('MMMM D, YYYY')}
+						<span className="bold">Submitted By :</span> {tutorial.submittedBy.name}
+					</div>
+					<div className="tutorial-info">
+						<span className="bold">Submitted On :</span>{' '}
+						{moment(tutorial.submittedOn).format('MMMM D, YYYY')}
 					</div>
 					<Button type="primary">Visit Tutorial</Button>
 					<Divider className="divider" />
-					<div className="tutorial-info">Educator : {tutorial.educator}</div>
-					<div className="tutorial-info">Medium : {tutorial.medium}</div>
-					<div className="tutorial-info">Type : {tutorial.type}</div>
-					<div className="tutorial-info">Skill Level : {tutorial.skillLevel}</div>
+					<div className="tutorial-info">
+						<span className="bold">Educator :</span> {tutorial.educator}
+					</div>
+					<div className="tutorial-info">
+						<span className="bold">Medium :</span> {tutorial.medium}
+					</div>
+					<div className="tutorial-info">
+						<span className="bold">Type :</span> {tutorial.type}
+					</div>
+					<div className="tutorial-info">
+						<span className="bold">Skill Level :</span> {tutorial.skillLevel}
+					</div>
+					<div className="tutorial-info">
+						<span className="bold">Description :</span> Lorem ipsum dolor sit amet, consectetur
+						adipiscing elit. Mauris consequat placerat lorem non volutpat. Cras mattis ligula ac
+						gravida fermentum. Mauris porttitor, nulla nec luctus pulvinar, lorem enim volutpat
+						orci, eu egestas magna quam vel turpis. Suspendisse nec neque mauris. Nunc eu tortor
+						dolor. Ut vulputate nunc vel ex efficitur tempus sed ut magna. Ut pharetra viverra
+						orci, at laoreet justo finibus id. Ut a venenatis mi. In lacinia dignissim efficitur.
+						In venenatis tortor non suscipit venenatis. Maecenas mollis dignissim nibh, vel
+						pellentesque elit mollis non. Aliquam viverra gravida tincidunt. Donec metus sapien,
+						dapibus sed est a, interdum sollicitudin mauris. Quisque ut ex a eros suscipit
+						suscipit. Mauris laoreet porttitor turpis, ac tempus arcu aliquam et. Aenean eu metus
+						vel nisi varius porttitor. In fermentum, dui sit amet eleifend venenatis, magna ligula
+						gravida libero, non consequat est urna id turpis.
+					</div>
+					<div className="tutorial-info">
+						<span className="bold">Rating :</span> <Rate disabled allowHalf value={2.5} />
+					</div>
+					<Divider className="divider" />
+					<div className="reviews">
+						<div className="tutorial-info">
+							<span className="bold">Reviews</span>
+						</div>
+						<Input.TextArea rows={1} placeholder="Add a review" className="review-text" />
+						<Button type="primary">Submit</Button>
+					</div>
 				</div>
 			);
 		}
