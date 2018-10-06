@@ -6,6 +6,7 @@ export const ADD_TAG = 'ADD_TAG';
 export const ADD_TUTORIAL = 'ADD_TUTORIAL';
 export const LOADING = 'LOADING';
 export const USER_TUTORIALS = 'USER_TUTORIALS';
+export const USER_FAVORITES = 'USER_FAVORITES';
 export const GET_TAGS = 'GET_TAGS';
 export const GET_TAG = 'GET_TAG';
 export const GET_TUTORIALS_BY_TAG = 'GET_TUTORIALS_BY_TAG';

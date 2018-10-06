@@ -2,6 +2,7 @@ const router = require('express').Router();
 const passport = require('passport');
 
 const Tutorial = require('../../models/Tutorial');
+const User = require('../../models/User');
 
 // Routes for /api/tutorials
 
@@ -45,6 +46,15 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 		.catch(err => console.log(err));
 });
 
+// Type		GET
+// URL		/api/tutorials/me/favorites
+// Desc		Returns list of favorite tutorials of the user
+router.get('/me/favorites', passport.authenticate('jwt', { session: false }), (req, res) => {
+	User.findById(req.user._id)
+		.then(user => res.json({ favorites: user.favorites }))
+		.catch(err => console.log(err));
+});
+
 // Type		POST
 // URL		/api/tutorials
 // Desc		Adds a new tutorial to the database
@@ -65,7 +75,13 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 	tutorial
 		.save()
 		.then(tutorial => {
-			res.json({ tutorial });
+			User.findByIdAndUpdate(
+				req.user._id,
+				{ $push: { submittedTutorials: tutorial._id } },
+				{ new: true }
+			)
+				.then(user => res.json({ tutorial }))
+				.catch(err => console.log(err));
 		})
 		.catch(err => console.log(err));
 });

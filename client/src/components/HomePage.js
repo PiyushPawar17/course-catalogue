@@ -25,11 +25,15 @@ class HomePage extends React.Component {
 		if (this.props.tag.loading || !this.props.tag.tags) {
 			tags = <Icon type="loading" />;
 		} else {
-			tags = this.props.tag.tags.map((tag, i) => (
-				<Col key={i} span={8}>
-					<TagCard tag={tag} />
-				</Col>
-			));
+			if (this.props.tag.tags.length === 0) {
+				tags = <div className="nothing-to-show">No tutorials submitted yet</div>;
+			} else {
+				tags = this.props.tag.tags.map((tag, i) => (
+					<Col key={i} span={8}>
+						<TagCard tag={tag} />
+					</Col>
+				));
+			}
 		}
 
 		return (

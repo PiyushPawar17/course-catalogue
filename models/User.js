@@ -14,13 +14,7 @@ const UserSchema = new Schema({
 		type: String,
 		required: true
 	},
-	submittedVideoLinks: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: 'tutorial'
-		}
-	],
-	submittedBlogLinks: [
+	submittedTutorials: [
 		{
 			type: Schema.Types.ObjectId,
 			ref: 'tutorial'

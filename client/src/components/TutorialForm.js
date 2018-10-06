@@ -24,7 +24,8 @@ class TutorialForm extends React.Component {
 		this.submitTutorial = this.submitTutorial.bind(this);
 		this.addTag = this.addTag.bind(this);
 		this.selectTags = this.selectTags.bind(this);
-		this.onChange = this.onChange.bind(this);
+		this.onChangeTutorial = this.onChangeTutorial.bind(this);
+		this.onChangeTag = this.onChangeTag.bind(this);
 	}
 
 	componentDidMount() {
@@ -43,12 +44,15 @@ class TutorialForm extends React.Component {
 		this.setState({ tags });
 	}
 
-	onChange() {
+	onChangeTutorial() {
 		const tutorialDescription = this.refs.tutorialDescription.textAreaRef.value;
-		const tagDescription = this.refs.tagDescription.textAreaRef.value;
 		if (tutorialDescription.length <= 150) {
 			this.setState({ tutorialLetters: tutorialDescription.length, tutorialDescription });
 		}
+	}
+
+	onChangeTag() {
+		const tagDescription = this.refs.tagDescription.textAreaRef.value;
 		if (tagDescription.length <= 150) {
 			this.setState({ tagLetters: tagDescription.length, tagDescription });
 		}
@@ -77,7 +81,7 @@ class TutorialForm extends React.Component {
 		this.refs.tagWebsite.input.value = '';
 
 		this.closeModal();
-		this.props.getTags();
+		window.location.reload();
 	}
 
 	submitTutorial(event) {
@@ -145,7 +149,7 @@ class TutorialForm extends React.Component {
 						placeholder="Description"
 						rows={2}
 						ref="tutorialDescription"
-						onChange={this.onChange}
+						onChange={this.onChangeTutorial}
 						value={this.state.tutorialDescription}
 					/>
 					<small className="word-count">{this.state.tutorialLetters} / 150</small>
@@ -211,7 +215,7 @@ class TutorialForm extends React.Component {
 								placeholder="Description"
 								rows={3}
 								ref="tagDescription"
-								onChange={this.onChange}
+								onChange={this.onChangeTag}
 								value={this.state.tagDescription}
 							/>
 							<small className="word-count">{this.state.tagLetters} / 150</small>

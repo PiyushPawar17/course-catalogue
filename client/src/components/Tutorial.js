@@ -12,7 +12,6 @@ class Tutorial extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.tutorial.tutorial);
 		const { tutorial } = this.props.tutorial;
 		let tutorialPage;
 		if (this.props.tutorial.loading || !tutorial) {
@@ -47,7 +46,11 @@ class Tutorial extends React.Component {
 						<span className="bold">Submitted On :</span>{' '}
 						{moment(tutorial.submittedOn).format('MMMM D, YYYY')}
 					</div>
-					<Button type="primary">Visit Tutorial</Button>
+					<Button type="primary">
+						<a href={tutorial.link} target="_blank">
+							Visit Tutorial
+						</a>
+					</Button>
 					<Divider className="divider" />
 					<div className="tutorial-info">
 						<span className="bold">Educator :</span> {tutorial.educator}
@@ -62,18 +65,7 @@ class Tutorial extends React.Component {
 						<span className="bold">Skill Level :</span> {tutorial.skillLevel}
 					</div>
 					<div className="tutorial-info">
-						<span className="bold">Description :</span> Lorem ipsum dolor sit amet, consectetur
-						adipiscing elit. Mauris consequat placerat lorem non volutpat. Cras mattis ligula ac
-						gravida fermentum. Mauris porttitor, nulla nec luctus pulvinar, lorem enim volutpat
-						orci, eu egestas magna quam vel turpis. Suspendisse nec neque mauris. Nunc eu tortor
-						dolor. Ut vulputate nunc vel ex efficitur tempus sed ut magna. Ut pharetra viverra
-						orci, at laoreet justo finibus id. Ut a venenatis mi. In lacinia dignissim efficitur.
-						In venenatis tortor non suscipit venenatis. Maecenas mollis dignissim nibh, vel
-						pellentesque elit mollis non. Aliquam viverra gravida tincidunt. Donec metus sapien,
-						dapibus sed est a, interdum sollicitudin mauris. Quisque ut ex a eros suscipit
-						suscipit. Mauris laoreet porttitor turpis, ac tempus arcu aliquam et. Aenean eu metus
-						vel nisi varius porttitor. In fermentum, dui sit amet eleifend venenatis, magna ligula
-						gravida libero, non consequat est urna id turpis.
+						<span className="bold">Description :</span> {tutorial.description}
 					</div>
 					<div className="tutorial-info">
 						<span className="bold">Rating :</span> <Rate disabled allowHalf value={2.5} />

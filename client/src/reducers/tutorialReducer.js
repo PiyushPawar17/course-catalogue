@@ -1,11 +1,10 @@
-import { ADD_TUTORIAL, USER_TUTORIALS, GET_TUTORIALS_BY_TAG, GET_TUTORIAL, LOADING } from '../actions/types';
+import { ADD_TUTORIAL, GET_TUTORIALS_BY_TAG, GET_TUTORIAL, LOADING } from '../actions/types';
 
 const initialState = {
 	loading: false,
 	tutorial: null,
 	tutorials: [],
-	tag: '',
-	userTutorials: []
+	tag: ''
 };
 
 export default function(state = initialState, action) {
@@ -14,12 +13,6 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				tutorial: action.payload
-			};
-		case USER_TUTORIALS:
-			return {
-				...state,
-				userTutorials: action.payload,
-				loading: false
 			};
 		case GET_TUTORIAL:
 			return {
