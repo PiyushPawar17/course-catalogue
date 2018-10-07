@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Tag, Divider, Button, Rate, Input } from 'antd';
+import { Icon, Tag, Divider, Button, Rate, Input, Tooltip } from 'antd';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { getTutorial } from '../actions/tutorialActions';
@@ -7,8 +7,23 @@ import { getTutorial } from '../actions/tutorialActions';
 import '../styles/Tutorial.css';
 
 class Tutorial extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			theme: 'outlined'
+		};
+
+		this.changeTheme = this.changeTheme.bind(this);
+	}
+
 	componentDidMount() {
 		this.props.getTutorial(this.props.match.params.tutorial);
+	}
+
+	changeTheme() {
+		const theme = this.state.theme === 'outlined' ? 'filled' : 'outlined';
+		this.setState({ theme });
 	}
 
 	render() {
@@ -37,7 +52,22 @@ class Tutorial extends React.Component {
 			));
 			tutorialPage = (
 				<div>
-					<h1>{tutorial.title}</h1>
+					<h1 className="tutorial-title-name">
+						{tutorial.title}{' '}
+						<Tooltip
+							placement="top"
+							title={
+								this.state.theme === 'outlined' ? 'Add to favorites' : 'Remove from favorites'
+							}
+						>
+							<Icon
+								type="heart"
+								theme={this.state.theme}
+								className="favorite tutorial-page-fav"
+								onClick={this.changeTheme}
+							/>
+						</Tooltip>
+					</h1>
 					<div className="tutorial-tags">{tags}</div>
 					<div className="tutorial-info">
 						<span className="bold">Submitted By :</span> {tutorial.submittedBy.name}

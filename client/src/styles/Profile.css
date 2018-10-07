@@ -1,6 +1,7 @@
 .profile {
 	width: 90%;
 	margin: 2% 5%;
+	min-height: 80vh;
 }
 
 .profile-userinfo {

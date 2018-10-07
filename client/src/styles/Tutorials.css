@@ -1,6 +1,7 @@
 .tutorials-by-tag {
 	width: 80%;
 	margin: 3rem auto;
+	min-height: 80vh;
 }
 
 .tutorial-title {

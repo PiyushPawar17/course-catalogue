@@ -13,6 +13,7 @@ import Profile from './Profile';
 import TutorialForm from './TutorialForm';
 import Tutorials from './Tutorials';
 import Tutorial from './Tutorial';
+import Footer from './Footer';
 
 import '../styles/Base.css';
 
@@ -49,6 +50,7 @@ class App extends React.Component {
 							<Route path="/tutorials/tag/:tag" component={Tutorials} />
 							<Route path="/tutorials/:tutorial" component={Tutorial} />
 						</Switch>
+						<Footer />
 					</div>
 				</Router>
 			</Provider>

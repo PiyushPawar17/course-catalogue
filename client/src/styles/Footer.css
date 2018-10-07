@@ -1,0 +1,33 @@
+.footer {
+	color: #ffffff;
+	background-color: #0787e6;
+	height: 9vh;
+}
+
+.footer-content {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.footer-links {
+	display: inline-block;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+.footer-links a {
+	color: #ffffff;
+}
+
+.footer-links:not(:last-child) {
+	margin-right: 3rem;
+}
+
+.footer-links.github {
+	float: right;
+	font-size: 1.2rem;
+}
+
+.social-icon {
+	color: #ffffff;
+}

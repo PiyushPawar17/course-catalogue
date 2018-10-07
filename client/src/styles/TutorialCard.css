@@ -30,6 +30,7 @@
 
 .favorite {
 	color: #f72b2b;
+	cursor: pointer;
 }
 
 .card-entries {
