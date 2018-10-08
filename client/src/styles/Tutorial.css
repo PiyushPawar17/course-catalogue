@@ -32,10 +32,19 @@
 }
 
 .reviews {
-	margin-top: 20px;
+	margin: 2rem 0 5rem 0;
 }
 
 .review-text {
 	width: 90%;
 	margin-right: 1rem;
+}
+
+.review {
+	margin: 1rem 0;
+}
+
+.review .reviewed-by {
+	font-weight: bold;
+	margin-bottom: 5px;
 }

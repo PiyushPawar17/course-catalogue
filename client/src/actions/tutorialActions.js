@@ -27,6 +27,13 @@ export const getTutorial = id => dispatch => {
 		.catch(err => console.log(err));
 };
 
+export const addReview = (tutorial, review) => dispatch => {
+	axios
+		.post(`/api/tutorials/review/${tutorial}`, review)
+		.then(res => dispatch(getTutorial(tutorial)))
+		.catch(err => console.log(err));
+};
+
 export const loading = () => {
 	return {
 		type: LOADING

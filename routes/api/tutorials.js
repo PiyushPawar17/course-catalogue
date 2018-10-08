@@ -33,6 +33,7 @@ router.get('/tag/:tag', (req, res) => {
 router.get('/:tutorial', (req, res) => {
 	Tutorial.findById(req.params.tutorial)
 		.populate('submittedBy', 'name')
+		.populate('reviews.reviewedBy', 'name')
 		.then(tutorial => res.json({ tutorial }))
 		.catch(err => console.log(err));
 });
@@ -83,6 +84,20 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 				.then(user => res.json({ tutorial }))
 				.catch(err => console.log(err));
 		})
+		.catch(err => console.log(err));
+});
+
+// Type		POST
+// URL		/api/tutorials/review/:tutorial
+// Desc		Adds a review to the tutorial
+router.post('/review/:tutorial', passport.authenticate('jwt', { session: false }), (req, res) => {
+	const newReview = {
+		review: req.body.review,
+		reviewedBy: req.user._id
+	};
+
+	Tutorial.findByIdAndUpdate(req.params.tutorial, { $push: { reviews: newReview } }, { new: true })
+		.then(tutorial => res.json({ tutorial }))
 		.catch(err => console.log(err));
 });
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Icon, Tag, Divider, Button, Rate, Input, Tooltip } from 'antd';
+import { Icon, Tag, Divider, Button, Rate, Input, Tooltip, message } from 'antd';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { getTutorial } from '../actions/tutorialActions';
+import { getTutorial, addReview } from '../actions/tutorialActions';
 
 import '../styles/Tutorial.css';
 
@@ -15,6 +15,7 @@ class Tutorial extends React.Component {
 		};
 
 		this.changeTheme = this.changeTheme.bind(this);
+		this.addReview = this.addReview.bind(this);
 	}
 
 	componentDidMount() {
@@ -26,8 +27,22 @@ class Tutorial extends React.Component {
 		this.setState({ theme });
 	}
 
+	addReview() {
+		if (this.refs.review.textAreaRef.value.trim() === '') {
+			return message.info('Enter a review');
+		}
+
+		const newReview = {
+			review: this.refs.review.textAreaRef.value
+		};
+
+		this.props.addReview(this.props.match.params.tutorial, newReview);
+		this.refs.review.textAreaRef.value = '';
+	}
+
 	render() {
 		const { tutorial } = this.props.tutorial;
+		console.log(tutorial);
 		let tutorialPage;
 		if (this.props.tutorial.loading || !tutorial) {
 			tutorialPage = <Icon type="loading" />;
@@ -50,6 +65,20 @@ class Tutorial extends React.Component {
 					{tag}
 				</Tag>
 			));
+
+			let reviews;
+
+			if (tutorial.reviews.length === 0) {
+				reviews = <div className="nothing-to-show review">No Reviews Yet</div>;
+			} else {
+				reviews = tutorial.reviews.map((review, i) => (
+					<div className="review" key={i}>
+						<div className="reviewed-by">{review.reviewedBy.name}</div>
+						<div className="review-content">{review.review}</div>
+					</div>
+				));
+			}
+
 			tutorialPage = (
 				<div>
 					<h1 className="tutorial-title-name">
@@ -105,8 +134,16 @@ class Tutorial extends React.Component {
 						<div className="tutorial-info">
 							<span className="bold">Reviews</span>
 						</div>
-						<Input.TextArea rows={1} placeholder="Add a review" className="review-text" />
-						<Button type="primary">Submit</Button>
+						<Input.TextArea
+							rows={1}
+							placeholder="Add a review"
+							className="review-text"
+							ref="review"
+						/>
+						<Button type="primary" onClick={this.addReview}>
+							Submit
+						</Button>
+						{reviews}
 					</div>
 				</div>
 			);
@@ -122,5 +159,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getTutorial }
+	{ getTutorial, addReview }
 )(Tutorial);
