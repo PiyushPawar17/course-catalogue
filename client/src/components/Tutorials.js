@@ -19,7 +19,7 @@ class Tutorials extends React.Component {
 			tutorials = <Icon type="loading" />;
 		} else {
 			tutorials = this.props.tutorial.tutorials.map((tutorial, i) => (
-				<Col span={8} key={i}>
+				<Col span={24} key={i}>
 					<TutorialCard tutorial={tutorial} />
 				</Col>
 			));

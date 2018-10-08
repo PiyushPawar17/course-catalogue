@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Tag, Skeleton, Tooltip, Icon } from 'antd';
+import { Card, Tag, Skeleton, Tooltip, Icon, Row, Col } from 'antd';
 import { withRouter } from 'react-router-dom';
 
 import '../styles/TutorialCard.css';
@@ -68,9 +68,17 @@ class TutorialCard extends React.Component {
 							/>
 						</Tooltip>
 					</div>
-					<div className="card-entries">Medium : {this.props.tutorial.medium}</div>
-					<div className="card-entries">Type : {this.props.tutorial.type}</div>
-					<div className="card-entries">Skill Level : {this.props.tutorial.skillLevel}</div>
+					<Row gutter={8}>
+						<Col span={8}>
+							<div className="card-entries">Medium : {this.props.tutorial.medium}</div>
+						</Col>
+						<Col span={8}>
+							<div className="card-entries">Type : {this.props.tutorial.type}</div>
+						</Col>
+						<Col span={8}>
+							<div className="card-entries">Skill Level : {this.props.tutorial.skillLevel}</div>
+						</Col>
+					</Row>
 					<div className="card-entries">{tags}</div>
 				</Skeleton>
 			</Card>
