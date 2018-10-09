@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Tag, Divider, Button, Rate, Input, Tooltip, message } from 'antd';
+import { Icon, Tag, Divider, Button, Input, Tooltip, message } from 'antd';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { getTutorial, addReview } from '../actions/tutorialActions';
@@ -42,7 +42,6 @@ class Tutorial extends React.Component {
 
 	render() {
 		const { tutorial } = this.props.tutorial;
-		console.log(tutorial);
 		let tutorialPage;
 		if (this.props.tutorial.loading || !tutorial) {
 			tutorialPage = <Icon type="loading" />;
@@ -125,9 +124,6 @@ class Tutorial extends React.Component {
 					</div>
 					<div className="tutorial-info">
 						<span className="bold">Description :</span> {tutorial.description}
-					</div>
-					<div className="tutorial-info">
-						<span className="bold">Rating :</span> <Rate disabled allowHalf value={2.5} />
 					</div>
 					<Divider className="divider" />
 					<div className="reviews">

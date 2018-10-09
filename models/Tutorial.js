@@ -30,15 +30,10 @@ const TutorialSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	ratings: [
+	upvotes: [
 		{
-			rating: {
-				type: Number
-			},
-			ratedBy: {
-				type: Schema.Types.ObjectId,
-				ref: 'user'
-			}
+			type: Schema.Types.ObjectId,
+			ref: 'user'
 		}
 	],
 	type: {

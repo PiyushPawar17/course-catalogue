@@ -9,15 +9,22 @@ class TutorialCard extends React.Component {
 		super(props);
 
 		this.state = {
-			theme: 'outlined'
+			favoriteTheme: 'outlined',
+			upvote: false
 		};
 
-		this.changeTheme = this.changeTheme.bind(this);
+		this.changeFavoriteTheme = this.changeFavoriteTheme.bind(this);
+		this.changeUpvoteColor = this.changeUpvoteColor.bind(this);
 	}
 
-	changeTheme() {
-		const theme = this.state.theme === 'outlined' ? 'filled' : 'outlined';
-		this.setState({ theme });
+	changeFavoriteTheme() {
+		const favoriteTheme = this.state.favoriteTheme === 'outlined' ? 'filled' : 'outlined';
+		this.setState({ favoriteTheme });
+	}
+
+	changeUpvoteColor() {
+		const upvote = this.state.upvote;
+		this.setState({ upvote: !upvote });
 	}
 
 	render() {
@@ -44,6 +51,18 @@ class TutorialCard extends React.Component {
 			<Card className="tutorial-card">
 				<Skeleton loading={!this.props.tutorial} active>
 					<div className="card-title">
+						<div className="upvotes">
+							<div
+								className="upvote-icon"
+								onClick={this.changeUpvoteColor}
+								className={this.state.upvote ? 'upvoted' : ''}
+							>
+								<Icon type="caret-up" theme="outlined" />
+							</div>
+							<Tooltip placement="left" title="Upvotes">
+								<small>4</small>
+							</Tooltip>
+						</div>
 						<Tooltip placement="topLeft" title="Click here for more info">
 							<span
 								className="tutorial-name"
@@ -57,14 +76,16 @@ class TutorialCard extends React.Component {
 						<Tooltip
 							placement="top"
 							title={
-								this.state.theme === 'outlined' ? 'Add to favorites' : 'Remove from favorites'
+								this.state.favoriteTheme === 'outlined'
+									? 'Add to favorites'
+									: 'Remove from favorites'
 							}
 						>
 							<Icon
 								type="heart"
-								theme={this.state.theme}
+								theme={this.state.favoriteTheme}
 								className="favorite"
-								onClick={this.changeTheme}
+								onClick={this.changeFavoriteTheme}
 							/>
 						</Tooltip>
 					</div>

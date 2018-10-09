@@ -19,7 +19,7 @@ class Footer extends React.Component {
 							<a
 								href="https://github.com/PiyushPawar17/course-catalogue"
 								target="_blank"
-								rel="noreferrer"
+								rel="noopener noreferrer"
 							>
 								<Icon type="github" theme="outlined" className="social-icon" />
 							</a>
