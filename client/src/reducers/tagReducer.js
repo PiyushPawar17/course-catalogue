@@ -1,4 +1,4 @@
-import { ADD_TAG, GET_TAGS, LOADING, GET_TAG } from '../actions/types';
+import { ADD_TAG, GET_TAGS, TAG_LOADING, GET_TAG } from '../actions/types';
 
 const initialState = {
 	loading: false,
@@ -25,7 +25,7 @@ export default function(state = initialState, action) {
 				...state,
 				tag: action.payload
 			};
-		case LOADING:
+		case TAG_LOADING:
 			return {
 				...state,
 				loading: true

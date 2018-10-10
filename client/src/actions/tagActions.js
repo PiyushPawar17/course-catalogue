@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_TAG, GET_TAGS, LOADING, GET_TAG } from './types';
+import { ADD_TAG, GET_TAGS, TAG_LOADING, GET_TAG } from './types';
 
 export const getTags = () => dispatch => {
 	dispatch(loading());
@@ -26,6 +26,6 @@ export const addTag = tag => dispatch => {
 
 export const loading = () => {
 	return {
-		type: LOADING
+		type: TAG_LOADING
 	};
 };

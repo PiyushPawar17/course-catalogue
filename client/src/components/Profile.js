@@ -2,27 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Icon, Avatar, Tabs, Row, Col } from 'antd';
-import { getUserProfile } from '../actions/authActions';
-import { getUserTutorials, getUserFavorites } from '../actions/userActions';
 
 import TutorialCard from './TutorialCard';
 
 import '../styles/Profile.css';
 
 class Profile extends React.Component {
-	componentDidMount() {
-		this.props.getUserProfile();
-		this.props.getUserTutorials();
-		this.props.getUserFavorites();
-	}
-
 	render() {
 		let profile;
 		if (this.props.auth.loading || !this.props.auth.userProfile) {
 			profile = <Icon type="loading" />;
 		} else {
-			const videos = this.props.user.submittedTutorials.filter(tutorial => tutorial.medium === 'Video');
-			const blogs = this.props.user.submittedTutorials.filter(tutorial => tutorial.medium === 'Blog');
+			const videos = this.props.auth.userProfile.submittedTutorials.filter(
+				tutorial => tutorial.medium === 'Video'
+			);
+			const blogs = this.props.auth.userProfile.submittedTutorials.filter(
+				tutorial => tutorial.medium === 'Blog'
+			);
 			let favorites;
 			let submittedVideos;
 			let submittedBlogs;
@@ -30,7 +26,7 @@ class Profile extends React.Component {
 				submittedVideos = <div className="nothing-to-show">No video tutorials submitted yet</div>;
 			} else {
 				submittedVideos = videos.map((tutorial, i) => (
-					<Col span={8} key={i}>
+					<Col span={24} key={i}>
 						<TutorialCard tutorial={tutorial} />
 					</Col>
 				));
@@ -39,16 +35,16 @@ class Profile extends React.Component {
 				submittedBlogs = <div className="nothing-to-show">No blogs submitted yet</div>;
 			} else {
 				submittedBlogs = blogs.map((tutorial, i) => (
-					<Col span={8} key={i}>
+					<Col span={24} key={i}>
 						<TutorialCard tutorial={tutorial} />
 					</Col>
 				));
 			}
-			if (this.props.user.favorites.length === 0) {
+			if (this.props.auth.userProfile.favorites.length === 0) {
 				favorites = <div className="nothing-to-show">Nothing in favorites</div>;
 			} else {
-				favorites = this.props.user.favorites.map((tutorial, i) => (
-					<Col span={8} key={i}>
+				favorites = this.props.auth.userProfile.favorites.map((tutorial, i) => (
+					<Col span={24} key={i}>
 						<TutorialCard tutorial={tutorial} />
 					</Col>
 				));
@@ -90,11 +86,7 @@ class Profile extends React.Component {
 
 const mapStateToProps = state => ({
 	auth: state.auth,
-	tutorial: state.tutorial,
-	user: state.user
+	tutorial: state.tutorial
 });
 
-export default connect(
-	mapStateToProps,
-	{ getUserProfile, getUserTutorials, getUserFavorites }
-)(Profile);
+export default connect(mapStateToProps)(Profile);

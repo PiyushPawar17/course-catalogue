@@ -8,7 +8,8 @@ const UserSchema = new Schema({
 	},
 	email: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
 	password: {
 		type: String,
@@ -23,7 +24,8 @@ const UserSchema = new Schema({
 	favorites: [
 		{
 			type: Schema.Types.ObjectId,
-			ref: 'tutorial'
+			ref: 'tutorial',
+			unique: true
 		}
 	]
 });

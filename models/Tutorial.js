@@ -22,6 +22,14 @@ const TutorialSchema = new Schema({
 	educator: {
 		type: String
 	},
+	type: {
+		type: String,
+		required: true
+	},
+	skillLevel: {
+		type: String,
+		required: true
+	},
 	submittedBy: {
 		type: Schema.Types.ObjectId,
 		ref: 'user'
@@ -36,14 +44,6 @@ const TutorialSchema = new Schema({
 			ref: 'user'
 		}
 	],
-	type: {
-		type: String,
-		required: true
-	},
-	skillLevel: {
-		type: String,
-		required: true
-	},
 	reviews: [
 		{
 			review: {

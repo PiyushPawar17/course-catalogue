@@ -10,21 +10,11 @@ class Tutorial extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			theme: 'outlined'
-		};
-
-		this.changeTheme = this.changeTheme.bind(this);
 		this.addReview = this.addReview.bind(this);
 	}
 
 	componentDidMount() {
 		this.props.getTutorial(this.props.match.params.tutorial);
-	}
-
-	changeTheme() {
-		const theme = this.state.theme === 'outlined' ? 'filled' : 'outlined';
-		this.setState({ theme });
 	}
 
 	addReview() {
@@ -80,22 +70,7 @@ class Tutorial extends React.Component {
 
 			tutorialPage = (
 				<div>
-					<h1 className="tutorial-title-name">
-						{tutorial.title}{' '}
-						<Tooltip
-							placement="top"
-							title={
-								this.state.theme === 'outlined' ? 'Add to favorites' : 'Remove from favorites'
-							}
-						>
-							<Icon
-								type="heart"
-								theme={this.state.theme}
-								className="favorite tutorial-page-fav"
-								onClick={this.changeTheme}
-							/>
-						</Tooltip>
-					</h1>
+					<h1 className="tutorial-title-name">{tutorial.title}</h1>
 					<div className="tutorial-tags">{tags}</div>
 					<div className="tutorial-info">
 						<span className="bold">Submitted By :</span> {tutorial.submittedBy.name}

@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
 import setAuthToken from '../utils/setAuthToken';
-import { SIGNUP, CLEAR, SET_CURRENT_USER, USER_PROFILE, LOADING } from './types';
+import { SIGNUP, CLEAR, SET_CURRENT_USER, USER_PROFILE, AUTH_LOADING } from './types';
 
 export const signUp = (user, history) => dispatch => {
 	axios
@@ -27,6 +27,7 @@ export const logIn = user => dispatch => {
 			const decoded = jwt_decode(token);
 			// Set current user
 			dispatch(setCurrentUser(decoded));
+			dispatch(getUserProfile());
 		})
 		.catch(err => console.log(err));
 };
@@ -59,7 +60,7 @@ export const setCurrentUser = decoded => {
 
 export const loading = () => {
 	return {
-		type: LOADING
+		type: AUTH_LOADING
 	};
 };
 

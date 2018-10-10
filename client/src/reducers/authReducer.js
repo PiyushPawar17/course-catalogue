@@ -1,4 +1,4 @@
-import { SIGNUP, CLEAR, SET_CURRENT_USER, USER_PROFILE, LOADING } from '../actions/types';
+import { SIGNUP, CLEAR, SET_CURRENT_USER, USER_PROFILE, AUTH_LOADING } from '../actions/types';
 import { isEmpty } from '../utils/validate';
 
 const initialState = {
@@ -25,7 +25,7 @@ export default function(state = initialState, action) {
 		case USER_PROFILE:
 			return {
 				...state,
-				userProfile: action.payload,
+				userProfile: action.payload.user,
 				loading: false
 			};
 		case CLEAR:
@@ -33,7 +33,7 @@ export default function(state = initialState, action) {
 				...state,
 				newSignUp: false
 			};
-		case LOADING:
+		case AUTH_LOADING:
 			return {
 				...state,
 				loading: true

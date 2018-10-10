@@ -101,4 +101,26 @@ router.post('/review/:tutorial', passport.authenticate('jwt', { session: false }
 		.catch(err => console.log(err));
 });
 
+// Type		POST
+// URL		/api/tutorials/me/addfavorite/:tutorial
+// Desc		Adds tutorial to user's favorites
+router.post('/me/addfavorite/:tutorial', passport.authenticate('jwt', { session: false }), (req, res) => {
+	Tutorial.findById(req.params.tutorial).then(tutorial => {
+		User.findByIdAndUpdate(req.user._id, { $push: { favorites: tutorial._id } }, { new: true })
+			.then(user => res.json({ user }))
+			.catch(err => console.log(err));
+	});
+});
+
+// Type		POST
+// URL		/api/tutorials/me/removefavorite/:tutorial
+// Desc		Removes tutorial from user's favorites
+router.post('/me/removefavorite/:tutorial', passport.authenticate('jwt', { session: false }), (req, res) => {
+	Tutorial.findById(req.params.tutorial).then(tutorial => {
+		User.findByIdAndUpdate(req.user._id, { $pullAll: { favorites: tutorial._id } }, { new: true })
+			.then(user => res.json({ user }))
+			.catch(err => console.log(err));
+	});
+});
+
 module.exports = router;

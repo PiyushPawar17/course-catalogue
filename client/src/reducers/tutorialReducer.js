@@ -1,4 +1,4 @@
-import { ADD_TUTORIAL, GET_TUTORIALS_BY_TAG, GET_TUTORIAL, LOADING } from '../actions/types';
+import { ADD_TUTORIAL, GET_TUTORIALS_BY_TAG, GET_TUTORIAL, TUTORIAL_LOADING } from '../actions/types';
 
 const initialState = {
 	loading: false,
@@ -26,7 +26,7 @@ export default function(state = initialState, action) {
 				tutorials: action.payload.tutorials,
 				loading: false
 			};
-		case LOADING:
+		case TUTORIAL_LOADING:
 			return {
 				...state,
 				loading: true

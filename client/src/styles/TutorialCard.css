@@ -44,19 +44,18 @@
 
 .tutorial-name {
 	display: inline-block;
-	width: 90%;
+	width: 80%;
 }
 
 .tutorial-name:hover {
 	color: #0787e6;
 }
 
-.favorite {
-	color: #f72b2b;
-	cursor: pointer;
-}
-
 .card-entries {
 	margin-bottom: 1.2rem;
 	font-size: 1rem;
+}
+
+.favorite-button {
+	float: right;
 }

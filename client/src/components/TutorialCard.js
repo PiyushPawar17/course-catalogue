@@ -1,6 +1,7 @@
 import React from 'react';
-import { Card, Tag, Skeleton, Tooltip, Icon, Row, Col } from 'antd';
+import { Card, Tag, Skeleton, Tooltip, Icon, Row, Col, Button } from 'antd';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import '../styles/TutorialCard.css';
 
@@ -9,17 +10,10 @@ class TutorialCard extends React.Component {
 		super(props);
 
 		this.state = {
-			favoriteTheme: 'outlined',
 			upvote: false
 		};
 
-		this.changeFavoriteTheme = this.changeFavoriteTheme.bind(this);
 		this.changeUpvoteColor = this.changeUpvoteColor.bind(this);
-	}
-
-	changeFavoriteTheme() {
-		const favoriteTheme = this.state.favoriteTheme === 'outlined' ? 'filled' : 'outlined';
-		this.setState({ favoriteTheme });
 	}
 
 	changeUpvoteColor() {
@@ -73,21 +67,6 @@ class TutorialCard extends React.Component {
 								{this.props.tutorial.title}
 							</span>
 						</Tooltip>
-						<Tooltip
-							placement="top"
-							title={
-								this.state.favoriteTheme === 'outlined'
-									? 'Add to favorites'
-									: 'Remove from favorites'
-							}
-						>
-							<Icon
-								type="heart"
-								theme={this.state.favoriteTheme}
-								className="favorite"
-								onClick={this.changeFavoriteTheme}
-							/>
-						</Tooltip>
 					</div>
 					<Row gutter={8}>
 						<Col span={8}>
@@ -101,10 +80,18 @@ class TutorialCard extends React.Component {
 						</Col>
 					</Row>
 					<div className="card-entries">{tags}</div>
+					<Button type="primary" className="favorite-button">
+						Add to Favorites
+					</Button>
 				</Skeleton>
 			</Card>
 		);
 	}
 }
 
-export default withRouter(TutorialCard);
+const mapStateToProps = state => ({
+	auth: state.auth,
+	user: state.user
+});
+
+export default connect(mapStateToProps)(withRouter(TutorialCard));

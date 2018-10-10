@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_TUTORIAL, GET_TUTORIALS_BY_TAG, GET_TUTORIAL, LOADING } from './types';
+import { ADD_TUTORIAL, GET_TUTORIALS_BY_TAG, GET_TUTORIAL, TUTORIAL_LOADING } from './types';
 
 export const addTutorial = (tutorial, history) => dispatch => {
 	axios
@@ -36,6 +36,6 @@ export const addReview = (tutorial, review) => dispatch => {
 
 export const loading = () => {
 	return {
-		type: LOADING
+		type: TUTORIAL_LOADING
 	};
 };
