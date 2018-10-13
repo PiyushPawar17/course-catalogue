@@ -13,8 +13,9 @@ class Footer extends React.Component {
 						<li className="footer-links">
 							<Link to="/">Home</Link>
 						</li>
-						<li className="footer-links">About Us</li>
-						<li className="footer-links">Help and FAQ</li>
+						<li className="footer-links">
+							<Link to="/about">About Us</Link>
+						</li>
 						<li className="footer-links github">
 							<a
 								href="https://github.com/PiyushPawar17/course-catalogue"

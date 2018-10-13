@@ -1,0 +1,30 @@
+.about-page {
+	min-height: 80vh;
+	width: 80%;
+	margin: 2rem auto;
+}
+
+.about-content {
+	font-size: 1rem;
+	line-height: 1.7rem;
+	text-align: justify;
+	margin-bottom: 3rem;
+}
+
+.member {
+	text-align: center;
+}
+
+.member-name {
+	font-size: 1rem;
+	margin-bottom: 1rem;
+}
+
+.about-social-icon {
+	color: #4e4e4e;
+	font-size: 1.2rem;
+}
+
+.github-icon:hover {
+	color: #111111;
+}
