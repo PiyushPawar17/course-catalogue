@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { mongoURI } = require('../config/keys_dev');
+const { mongoURI } = require('../config/keys');
 
 mongoose.Promise = global.Promise;
 
