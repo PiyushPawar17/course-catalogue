@@ -11,10 +11,10 @@
 	transform: translateX(-2px) translateY(-2px);
 	box-shadow: 2px 2px 5px 0px #0787e6;
 }
-
+/* 
 .tutorial-card .ant-card-body {
 	padding: 0.9rem 2rem;
-}
+} */
 
 .card-title {
 	font-size: 1.2rem;
@@ -56,6 +56,7 @@
 	font-size: 1rem;
 }
 
-.favorite-button {
+.favorite-button,
+.remove-favorite-button {
 	float: right;
 }

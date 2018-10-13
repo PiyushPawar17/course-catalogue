@@ -1,8 +1,9 @@
 import React from 'react';
-import { Icon, Tag, Divider, Button, Input, Tooltip, message } from 'antd';
+import { Icon, Tag, Divider, Button, Input, message } from 'antd';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { getTutorial, addReview } from '../actions/tutorialActions';
+import { addToFavorites, clearMessage } from '../actions/userActions';
 
 import '../styles/Tutorial.css';
 
@@ -11,10 +12,17 @@ class Tutorial extends React.Component {
 		super(props);
 
 		this.addReview = this.addReview.bind(this);
+		this.addToFavorites = this.addToFavorites.bind(this);
 	}
 
 	componentDidMount() {
 		this.props.getTutorial(this.props.match.params.tutorial);
+	}
+
+	addToFavorites() {
+		this.props.addToFavorites(this.props.match.params.tutorial);
+		message.success('Tutorial added to favorites');
+		setTimeout(() => this.props.clearMessage(), 3000);
 	}
 
 	addReview() {
@@ -49,15 +57,20 @@ class Tutorial extends React.Component {
 				'#3359f5',
 				'#04caca'
 			];
-			const tags = tutorial.tags.map((tag, i) => (
-				<Tag key={i} color={colors[i % colors.length]}>
-					{tag}
-				</Tag>
-			));
+			let tags;
+			if (tutorial.tags) {
+				tags = tutorial.tags.map((tag, i) => (
+					<Tag key={i} color={colors[i % colors.length]}>
+						{tag}
+					</Tag>
+				));
+			} else {
+				tags = null;
+			}
 
 			let reviews;
 
-			if (tutorial.reviews.length === 0) {
+			if (tutorial.reviews.length === 0 || !tutorial.reviews) {
 				reviews = <div className="nothing-to-show review">No Reviews Yet</div>;
 			} else {
 				reviews = tutorial.reviews.map((review, i) => (
@@ -70,7 +83,14 @@ class Tutorial extends React.Component {
 
 			tutorialPage = (
 				<div>
-					<h1 className="tutorial-title-name">{tutorial.title}</h1>
+					<h1 className="tutorial-title-name">
+						{tutorial.title}{' '}
+						<span>
+							<Button type="primary" className="favorite-button" onClick={this.addToFavorites}>
+								Add to Favorites
+							</Button>
+						</span>
+					</h1>
 					<div className="tutorial-tags">{tags}</div>
 					<div className="tutorial-info">
 						<span className="bold">Submitted By :</span> {tutorial.submittedBy.name}
@@ -130,5 +150,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getTutorial, addReview }
+	{ getTutorial, addReview, addToFavorites, clearMessage }
 )(Tutorial);

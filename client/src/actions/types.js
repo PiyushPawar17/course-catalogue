@@ -11,3 +11,6 @@ export const GET_TAGS = 'GET_TAGS';
 export const GET_TAG = 'GET_TAG';
 export const GET_TUTORIALS_BY_TAG = 'GET_TUTORIALS_BY_TAG';
 export const GET_TUTORIAL = 'GET_TUTORIAL';
+export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
+export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
+export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';

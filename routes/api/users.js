@@ -13,21 +13,24 @@ const User = require('../../models/User');
 // URL		/api/users/me
 // Desc		Return current user
 router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
+	const tutorialFields = [
+		'title',
+		'link',
+		'description',
+		'tags',
+		'medium',
+		'educator',
+		'type',
+		'skillLevel',
+		'submittedBy',
+		'submittedOn',
+		'upvotes',
+		'reviews'
+	];
+
 	User.findById(req.user._id)
-		.populate('submittedTutorials', [
-			'title',
-			'link',
-			'description',
-			'tags',
-			'medium',
-			'educator',
-			'type',
-			'skillLevel',
-			'submittedBy',
-			'submittedOn',
-			'upvotes',
-			'reviews'
-		])
+		.populate('submittedTutorials', tutorialFields)
+		.populate('favorites', tutorialFields)
 		.then(user => res.json({ user }))
 		.catch(err => console.log(err));
 });

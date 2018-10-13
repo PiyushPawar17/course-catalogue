@@ -2,12 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Icon, Avatar, Tabs, Row, Col } from 'antd';
+import { getUserProfile } from '../actions/authActions';
 
 import TutorialCard from './TutorialCard';
 
 import '../styles/Profile.css';
 
 class Profile extends React.Component {
+	componentDidMount() {
+		this.props.getUserProfile();
+	}
+
 	render() {
 		let profile;
 		if (this.props.auth.loading || !this.props.auth.userProfile) {
@@ -89,4 +94,7 @@ const mapStateToProps = state => ({
 	tutorial: state.tutorial
 });
 
-export default connect(mapStateToProps)(Profile);
+export default connect(
+	mapStateToProps,
+	{ getUserProfile }
+)(Profile);

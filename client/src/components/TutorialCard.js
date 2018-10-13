@@ -1,7 +1,9 @@
 import React from 'react';
-import { Card, Tag, Skeleton, Tooltip, Icon, Row, Col, Button } from 'antd';
+import { Card, Tag, Skeleton, Tooltip, Icon, Row, Col, Button, message } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { addToFavorites, removeFromFavorites, clearMessage } from '../actions/userActions';
+import { getUserProfile } from '../actions/authActions';
 
 import '../styles/TutorialCard.css';
 
@@ -14,6 +16,21 @@ class TutorialCard extends React.Component {
 		};
 
 		this.changeUpvoteColor = this.changeUpvoteColor.bind(this);
+		this.addToFavorites = this.addToFavorites.bind(this);
+		this.removeFromFavorites = this.removeFromFavorites.bind(this);
+	}
+
+	addToFavorites() {
+		this.props.addToFavorites(this.props.tutorial._id);
+		message.success('Tutorial added to favorites');
+		setTimeout(() => this.props.clearMessage(), 3000);
+	}
+
+	removeFromFavorites() {
+		this.props.removeFromFavorites(this.props.tutorial._id);
+		message.success('Tutorial removed from favorites');
+		this.props.getUserProfile();
+		setTimeout(() => this.props.clearMessage(), 3000);
 	}
 
 	changeUpvoteColor() {
@@ -35,17 +52,22 @@ class TutorialCard extends React.Component {
 			'#3359f5',
 			'#04caca'
 		];
-		const tags = this.props.tutorial.tags.map((tag, i) => (
-			<Tag key={i} color={colors[i % colors.length]}>
-				{tag}
-			</Tag>
-		));
+		let tags;
+		if (this.props.tutorial.tags) {
+			tags = this.props.tutorial.tags.map((tag, i) => (
+				<Tag key={i} color={colors[i % colors.length]}>
+					{tag}
+				</Tag>
+			));
+		} else {
+			tags = null;
+		}
 
 		return (
 			<Card className="tutorial-card">
 				<Skeleton loading={!this.props.tutorial} active>
 					<div className="card-title">
-						<div className="upvotes">
+						{/* <div className="upvotes">
 							<div
 								className="upvote-icon"
 								onClick={this.changeUpvoteColor}
@@ -56,7 +78,7 @@ class TutorialCard extends React.Component {
 							<Tooltip placement="left" title="Upvotes">
 								<small>4</small>
 							</Tooltip>
-						</div>
+						</div> */}
 						<Tooltip placement="topLeft" title="Click here for more info">
 							<span
 								className="tutorial-name"
@@ -80,8 +102,15 @@ class TutorialCard extends React.Component {
 						</Col>
 					</Row>
 					<div className="card-entries">{tags}</div>
-					<Button type="primary" className="favorite-button">
+					<Button type="primary" className="favorite-button" onClick={this.addToFavorites}>
 						Add to Favorites
+					</Button>
+					<Button
+						type="danger"
+						className="remove-favorite-button"
+						onClick={this.removeFromFavorites}
+					>
+						Remove from Favorites
 					</Button>
 				</Skeleton>
 			</Card>
@@ -90,8 +119,10 @@ class TutorialCard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	auth: state.auth,
-	user: state.user
+	auth: state.auth
 });
 
-export default connect(mapStateToProps)(withRouter(TutorialCard));
+export default connect(
+	mapStateToProps,
+	{ addToFavorites, removeFromFavorites, clearMessage, getUserProfile }
+)(withRouter(TutorialCard));
