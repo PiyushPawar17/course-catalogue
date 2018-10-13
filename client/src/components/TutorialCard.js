@@ -2,6 +2,8 @@ import React from 'react';
 import { Card, Tag, Skeleton, Tooltip, Icon, Row, Col, Button, message } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import { addToFavorites, removeFromFavorites, clearMessage } from '../actions/userActions';
 import { getUserProfile } from '../actions/authActions';
 
@@ -102,21 +104,37 @@ class TutorialCard extends React.Component {
 						</Col>
 					</Row>
 					<div className="card-entries">{tags}</div>
-					<Button type="primary" className="favorite-button" onClick={this.addToFavorites}>
-						Add to Favorites
-					</Button>
-					<Button
-						type="danger"
-						className="remove-favorite-button"
-						onClick={this.removeFromFavorites}
-					>
-						Remove from Favorites
-					</Button>
+					{this.props.favorite ? (
+						<Button type="primary" className="favorite-button" onClick={this.addToFavorites}>
+							Add to Favorites
+						</Button>
+					) : (
+						<Button
+							type="danger"
+							className="remove-favorite-button"
+							onClick={this.removeFromFavorites}
+						>
+							Remove from Favorites
+						</Button>
+					)}
 				</Skeleton>
 			</Card>
 		);
 	}
 }
+
+TutorialCard.propTypes = {
+	favorite: PropTypes.bool,
+	auth: PropTypes.object.isRequired,
+	addToFavorites: PropTypes.func.isRequired,
+	removeFromFavorites: PropTypes.func.isRequired,
+	clearMessage: PropTypes.func.isRequired,
+	getUserProfile: PropTypes.func.isRequired
+};
+
+TutorialCard.defaultProps = {
+	favorite: true
+};
 
 const mapStateToProps = state => ({
 	auth: state.auth

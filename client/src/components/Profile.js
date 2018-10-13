@@ -50,7 +50,7 @@ class Profile extends React.Component {
 			} else {
 				favorites = this.props.auth.userProfile.favorites.map((tutorial, i) => (
 					<Col span={24} key={i}>
-						<TutorialCard tutorial={tutorial} />
+						<TutorialCard tutorial={tutorial} favorite={false} />
 					</Col>
 				));
 			}

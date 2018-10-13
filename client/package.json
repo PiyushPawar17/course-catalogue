@@ -14,6 +14,7 @@
 		"babel-plugin-import": "^1.9.1",
 		"jwt-decode": "^2.2.0",
 		"moment": "^2.22.2",
+		"prop-types": "^15.6.2",
 		"react": "^16.5.2",
 		"react-app-rewired": "^1.6.2",
 		"react-dom": "^16.5.2",
