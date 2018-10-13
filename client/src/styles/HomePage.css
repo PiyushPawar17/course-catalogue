@@ -1,5 +1,14 @@
 .home-page {
+	margin-bottom: 4rem;
+}
+
+.homepage-tags {
 	width: 80%;
-	margin: 5rem auto;
-	min-height: 80vh;
+	margin: 0 auto;
+}
+
+.homepage-tags-header {
+	font-size: 2.1rem;
+	margin-bottom: 3rem;
+	text-align: center;
 }

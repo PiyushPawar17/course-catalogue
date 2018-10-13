@@ -16,10 +16,9 @@ class About extends React.Component {
 					of them and choose the best for themselves. Course Catalogue does all the tedious job and
 					brings all the significant details about online courses/tutorials offered by various
 					educational sites at a single platform and all one has to do is choose the most suitable
-					one for himself/herself and enjoy learning. The main benefit of this platform is that one
-					will get information about courses offered by various sites at single platform and hence
-					does not have to visit each and every site to find a suitable course according to one’s
-					requirements. This will make browsing and decision making easier.
+					one for himself/herself and enjoy learning. Course Catalogue is a solution that provides
+					the best take off for a better career journey by assembling courses from various websites
+					all at one place, so that you don't have to visit each one.
 				</p>
 				<div className="members">
 					<h1>Team Members</h1>

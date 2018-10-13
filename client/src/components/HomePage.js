@@ -1,8 +1,10 @@
 import React from 'react';
 import { Row, Col, Icon, message } from 'antd';
+import { Element } from 'react-scroll';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import Header from './Header';
 import TagCard from './TagCard';
 
 import { clearSignUp } from '../actions/authActions';
@@ -40,7 +42,13 @@ class HomePage extends React.Component {
 
 		return (
 			<div className="home-page">
-				<Row gutter={8}>{tags}</Row>
+				<Header />
+				<div className="homepage-tags">
+					<div className="homepage-tags-header">Tutorials</div>
+					<Element name="tags">
+						<Row gutter={8}>{tags}</Row>
+					</Element>
+				</div>
 			</div>
 		);
 	}

@@ -1,12 +1,13 @@
 .navbar {
+	height: 8vh;
 	background-color: #0787e6;
 	color: #ffffff;
+	border-bottom: 1px solid #ffffff;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	height: 8vh;
 }
 
 .navbar .navbar-logo {
