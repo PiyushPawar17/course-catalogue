@@ -7,6 +7,7 @@ import store from '../store';
 import setAuthToken from '../utils/setAuthToken';
 import { setCurrentUser, logOut, getUserProfile } from '../actions/authActions';
 
+import PrivateRoute from './PrivateRoute';
 import Navbar from './Navbar';
 import HomePage from './HomePage';
 import Login from './Login';
@@ -48,12 +49,12 @@ class App extends React.Component {
 						<Navbar />
 						<Switch>
 							<Route exact path="/" component={HomePage} />
-							<Route path="/login" component={Login} />
-							<Route path="/profile" component={Profile} />
-							<Route path="/addtutorial" component={TutorialForm} />
-							<Route path="/tutorials/tag/:tag" component={Tutorials} />
-							<Route path="/tutorials/:tutorial" component={Tutorial} />
-							<Route path="/about" component={About} />
+							<Route exact path="/login" component={Login} />
+							<PrivateRoute exact path="/profile" component={Profile} />
+							<PrivateRoute exact path="/addtutorial" component={TutorialForm} />
+							<Route exact path="/tutorials/tag/:tag" component={Tutorials} />
+							<Route exact path="/tutorials/:tutorial" component={Tutorial} />
+							<Route exact path="/about" component={About} />
 						</Switch>
 						<Footer />
 					</div>
