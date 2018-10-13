@@ -22,12 +22,20 @@ class Tutorial extends React.Component {
 	}
 
 	addToFavorites() {
+		if (!this.props.auth.authenticated) {
+			return message.info('You need to login to add to favorites');
+		}
+
 		this.props.addToFavorites(this.props.match.params.tutorial);
 		message.success('Tutorial added to favorites');
 		setTimeout(() => this.props.clearMessage(), 3000);
 	}
 
 	addReview() {
+		if (!this.props.auth.authenticated) {
+			return message.info('You need to login to add a review');
+		}
+
 		if (this.refs.review.textAreaRef.value.trim() === '') {
 			return message.info('Enter a review');
 		}
@@ -147,6 +155,7 @@ class Tutorial extends React.Component {
 }
 
 Tutorial.propTypes = {
+	auth: PropTypes.object.isRequired,
 	tutorial: PropTypes.object.isRequired,
 	getTutorial: PropTypes.func.isRequired,
 	addReview: PropTypes.func.isRequired,
@@ -155,6 +164,7 @@ Tutorial.propTypes = {
 };
 
 const mapStateToProps = state => ({
+	auth: state.auth,
 	tutorial: state.tutorial
 });
 

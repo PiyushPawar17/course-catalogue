@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Tag, Skeleton, Tooltip, Icon, Row, Col, Button, message } from 'antd';
+import { Card, Tag, Skeleton, Tooltip, Icon, Row, Col, Button, message, Popconfirm } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -23,6 +23,10 @@ class TutorialCard extends React.Component {
 	}
 
 	addToFavorites() {
+		if (!this.props.auth.authenticated) {
+			return message.info('You need to login to add to favorites');
+		}
+
 		this.props.addToFavorites(this.props.tutorial._id);
 		message.success('Tutorial added to favorites');
 		setTimeout(() => this.props.clearMessage(), 3000);
@@ -109,13 +113,18 @@ class TutorialCard extends React.Component {
 							Add to Favorites
 						</Button>
 					) : (
-						<Button
-							type="danger"
-							className="remove-favorite-button"
-							onClick={this.removeFromFavorites}
+						<Popconfirm
+							placement="top"
+							title="Remove from favorites?"
+							okText="Yes"
+							cancelText="Cancel"
+							icon={<Icon type="question-circle" theme="outlined" />}
+							onConfirm={this.removeFromFavorites}
 						>
-							Remove from Favorites
-						</Button>
+							<Button type="danger" className="remove-favorite-button">
+								Remove from Favorites
+							</Button>
+						</Popconfirm>
 					)}
 				</Skeleton>
 			</Card>

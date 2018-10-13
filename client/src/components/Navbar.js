@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Button, Icon } from 'antd';
+import { Layout, Button, Icon, Popconfirm } from 'antd';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -28,11 +28,20 @@ class Navbar extends React.Component {
 							<Icon type="user" /> Profile
 						</Button>
 					</Link>
-					<a href="#">
-						<Button className="navbar-link" onClick={this.logOut.bind(this)}>
-							Log Out <Icon type="logout" />
-						</Button>
-					</a>
+					<Popconfirm
+						placement="bottom"
+						title="Logout?"
+						okText="Yes"
+						cancelText="Cancel"
+						icon={<Icon type="question-circle" theme="outlined" />}
+						onConfirm={this.logOut.bind(this)}
+					>
+						<a href="#">
+							<Button className="navbar-link">
+								Log Out <Icon type="logout" />
+							</Button>
+						</a>
+					</Popconfirm>
 				</React.Fragment>
 			);
 		} else {
