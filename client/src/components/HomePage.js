@@ -1,6 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Row, Col, Icon, message } from 'antd';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import TagCard from './TagCard';
 
 import { clearSignUp } from '../actions/authActions';
@@ -43,6 +45,13 @@ class HomePage extends React.Component {
 		);
 	}
 }
+
+HomePage.propTypes = {
+	auth: PropTypes.object.isRequired,
+	tag: PropTypes.object.isRequired,
+	getTags: PropTypes.func.isRequired,
+	clearSignUp: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
 	auth: state.auth,

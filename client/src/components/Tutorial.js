@@ -2,6 +2,8 @@ import React from 'react';
 import { Icon, Tag, Divider, Button, Input, message } from 'antd';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import PropTypes from 'prop-types';
+
 import { getTutorial, addReview } from '../actions/tutorialActions';
 import { addToFavorites, clearMessage } from '../actions/userActions';
 
@@ -143,6 +145,14 @@ class Tutorial extends React.Component {
 		return <div className="tutorial">{tutorialPage}</div>;
 	}
 }
+
+Tutorial.propTypes = {
+	tutorial: PropTypes.object.isRequired,
+	getTutorial: PropTypes.func.isRequired,
+	addReview: PropTypes.func.isRequired,
+	addToFavorites: PropTypes.func.isRequired,
+	clearMessage: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
 	tutorial: state.tutorial

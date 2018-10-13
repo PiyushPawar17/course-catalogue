@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form, Input, Button, Radio, Select, Modal, message } from 'antd';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import { addTag, getTags } from '../actions/tagActions';
 import { addTutorial } from '../actions/tutorialActions';
 
@@ -230,6 +232,14 @@ class TutorialForm extends React.Component {
 		);
 	}
 }
+
+TutorialForm.propTypes = {
+	tag: PropTypes.object.isRequired,
+	tutorial: PropTypes.object.isRequired,
+	getTags: PropTypes.func.isRequired,
+	addTag: PropTypes.func.isRequired,
+	addTutorial: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
 	tag: state.tag,

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Card } from 'antd';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import '../styles/TagCard.css';
 
@@ -29,5 +30,9 @@ class TagCard extends React.Component {
 		);
 	}
 }
+
+TagCard.propTypes = {
+	tag: PropTypes.object.isRequired
+};
 
 export default TagCard;

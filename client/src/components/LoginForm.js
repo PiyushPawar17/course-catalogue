@@ -2,9 +2,10 @@ import React from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import { validEmail, emptyString } from '../utils/validate';
 import { logIn } from '../actions/authActions';
+import { validEmail, emptyString } from '../utils/validate';
 
 import '../styles/LoginForm.css';
 
@@ -62,6 +63,10 @@ class LoginForm extends React.Component {
 		);
 	}
 }
+
+LoginForm.propTypes = {
+	logIn: PropTypes.func.isRequired
+};
 
 export default connect(
 	null,

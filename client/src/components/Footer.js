@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Layout, Icon } from 'antd';
+import { Link } from 'react-router-dom';
 
 import '../styles/Footer.css';
 

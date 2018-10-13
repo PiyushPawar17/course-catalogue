@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
 import { Layout, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import { logOut } from '../actions/authActions';
 
 import '../styles/Navbar.css';
-
-const { Header } = Layout;
 
 class Navbar extends React.Component {
 	logOut(event) {
@@ -47,7 +47,7 @@ class Navbar extends React.Component {
 		}
 
 		return (
-			<Header className="navbar">
+			<Layout.Header className="navbar">
 				<Link to="/" className="navbar-logo" style={{ width: navbarLogoWidth }}>
 					Course Catalogue
 				</Link>
@@ -57,10 +57,15 @@ class Navbar extends React.Component {
 					</Button>
 				</Link>
 				{navLinks}
-			</Header>
+			</Layout.Header>
 		);
 	}
 }
+
+Navbar.propTypes = {
+	auth: PropTypes.object.isRequired,
+	logOut: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
 	auth: state.auth

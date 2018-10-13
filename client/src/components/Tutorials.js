@@ -1,9 +1,12 @@
 import React from 'react';
 import { Row, Col, Icon } from 'antd';
 import { connect } from 'react-redux';
-import TutorialCard from './TutorialCard';
+import PropTypes from 'prop-types';
+
 import { getTag } from '../actions/tagActions';
 import { getTutorialsByTag } from '../actions/tutorialActions';
+
+import TutorialCard from './TutorialCard';
 
 import '../styles/Tutorials.css';
 
@@ -32,6 +35,13 @@ class Tutorials extends React.Component {
 		);
 	}
 }
+
+Tutorials.propTypes = {
+	tag: PropTypes.object.isRequired,
+	tutorial: PropTypes.object.isRequired,
+	getTag: PropTypes.func.isRequired,
+	getTutorialsByTag: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
 	tag: state.tag,

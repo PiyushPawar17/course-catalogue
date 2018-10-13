@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { Button, Icon, Avatar, Tabs, Row, Col } from 'antd';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import { getUserProfile } from '../actions/authActions';
 
 import TutorialCard from './TutorialCard';
@@ -88,6 +90,12 @@ class Profile extends React.Component {
 		return <div>{profile}</div>;
 	}
 }
+
+Profile.propTypes = {
+	auth: PropTypes.object.isRequired,
+	tutorial: PropTypes.object.isRequired,
+	getUserProfile: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
 	auth: state.auth,

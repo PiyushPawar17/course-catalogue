@@ -1,13 +1,12 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 
 import '../styles/Login.css';
-
-const TabPane = Tabs.TabPane;
 
 class Login extends React.Component {
 	componentDidMount() {
@@ -26,17 +25,21 @@ class Login extends React.Component {
 		return (
 			<div className="login">
 				<Tabs defaultActiveKey="1" className="login-signup-form">
-					<TabPane tab="Log In" key="1">
+					<Tabs.TabPane tab="Log In" key="1">
 						<LoginForm />
-					</TabPane>
-					<TabPane tab="Sign Up" key="2">
+					</Tabs.TabPane>
+					<Tabs.TabPane tab="Sign Up" key="2">
 						<SignUpForm />
-					</TabPane>
+					</Tabs.TabPane>
 				</Tabs>
 			</div>
 		);
 	}
 }
+
+Login.propTypes = {
+	auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
 	auth: state.auth

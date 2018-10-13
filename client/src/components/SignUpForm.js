@@ -2,9 +2,10 @@ import React from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { validEmail, emptyString, samePassword } from '../utils/validate';
 import { signUp } from '../actions/authActions';
+import { validEmail, emptyString, samePassword } from '../utils/validate';
 
 import '../styles/SignUpForm.css';
 
@@ -88,6 +89,11 @@ class SignUpForm extends React.Component {
 		);
 	}
 }
+
+SignUpForm.propTypes = {
+	auth: PropTypes.object.isRequired,
+	signUp: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
 	auth: state.auth
