@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Icon, Avatar, Tabs, Row, Col } from 'antd';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { getUserProfile } from '../actions/authActions';
@@ -79,8 +78,12 @@ class Profile extends React.Component {
 								<Row gutter={8}>{submittedBlogs}</Row>
 							</Tabs.TabPane>
 						</Tabs>
-						<Button type="primary" size="large">
-							<Link to="/addtutorial">Submit A Tutorial</Link>
+						<Button
+							type="primary"
+							size="large"
+							onClick={() => this.props.history.push('/addtutorial')}
+						>
+							Submit A Tutorial
 						</Button>
 					</main>
 				</div>
