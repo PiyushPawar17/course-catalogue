@@ -29,6 +29,7 @@ class TutorialCard extends React.Component {
 
 		this.props.addToFavorites(this.props.tutorial._id);
 		message.success('Tutorial added to favorites');
+		this.props.getUserProfile();
 		setTimeout(() => this.props.clearMessage(), 3000);
 	}
 
@@ -67,6 +68,13 @@ class TutorialCard extends React.Component {
 			));
 		} else {
 			tags = null;
+		}
+
+		let favorite = false;
+		if (this.props.auth.userProfile.favorites) {
+			this.props.auth.userProfile.favorites.forEach(tutorial => {
+				if (this.props.tutorial._id === tutorial._id) favorite = true;
+			});
 		}
 
 		return (
@@ -108,7 +116,7 @@ class TutorialCard extends React.Component {
 						</Col>
 					</Row>
 					<div className="card-entries">{tags}</div>
-					{this.props.favorite ? (
+					{!favorite ? (
 						<Button type="primary" className="favorite-button" onClick={this.addToFavorites}>
 							Add to Favorites
 						</Button>
@@ -133,16 +141,11 @@ class TutorialCard extends React.Component {
 }
 
 TutorialCard.propTypes = {
-	favorite: PropTypes.bool,
 	auth: PropTypes.object.isRequired,
 	addToFavorites: PropTypes.func.isRequired,
 	removeFromFavorites: PropTypes.func.isRequired,
 	clearMessage: PropTypes.func.isRequired,
 	getUserProfile: PropTypes.func.isRequired
-};
-
-TutorialCard.defaultProps = {
-	favorite: true
 };
 
 const mapStateToProps = state => ({

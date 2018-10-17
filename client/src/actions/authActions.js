@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
 import setAuthToken from '../utils/setAuthToken';
-import { SIGNUP, CLEAR, SET_CURRENT_USER, USER_PROFILE, AUTH_LOADING } from './types';
+import { SIGNUP, CLEAR, SET_CURRENT_USER, USER_PROFILE, AUTH_LOADING, CLEAR_CURRENT_PROFILE } from './types';
 
 export const signUp = (user, history) => dispatch => {
 	axios
@@ -55,6 +55,12 @@ export const setCurrentUser = decoded => {
 	return {
 		type: SET_CURRENT_USER,
 		payload: decoded
+	};
+};
+
+export const clearCurrentProfile = () => {
+	return {
+		type: CLEAR_CURRENT_PROFILE
 	};
 };
 

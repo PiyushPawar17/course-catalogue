@@ -31,7 +31,16 @@ router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) =
 	User.findById(req.user._id)
 		.populate('submittedTutorials', tutorialFields)
 		.populate('favorites', tutorialFields)
-		.then(user => res.json({ user }))
+		.then(user => {
+			const currentUser = {
+				_id: user._id,
+				name: user.name,
+				email: user.email,
+				submittedTutorials: user.submittedTutorials,
+				favorites: user.favorites
+			};
+			res.json({ user: currentUser });
+		})
 		.catch(err => console.log(err));
 });
 

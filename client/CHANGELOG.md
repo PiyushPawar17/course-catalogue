@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2018-10-17
+
+### Changed
+
+-   Conditional Add to favorites / Remove from favorites button.
+
+### Bug Fixes
+
+-   Cleared User profile on logout.
+
 ## [1.0.1] - 2018-10-16
 
 ### Bug Fixes

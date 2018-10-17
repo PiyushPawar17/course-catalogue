@@ -1,11 +1,12 @@
 import React from 'react';
-import { Icon, Tag, Divider, Button, Input, message } from 'antd';
+import { Icon, Tag, Divider, Button, Input, Popconfirm, message } from 'antd';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import { getTutorial, addReview } from '../actions/tutorialActions';
-import { addToFavorites, clearMessage } from '../actions/userActions';
+import { addToFavorites, removeFromFavorites, clearMessage } from '../actions/userActions';
+import { getUserProfile } from '../actions/authActions';
 
 import '../styles/Tutorial.css';
 
@@ -15,6 +16,7 @@ class Tutorial extends React.Component {
 
 		this.addReview = this.addReview.bind(this);
 		this.addToFavorites = this.addToFavorites.bind(this);
+		this.removeFromFavorites = this.removeFromFavorites.bind(this);
 	}
 
 	componentDidMount() {
@@ -28,6 +30,14 @@ class Tutorial extends React.Component {
 
 		this.props.addToFavorites(this.props.match.params.tutorial);
 		message.success('Tutorial added to favorites');
+		this.props.getUserProfile();
+		setTimeout(() => this.props.clearMessage(), 3000);
+	}
+
+	removeFromFavorites() {
+		this.props.removeFromFavorites(this.props.match.params.tutorial);
+		message.success('Tutorial removed from favorites');
+		this.props.getUserProfile();
 		setTimeout(() => this.props.clearMessage(), 3000);
 	}
 
@@ -78,6 +88,13 @@ class Tutorial extends React.Component {
 				tags = null;
 			}
 
+			let favorite = false;
+			if (this.props.auth.userProfile.favorites) {
+				this.props.auth.userProfile.favorites.forEach(tutorial => {
+					if (this.props.match.params.tutorial === tutorial._id) favorite = true;
+				});
+			}
+
 			let reviews;
 
 			if (tutorial.reviews.length === 0 || !tutorial.reviews) {
@@ -96,9 +113,28 @@ class Tutorial extends React.Component {
 					<h1 className="tutorial-title-name">
 						{tutorial.title}{' '}
 						<span>
-							<Button type="primary" className="favorite-button" onClick={this.addToFavorites}>
-								Add to Favorites
-							</Button>
+							{!favorite ? (
+								<Button
+									type="primary"
+									className="favorite-button"
+									onClick={this.addToFavorites}
+								>
+									Add to Favorites
+								</Button>
+							) : (
+								<Popconfirm
+									placement="top"
+									title="Remove from favorites?"
+									okText="Yes"
+									cancelText="Cancel"
+									icon={<Icon type="question-circle" theme="outlined" />}
+									onConfirm={this.removeFromFavorites}
+								>
+									<Button type="danger" className="remove-favorite-button">
+										Remove from Favorites
+									</Button>
+								</Popconfirm>
+							)}
 						</span>
 					</h1>
 					<div className="tutorial-tags">{tags}</div>
@@ -160,6 +196,8 @@ Tutorial.propTypes = {
 	getTutorial: PropTypes.func.isRequired,
 	addReview: PropTypes.func.isRequired,
 	addToFavorites: PropTypes.func.isRequired,
+	removeFromFavorites: PropTypes.func.isRequired,
+	getUserProfile: PropTypes.func.isRequired,
 	clearMessage: PropTypes.func.isRequired
 };
 
@@ -170,5 +208,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getTutorial, addReview, addToFavorites, clearMessage }
+	{ getTutorial, addReview, addToFavorites, removeFromFavorites, getUserProfile, clearMessage }
 )(Tutorial);

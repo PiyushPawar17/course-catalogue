@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
 
 import store from '../store';
 import setAuthToken from '../utils/setAuthToken';
-import { setCurrentUser, logOut, getUserProfile } from '../actions/authActions';
+import { setCurrentUser, logOut, getUserProfile, clearCurrentProfile } from '../actions/authActions';
 
 import PrivateRoute from './PrivateRoute';
 import Navbar from './Navbar';
@@ -35,6 +35,8 @@ if (localStorage.jwtToken) {
 	if (decoded.exp < currentTime) {
 		// Logout user
 		store.dispatch(logOut());
+		// Clear user profile
+		store.dispatch(clearCurrentProfile());
 		// Redirect to homepage
 		window.location.href = '/';
 	}

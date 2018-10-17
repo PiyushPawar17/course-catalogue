@@ -1,4 +1,11 @@
-import { SIGNUP, CLEAR, SET_CURRENT_USER, USER_PROFILE, AUTH_LOADING } from '../actions/types';
+import {
+	SIGNUP,
+	CLEAR,
+	SET_CURRENT_USER,
+	USER_PROFILE,
+	AUTH_LOADING,
+	CLEAR_CURRENT_PROFILE
+} from '../actions/types';
 import { isEmpty } from '../utils/validate';
 
 const initialState = {
@@ -27,6 +34,11 @@ export default function(state = initialState, action) {
 				...state,
 				userProfile: action.payload.user,
 				loading: false
+			};
+		case CLEAR_CURRENT_PROFILE:
+			return {
+				...state,
+				userProfile: {}
 			};
 		case CLEAR:
 			return {
