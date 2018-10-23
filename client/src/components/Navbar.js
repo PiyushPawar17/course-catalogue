@@ -1,7 +1,7 @@
 import React from 'react';
-import { Layout, Button, Icon, Popconfirm } from 'antd';
+import { Icon, Popconfirm, Drawer, Row, Col } from 'antd';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { logOut, clearCurrentProfile } from '../actions/authActions';
@@ -9,65 +9,145 @@ import { logOut, clearCurrentProfile } from '../actions/authActions';
 import '../styles/Navbar.css';
 
 class Navbar extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			visible: false
+		};
+
+		this.showDrawer = this.showDrawer.bind(this);
+		this.onClose = this.onClose.bind(this);
+		this.mobileNavigation = this.mobileNavigation.bind(this);
+		this.logOut = this.logOut.bind(this);
+	}
+
+	showDrawer() {
+		this.setState({ visible: true });
+	}
+
+	onClose() {
+		this.setState({ visible: false });
+	}
+
+	mobileNavigation(route) {
+		this.props.history.push(route);
+		this.onClose();
+	}
+
 	logOut(event) {
 		event.preventDefault();
 
 		this.props.clearCurrentProfile();
 		this.props.logOut(this.props.history);
+		this.onClose();
 	}
 
 	render() {
 		const { authenticated } = this.props.auth;
-		let navLinks;
-		let navbarLogoWidth = '75%';
+		let navLinks, smallScreenNavLinks;
+		let nlg = 18;
+		let nmd = 16;
 		if (authenticated) {
-			navbarLogoWidth = '65%';
+			nlg = 16;
+			nmd = 13;
 			navLinks = (
 				<React.Fragment>
-					<Link to="/profile">
-						<Button className="navbar-link">
+					<Col xs={0} sm={0} md={3} lg={2}>
+						<div className="navbar-link" onClick={() => this.props.history.push('/profile')}>
 							<Icon type="user" /> Profile
-						</Button>
-					</Link>
+						</div>
+					</Col>
+					<Col xs={0} sm={0} md={3} lg={2}>
+						<Popconfirm
+							placement="bottom"
+							title="Logout?"
+							okText="Yes"
+							cancelText="Cancel"
+							icon={<Icon type="question-circle" theme="outlined" />}
+							onConfirm={this.logOut.bind(this)}
+						>
+							<div className="navbar-link">
+								Log Out <Icon type="logout" />
+							</div>
+						</Popconfirm>
+					</Col>
+				</React.Fragment>
+			);
+			smallScreenNavLinks = (
+				<React.Fragment>
+					<div
+						className="small-screen-navbar-link"
+						onClick={() => this.mobileNavigation('/profile')}
+					>
+						<Icon type="user" /> Profile
+					</div>
 					<Popconfirm
 						placement="bottom"
 						title="Logout?"
 						okText="Yes"
 						cancelText="Cancel"
 						icon={<Icon type="question-circle" theme="outlined" />}
-						onConfirm={this.logOut.bind(this)}
+						onConfirm={this.logOut}
 					>
-						<a href="#">
-							<Button className="navbar-link">
-								Log Out <Icon type="logout" />
-							</Button>
-						</a>
+						<div className="small-screen-navbar-link">
+							Log Out <Icon type="logout" />
+						</div>
 					</Popconfirm>
 				</React.Fragment>
 			);
 		} else {
-			navbarLogoWidth = '75%';
+			nlg = 18;
+			nmd = 16;
 			navLinks = (
-				<Link to="/login">
-					<Button className="navbar-link">
+				<Col xs={0} sm={0} md={3} lg={2}>
+					<div className="navbar-link" onClick={() => this.props.history.push('/login')}>
 						Log In <Icon type="login" />
-					</Button>
-				</Link>
+					</div>
+				</Col>
+			);
+			smallScreenNavLinks = (
+				<div className="small-screen-navbar-link" onClick={() => this.mobileNavigation('/login')}>
+					Log In <Icon type="login" />
+				</div>
 			);
 		}
 
 		return (
-			<Layout.Header className="navbar">
-				<Link to="/" className="navbar-logo" style={{ width: navbarLogoWidth }}>
-					Course Catalogue
-				</Link>
-				<Link to="/">
-					<Button className="navbar-link">
+			<Row className="navbar" align="middle">
+				<Col xs={20} sm={20} md={nmd} lg={nlg} offset={1}>
+					<div className="navbar-logo" onClick={() => this.props.history.push('/')}>
+						Course Catalogue
+					</div>
+				</Col>
+				<Col xs={0} sm={0} md={3} lg={2}>
+					<div className="navbar-link" onClick={() => this.props.history.push('/')}>
 						<Icon type="home" /> Home
-					</Button>
-				</Link>
+					</div>
+				</Col>
+				<Col xs={3} sm={3} md={0}>
+					<div className="navbar-link" onClick={this.showDrawer}>
+						{this.state.visible ? (
+							<Icon type="menu-fold" theme="outlined" />
+						) : (
+							<Icon type="menu-unfold" theme="outlined" />
+						)}
+					</div>
+				</Col>
 				{navLinks}
-			</Layout.Header>
+				<Drawer
+					title="Course Catalogue"
+					placement="left"
+					closable={false}
+					onClose={this.onClose}
+					visible={this.state.visible}
+				>
+					<div className="small-screen-navbar-link" onClick={() => this.mobileNavigation('/')}>
+						<Icon type="home" /> Home
+					</div>
+					{smallScreenNavLinks}
+				</Drawer>
+			</Row>
 		);
 	}
 }

@@ -58,9 +58,6 @@ class Profile extends React.Component {
 			profile = (
 				<div className="profile">
 					<div className="profile-userinfo">
-						<div className="profile-avatar">
-							<Avatar size={128} icon="user" className="avatar" />
-						</div>
 						<div className="profile-username">{this.props.auth.user.name}</div>
 						<div className="profile-useremail">
 							<Icon type="mail" /> {this.props.auth.user.email}

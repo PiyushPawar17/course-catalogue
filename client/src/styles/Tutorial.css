@@ -1,8 +1,8 @@
 .tutorial {
+	min-height: calc(100vh - 4rem);
 	width: 80%;
 	margin: 2rem auto;
 	user-select: none;
-	min-height: 80vh;
 }
 
 .tutorial-title-name {
@@ -35,11 +35,6 @@
 	margin: 2rem 0 5rem 0;
 }
 
-.review-text {
-	width: 90%;
-	margin-right: 0.6rem;
-}
-
 .review {
 	margin: 1rem 0;
 }
@@ -47,4 +42,8 @@
 .review .reviewed-by {
 	font-weight: bold;
 	margin-bottom: 5px;
+}
+
+.review .review-content {
+	text-align: justify;
 }

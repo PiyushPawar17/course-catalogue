@@ -1,7 +1,7 @@
 .footer {
 	color: #ffffff;
 	background-color: #0787e6;
-	height: 9vh;
+	min-height: 4rem;
 }
 
 .footer-content {
@@ -17,10 +17,6 @@
 
 .footer-links a {
 	color: #ffffff;
-}
-
-.footer-links:not(:last-child) {
-	margin-right: 3rem;
 }
 
 .footer-links.github {

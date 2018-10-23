@@ -33,7 +33,7 @@ class HomePage extends React.Component {
 				tags = <div className="nothing-to-show">No tutorials submitted yet</div>;
 			} else {
 				tags = this.props.tag.tags.map((tag, i) => (
-					<Col key={i} span={8}>
+					<Col key={i} sm={{ span: 20, offset: 2 }} md={{ span: 10, offset: 1 }} xl={{ span: 8, offset: 0 }}>
 						<TagCard tag={tag} />
 					</Col>
 				));
@@ -46,7 +46,7 @@ class HomePage extends React.Component {
 				<div className="homepage-tags">
 					<div className="homepage-tags-header">Tutorials</div>
 					<Element name="tags">
-						<Row gutter={8}>{tags}</Row>
+						<Row gutter={{ sm: 0, md: 4, xl: 8 }}>{tags}</Row>
 					</Element>
 				</div>
 			</div>

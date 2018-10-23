@@ -33,3 +33,9 @@
 	color: #ee1717;
 	margin-left: 2px;
 }
+
+@media screen and (max-width: 768px) {
+	.full-page-form {
+		width: 85%;
+	}
+}

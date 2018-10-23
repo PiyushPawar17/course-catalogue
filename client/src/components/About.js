@@ -24,7 +24,7 @@ class About extends React.Component {
 					<h1>Team Members</h1>
 					<Divider className="divider" />
 					<Row type="flex" justify="space-between">
-						<Col span={4} className="member">
+						<Col xs={24} md={8} lg={4} className="member">
 							<div className="member-name">Ishita Das</div>
 							<div className="member-social">
 								<span>
@@ -42,7 +42,7 @@ class About extends React.Component {
 								</span>
 							</div>
 						</Col>
-						<Col span={4} className="member">
+						<Col xs={24} md={8} lg={4} className="member">
 							<div className="member-name">Avdhesh Yadav</div>
 							<div className="member-social">
 								<span>
@@ -60,7 +60,7 @@ class About extends React.Component {
 								</span>
 							</div>
 						</Col>
-						<Col span={4} className="member">
+						<Col xs={24} md={8} lg={4} className="member">
 							<div className="member-name">Mohak Khare</div>
 							<div className="member-social">
 								<span>
@@ -78,7 +78,7 @@ class About extends React.Component {
 								</span>
 							</div>
 						</Col>
-						<Col span={4} className="member">
+						<Col xs={24} md={8} lg={4} className="member">
 							<div className="member-name">Piyush Pawar</div>
 							<div className="member-social">
 								<span>
@@ -96,7 +96,7 @@ class About extends React.Component {
 								</span>
 							</div>
 						</Col>
-						<Col span={4} className="member">
+						<Col xs={24} md={8} lg={4} className="member">
 							<div className="member-name">Abhyudai Bisht</div>
 							<div className="member-social">
 								<span>
@@ -114,7 +114,7 @@ class About extends React.Component {
 								</span>
 							</div>
 						</Col>
-						<Col span={4} className="member">
+						<Col xs={24} md={8} lg={4} className="member">
 							<div className="member-name">Saurabh Pandit</div>
 							<div className="member-social">
 								<span>

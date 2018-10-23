@@ -1,5 +1,5 @@
 .about-page {
-	min-height: 80vh;
+	min-height: calc(100vh - 4rem);
 	width: 80%;
 	margin: 2rem auto;
 }

@@ -1,7 +1,7 @@
 .tutorials-by-tag {
+	min-height: calc(100vh - 4rem);
 	width: 80%;
 	margin: 3rem auto;
-	min-height: 80vh;
 }
 
 .tutorial-title {

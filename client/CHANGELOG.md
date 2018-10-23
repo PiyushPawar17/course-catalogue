@@ -2,9 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2018-10-23
+
+### Updated
+
+-   Made Website Responsive
+
 ## [1.0.2] - 2018-10-17
 
-### Changed
+### Updated
 
 -   Conditional Add to favorites / Remove from favorites button.
 

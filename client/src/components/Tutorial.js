@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Tag, Divider, Button, Input, Popconfirm, message } from 'antd';
+import { Icon, Tag, Divider, Button, Input, Popconfirm, Row, Col, message } from 'antd';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -111,31 +111,31 @@ class Tutorial extends React.Component {
 			tutorialPage = (
 				<div>
 					<h1 className="tutorial-title-name">
-						{tutorial.title}{' '}
-						<span>
-							{!favorite ? (
-								<Button
-									type="primary"
-									className="favorite-button"
-									onClick={this.addToFavorites}
-								>
-									Add to Favorites
-								</Button>
-							) : (
-								<Popconfirm
-									placement="top"
-									title="Remove from favorites?"
-									okText="Yes"
-									cancelText="Cancel"
-									icon={<Icon type="question-circle" theme="outlined" />}
-									onConfirm={this.removeFromFavorites}
-								>
-									<Button type="danger" className="remove-favorite-button">
-										Remove from Favorites
-									</Button>
-								</Popconfirm>
-							)}
-						</span>
+						<Row gutter={8}>
+							<Col sm={24} md={20}>
+								{tutorial.title}
+							</Col>
+							<Col sm={24} md={4}>
+								<span>
+									{!favorite ? (
+										<Button type="primary" onClick={this.addToFavorites}>
+											Add to Favorites
+										</Button>
+									) : (
+										<Popconfirm
+											placement="top"
+											title="Remove from favorites?"
+											okText="Yes"
+											cancelText="Cancel"
+											icon={<Icon type="question-circle" theme="outlined" />}
+											onConfirm={this.removeFromFavorites}
+										>
+											<Button type="danger">Remove from Favorites</Button>
+										</Popconfirm>
+									)}
+								</span>
+							</Col>
+						</Row>
 					</h1>
 					<div className="tutorial-tags">{tags}</div>
 					<div className="tutorial-info">
@@ -171,15 +171,16 @@ class Tutorial extends React.Component {
 						<div className="tutorial-info">
 							<span className="bold">Reviews</span>
 						</div>
-						<Input.TextArea
-							rows={1}
-							placeholder="Add a review"
-							className="review-text"
-							ref="review"
-						/>
-						<Button type="primary" onClick={this.addReview}>
-							Submit
-						</Button>
+						<Row gutter={8}>
+							<Col sm={24} md={22}>
+								<Input.TextArea rows={1} placeholder="Add a review" ref="review" />
+							</Col>
+							<Col sm={24} md={2}>
+								<Button type="primary" onClick={this.addReview}>
+									Submit
+								</Button>
+							</Col>
+						</Row>
 						{reviews}
 					</div>
 				</div>

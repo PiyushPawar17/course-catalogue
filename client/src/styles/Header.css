@@ -1,5 +1,5 @@
 .header {
-	height: 92vh;
+	height: calc(100vh - 4rem);
 	text-align: center;
 	background: rgb(7, 135, 230);
 	background: linear-gradient(180deg, rgba(7, 135, 230, 1) 0%, rgba(45, 156, 255, 1) 100%);
@@ -42,6 +42,25 @@
 	cursor: pointer;
 	-webkit-animation: moveIcon 2.5s infinite;
 	animation: moveIcon 2.5s infinite;
+}
+
+@media screen and (max-width: 768px) {
+	.heading {
+		font-size: 2rem;
+		letter-spacing: 0.6rem;
+		margin-top: 1rem;
+		margin-bottom: 3rem;
+	}
+
+	.header-description {
+		font-size: 1.2rem;
+		word-spacing: 0.1rem;
+		margin-bottom: 2rem;
+	}
+
+	.scroll-down {
+		font-size: 1rem;
+	}
 }
 
 @keyframes moveInLeft {

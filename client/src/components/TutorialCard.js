@@ -104,14 +104,14 @@ class TutorialCard extends React.Component {
 							</span>
 						</Tooltip>
 					</div>
-					<Row gutter={8}>
-						<Col span={8}>
+					<Row gutter={{ sm: 0, md: 4, xl: 8 }}>
+						<Col sm={{ span: 24 }} md={{ span: 12 }} xl={{ span: 8 }}>
 							<div className="card-entries">Medium : {this.props.tutorial.medium}</div>
 						</Col>
-						<Col span={8}>
+						<Col sm={{ span: 24 }} md={{ span: 12 }} xl={{ span: 8 }}>
 							<div className="card-entries">Type : {this.props.tutorial.type}</div>
 						</Col>
-						<Col span={8}>
+						<Col sm={{ span: 24 }} md={{ span: 12 }} xl={{ span: 8 }}>
 							<div className="card-entries">Skill Level : {this.props.tutorial.skillLevel}</div>
 						</Col>
 					</Row>

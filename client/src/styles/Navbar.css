@@ -1,5 +1,5 @@
 .navbar {
-	height: 8vh;
+	height: 4rem;
 	background-color: #0787e6;
 	color: #ffffff;
 	border-bottom: 1px solid #ffffff;
@@ -11,34 +11,29 @@
 }
 
 .navbar .navbar-logo {
-	display: inline-block;
 	font-size: 1.7rem;
 	color: #ffffff;
+	cursor: pointer;
+	line-height: 4rem;
 }
 
 .navbar .navbar-link {
-	width: 10%;
-	height: 100%;
-	display: inline-block;
-	border-radius: 0;
-	border: none;
-	background-color: #0787e6;
-	color: #ffffff;
-	text-decoration: none;
 	transition-duration: 0.7s;
 	text-align: center;
 	cursor: pointer;
 	font-size: 1rem;
+	height: 4rem;
+	line-height: 4rem;
 }
 
 .navbar .navbar-link:hover {
 	background-color: rgba(0, 0, 0, 0.1);
 }
 
-a {
-	text-decoration: none !important;
-}
-
-.ant-layout-header {
-	line-height: 0;
+.small-screen-navbar-link {
+	padding: 1.5rem 0;
+	text-align: center;
+	border-bottom: 1px solid #bebebe;
+	color: #0787e6;
+	cursor: pointer;
 }

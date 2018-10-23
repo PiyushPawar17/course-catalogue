@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Icon } from 'antd';
+import { Layout, Icon, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 
 import '../styles/Footer.css';
@@ -9,14 +9,14 @@ class Footer extends React.Component {
 		return (
 			<Layout.Footer className="footer">
 				<div className="footer-content">
-					<ul>
-						<li className="footer-links">
+					<Row>
+						<Col xs={24} sm={24} md={3} lg={2} className="footer-links">
 							<Link to="/">Home</Link>
-						</li>
-						<li className="footer-links">
+						</Col>
+						<Col xs={24} sm={24} md={18} lg={20} className="footer-links">
 							<Link to="/about">About Us</Link>
-						</li>
-						<li className="footer-links github">
+						</Col>
+						<Col xs={24} sm={24} md={3} lg={2} className="footer-links github">
 							<a
 								href="https://github.com/PiyushPawar17/course-catalogue"
 								target="_blank"
@@ -24,8 +24,8 @@ class Footer extends React.Component {
 							>
 								<Icon type="github" theme="outlined" className="social-icon" />
 							</a>
-						</li>
-					</ul>
+						</Col>
+					</Row>
 				</div>
 			</Layout.Footer>
 		);

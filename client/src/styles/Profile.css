@@ -1,7 +1,7 @@
 .profile {
+	min-height: calc(100vh - 4rem);
 	width: 90%;
 	margin: 2% 5%;
-	min-height: 80vh;
 }
 
 .profile-userinfo {
@@ -9,15 +9,6 @@
 	padding: 2rem;
 	background: rgb(7, 135, 230);
 	background: radial-gradient(circle, rgba(7, 135, 230, 1) 0%, rgba(75, 170, 255, 1) 100%);
-}
-
-.profile-avatar {
-	margin: 1.2rem 0;
-}
-
-.avatar {
-	background-color: #ffffff;
-	color: #0787e6;
 }
 
 .profile-username {
@@ -40,4 +31,15 @@
 .nothing-to-show {
 	text-align: center;
 	color: rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+	.profile-username {
+		font-size: 2rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.profile-useremail {
+		font-size: 0.9rem;
+	}
 }

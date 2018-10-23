@@ -1,10 +1,24 @@
 .login {
-	height: 92vh;
-	background: url(../img/login-background.png) no-repeat;
+	height: calc(100vh - 8rem);
 }
 
 .login-signup-form {
-	color: white;
-	width: 500px;
-	padding: 70px;
+	width: 80%;
+	margin: 10% auto;
+}
+
+.login-info {
+	background: rgb(7, 135, 230);
+	background: linear-gradient(
+		180deg,
+		rgba(7, 135, 230, 1) 0%,
+		rgba(45, 156, 255, 1) 50%,
+		rgba(7, 135, 230, 1) 100%
+	);
+	color: #ffffff;
+	font-size: 1.5rem;
+	height: calc(100vh - 8rem);
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

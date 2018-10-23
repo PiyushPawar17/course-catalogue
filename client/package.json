@@ -1,6 +1,6 @@
 {
 	"name": "client",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"private": true,
 	"scripts": {
 		"start": "react-app-rewired start",
@@ -22,6 +22,8 @@
 		"react-router-dom": "^4.3.1",
 		"react-scripts": "1.1.5",
 		"react-scroll": "^1.7.10",
+		"react-typist": "^2.0.4",
+		"react-typist-loop": "0.0.5",
 		"redux": "^4.0.0",
 		"redux-thunk": "^2.3.0",
 		"validator": "^10.8.0"
