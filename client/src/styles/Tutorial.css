@@ -9,10 +9,6 @@
 	text-transform: capitalize;
 }
 
-.tutorial-page-fav {
-	margin-left: 5rem;
-}
-
 .tutorial-tags {
 	margin-bottom: 1rem;
 	user-select: none;
@@ -46,4 +42,15 @@
 
 .review .review-content {
 	text-align: justify;
+}
+
+@media screen and (max-width: 768px) {
+	.tutorial-title-name {
+		font-size: 1.2rem;
+	}
+
+	.tutorial-info {
+		font-size: 0.85rem;
+		margin-bottom: 10px;
+	}
 }

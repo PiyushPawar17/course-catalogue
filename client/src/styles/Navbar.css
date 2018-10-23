@@ -37,3 +37,10 @@
 	color: #0787e6;
 	cursor: pointer;
 }
+
+@media screen and (max-width: 576px) {
+	.navbar .navbar-logo {
+		font-size: 1.2rem;
+		text-align: center;
+	}
+}

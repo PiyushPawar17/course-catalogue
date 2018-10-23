@@ -7,3 +7,9 @@
 .tutorial-title {
 	text-align: center;
 }
+
+@media screen and (max-width: 768px) {
+	.tutorial-title {
+		font-size: 1.5rem;
+	}
+}

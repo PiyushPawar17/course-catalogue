@@ -81,18 +81,6 @@ class TutorialCard extends React.Component {
 			<Card className="tutorial-card">
 				<Skeleton loading={!this.props.tutorial} active>
 					<div className="card-title">
-						{/* <div className="upvotes">
-							<div
-								className="upvote-icon"
-								onClick={this.changeUpvoteColor}
-								className={this.state.upvote ? 'upvoted' : ''}
-							>
-								<Icon type="caret-up" theme="outlined" />
-							</div>
-							<Tooltip placement="left" title="Upvotes">
-								<small>4</small>
-							</Tooltip>
-						</div> */}
 						<Tooltip placement="topLeft" title="Click here for more info">
 							<span
 								className="tutorial-name"
