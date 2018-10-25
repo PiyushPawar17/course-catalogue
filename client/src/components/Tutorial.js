@@ -46,7 +46,7 @@ class Tutorial extends React.Component {
 
 	addUpvote() {
 		if (!this.props.auth.authenticated) {
-			return message.info('You need to login to add to favorites');
+			return message.info('You need to login to upvote');
 		}
 
 		this.props.addUpvote(this.props.match.params.tutorial);
