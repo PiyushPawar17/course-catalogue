@@ -4,7 +4,8 @@ import {
 	SET_CURRENT_USER,
 	USER_PROFILE,
 	AUTH_LOADING,
-	CLEAR_CURRENT_PROFILE
+	CLEAR_CURRENT_PROFILE,
+	INVALID_EMAIL
 } from '../actions/types';
 import { isEmpty } from '../utils/validate';
 
@@ -13,7 +14,8 @@ const initialState = {
 	authenticated: false,
 	newSignUp: false,
 	user: {},
-	userProfile: {}
+	userProfile: {},
+	message: ''
 };
 
 export default function(state = initialState, action) {
@@ -40,10 +42,16 @@ export default function(state = initialState, action) {
 				...state,
 				userProfile: {}
 			};
+		case INVALID_EMAIL:
+			return {
+				...state,
+				message: action.payload.msg
+			};
 		case CLEAR:
 			return {
 				...state,
-				newSignUp: false
+				newSignUp: false,
+				message: ''
 			};
 		case AUTH_LOADING:
 			return {

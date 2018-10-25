@@ -2,14 +2,26 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
 import setAuthToken from '../utils/setAuthToken';
-import { SIGNUP, CLEAR, SET_CURRENT_USER, USER_PROFILE, AUTH_LOADING, CLEAR_CURRENT_PROFILE } from './types';
+import {
+	SIGNUP,
+	CLEAR,
+	SET_CURRENT_USER,
+	USER_PROFILE,
+	AUTH_LOADING,
+	CLEAR_CURRENT_PROFILE,
+	INVALID_EMAIL
+} from './types';
 
 export const signUp = (user, history) => dispatch => {
 	axios
 		.post('/api/users/register', user)
 		.then(res => {
-			dispatch({ type: SIGNUP, payload: res.data });
-			history.push('/');
+			if (res.data.msg) {
+				dispatch({ type: INVALID_EMAIL, payload: res.data });
+			} else {
+				dispatch({ type: SIGNUP, payload: res.data });
+				history.push('/');
+			}
 		})
 		.catch(err => console.log(err));
 };

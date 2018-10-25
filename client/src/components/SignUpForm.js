@@ -4,12 +4,21 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { signUp } from '../actions/authActions';
+import { signUp, clearSignUp } from '../actions/authActions';
 import { validEmail, emptyString, samePassword } from '../utils/validate';
 
 import '../styles/SignUpForm.css';
 
 class SignUpForm extends React.Component {
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.auth.message !== '') {
+			message.error(nextProps.auth.message);
+			setTimeout(() => {
+				this.props.clearSignUp();
+			}, 2000);
+		}
+	}
+
 	signUp(event) {
 		event.preventDefault();
 
@@ -92,7 +101,8 @@ class SignUpForm extends React.Component {
 
 SignUpForm.propTypes = {
 	auth: PropTypes.object.isRequired,
-	signUp: PropTypes.func.isRequired
+	signUp: PropTypes.func.isRequired,
+	clearSignUp: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -101,5 +111,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ signUp }
+	{ signUp, clearSignUp }
 )(withRouter(SignUpForm));

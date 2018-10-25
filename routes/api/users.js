@@ -3,7 +3,11 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
-const { secretOrKey } = require('../../config/keys');
+const { secretOrKey, emailVerificationKey } = require('../../config/keys');
+
+const quickemailverification = require('quickemailverification')
+	.client(emailVerificationKey)
+	.quickemailverification();
 
 const User = require('../../models/User');
 
@@ -37,7 +41,8 @@ router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) =
 				name: user.name,
 				email: user.email,
 				submittedTutorials: user.submittedTutorials,
-				favorites: user.favorites
+				favorites: user.favorites,
+				upvotes: user.upvotes
 			};
 			res.json({ user: currentUser });
 		})
@@ -78,21 +83,27 @@ router.post('/register', (req, res) => {
 		if (user) {
 			return res.status(400).json({ error: 'Email already exist' });
 		} else {
-			const newUser = new User({
-				name: req.body.name,
-				email: req.body.email,
-				password: req.body.password
-			});
+			quickemailverification.verify(req.body.email, function(err, response) {
+				if (response.body.result === 'valid') {
+					const newUser = new User({
+						name: req.body.name,
+						email: req.body.email,
+						password: req.body.password
+					});
 
-			bcrypt.genSalt(10, (err, salt) => {
-				bcrypt.hash(newUser.password, salt, (err, hash) => {
-					if (err) throw err;
-					newUser.password = hash;
-					newUser
-						.save()
-						.then(user => res.json({ user: 'New User Registered' }))
-						.catch(err => console.log(err));
-				});
+					bcrypt.genSalt(10, (err, salt) => {
+						bcrypt.hash(newUser.password, salt, (err, hash) => {
+							if (err) throw err;
+							newUser.password = hash;
+							newUser
+								.save()
+								.then(user => res.json({ user: 'New User Registered' }))
+								.catch(err => console.log(err));
+						});
+					});
+				} else {
+					res.json({ msg: 'Enter a valid Email' });
+				}
 			});
 		}
 	});

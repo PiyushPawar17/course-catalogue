@@ -1,5 +1,13 @@
 import axios from 'axios';
-import { ADD_TUTORIAL, GET_TUTORIALS_BY_TAG, GET_TUTORIAL, TUTORIAL_LOADING } from './types';
+import {
+	ADD_TUTORIAL,
+	GET_TUTORIALS_BY_TAG,
+	GET_TUTORIAL,
+	TUTORIAL_LOADING,
+	ADD_UPVOTE,
+	REMOVE_UPVOTE,
+	CLEAR_UPVOTE_MESSAGE
+} from './types';
 
 export const addTutorial = (tutorial, history) => dispatch => {
 	axios
@@ -34,8 +42,28 @@ export const addReview = (tutorial, review) => dispatch => {
 		.catch(err => console.log(err));
 };
 
+export const addUpvote = tutorial => dispatch => {
+	axios
+		.post(`/api/tutorials/upvote/add/${tutorial}`)
+		.then(res => dispatch({ type: ADD_UPVOTE, payload: res.data }))
+		.catch(err => console.log(err));
+};
+
+export const removeUpvote = tutorial => dispatch => {
+	axios
+		.post(`/api/tutorials/upvote/remove/${tutorial}`)
+		.then(res => dispatch({ type: REMOVE_UPVOTE, payload: res.data }))
+		.catch(err => console.log(err));
+};
+
 export const loading = () => {
 	return {
 		type: TUTORIAL_LOADING
+	};
+};
+
+export const clearUpvoteMessage = () => {
+	return {
+		type: CLEAR_UPVOTE_MESSAGE
 	};
 };

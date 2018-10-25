@@ -54,3 +54,9 @@
 		margin-bottom: 10px;
 	}
 }
+
+@media screen and (max-width: 576px) {
+	.review-submit-button {
+		margin-top: 5px;
+	}
+}

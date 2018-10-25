@@ -8,7 +8,8 @@ const TutorialSchema = new Schema({
 	},
 	link: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
 	description: {
 		type: String,

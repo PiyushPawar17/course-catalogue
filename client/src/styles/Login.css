@@ -1,5 +1,5 @@
 .login {
-	height: calc(100vh - 8rem);
+	min-height: calc(100vh - 8rem);
 }
 
 .login-signup-form {
@@ -17,8 +17,24 @@
 	);
 	color: #ffffff;
 	font-size: 1.5rem;
-	height: calc(100vh - 8rem);
+	min-height: calc(100vh - 8rem);
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.login-header {
+	font-size: 2rem;
+	margin-bottom: 1rem;
+}
+
+.websites {
+	font-size: 1rem;
+	margin-bottom: 0.3rem;
+}
+
+@media screen and (min-width: 576px) {
+	.login {
+		height: calc(100vh - 8rem);
+	}
 }

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Icon, Tag, Divider, Button, Input, Popconfirm, Row, Col, message } from 'antd';
+import { Icon, Tag, Divider, Button, Input, Popconfirm, Row, Col, Badge, message } from 'antd';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import { getTutorial, addReview } from '../actions/tutorialActions';
 import { addToFavorites, removeFromFavorites, clearMessage } from '../actions/userActions';
+import { addUpvote, removeUpvote, clearUpvoteMessage } from '../actions/tutorialActions';
 import { getUserProfile } from '../actions/authActions';
 
 import '../styles/Tutorial.css';
@@ -17,6 +18,8 @@ class Tutorial extends React.Component {
 		this.addReview = this.addReview.bind(this);
 		this.addToFavorites = this.addToFavorites.bind(this);
 		this.removeFromFavorites = this.removeFromFavorites.bind(this);
+		this.addUpvote = this.addUpvote.bind(this);
+		this.removeUpvote = this.removeUpvote.bind(this);
 	}
 
 	componentDidMount() {
@@ -39,6 +42,26 @@ class Tutorial extends React.Component {
 		message.success('Tutorial removed from favorites');
 		this.props.getUserProfile();
 		setTimeout(() => this.props.clearMessage(), 3000);
+	}
+
+	addUpvote() {
+		if (!this.props.auth.authenticated) {
+			return message.info('You need to login to add to favorites');
+		}
+
+		this.props.addUpvote(this.props.match.params.tutorial);
+		message.success('Upvote Added');
+		this.props.getUserProfile();
+		this.props.getTutorial(this.props.match.params.tutorial);
+		setTimeout(() => this.props.clearUpvoteMessage(), 3000);
+	}
+
+	removeUpvote() {
+		this.props.removeUpvote(this.props.match.params.tutorial);
+		message.success('Upvote Removed');
+		this.props.getUserProfile();
+		this.props.getTutorial(this.props.match.params.tutorial);
+		setTimeout(() => this.props.clearUpvoteMessage(), 3000);
 	}
 
 	addReview() {
@@ -78,6 +101,7 @@ class Tutorial extends React.Component {
 				'#04caca'
 			];
 			let tags;
+
 			if (tutorial.tags) {
 				tags = tutorial.tags.map((tag, i) => (
 					<Tag key={i} color={colors[i % colors.length]}>
@@ -89,9 +113,30 @@ class Tutorial extends React.Component {
 			}
 
 			let favorite = false;
+			let upvote = false;
+			let upvoteCount = 0;
+			if (this.props.tutorial.tutorial.upvotes)
+				upvoteCount = this.props.tutorial.tutorial.upvotes.length;
+
 			if (this.props.auth.userProfile.favorites) {
 				this.props.auth.userProfile.favorites.forEach(tutorial => {
-					if (this.props.match.params.tutorial === tutorial._id) favorite = true;
+					if (this.props.match.params.tutorial === tutorial._id) {
+						favorite = true;
+						return;
+					} else {
+						favorite = false;
+					}
+				});
+			}
+
+			if (this.props.auth.userProfile.upvotes) {
+				this.props.auth.userProfile.upvotes.forEach(tutorial => {
+					if (this.props.tutorial.tutorial._id === tutorial) {
+						upvote = true;
+						return;
+					} else {
+						upvote = false;
+					}
 				});
 			}
 
@@ -137,6 +182,28 @@ class Tutorial extends React.Component {
 							</Col>
 						</Row>
 					</h1>
+					{!upvote ? (
+						<Badge count={upvoteCount} showZero>
+							<Button className="upvote-button" onClick={this.addUpvote}>
+								Upvote
+							</Button>
+						</Badge>
+					) : (
+						<Popconfirm
+							placement="top"
+							title="Remove Upvote?"
+							okText="Yes"
+							cancelText="Cancel"
+							icon={<Icon type="question-circle" theme="outlined" />}
+							onConfirm={this.removeUpvote}
+						>
+							<Badge count={upvoteCount} showZero>
+								<Button type="danger" className="upvote-button">
+									Remove Upvote
+								</Button>
+							</Badge>
+						</Popconfirm>
+					)}
 					<div className="tutorial-tags">{tags}</div>
 					<div className="tutorial-info">
 						<span className="bold">Submitted By :</span> {tutorial.submittedBy.name}
@@ -176,7 +243,11 @@ class Tutorial extends React.Component {
 								<Input.TextArea rows={1} placeholder="Add a review" ref="review" />
 							</Col>
 							<Col sm={24} md={2}>
-								<Button type="primary" onClick={this.addReview}>
+								<Button
+									type="primary"
+									onClick={this.addReview}
+									className="review-submit-button"
+								>
 									Submit
 								</Button>
 							</Col>
@@ -209,5 +280,15 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getTutorial, addReview, addToFavorites, removeFromFavorites, getUserProfile, clearMessage }
+	{
+		getTutorial,
+		addReview,
+		addToFavorites,
+		removeFromFavorites,
+		getUserProfile,
+		clearMessage,
+		addUpvote,
+		removeUpvote,
+		clearUpvoteMessage
+	}
 )(Tutorial);

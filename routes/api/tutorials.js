@@ -12,6 +12,7 @@ const User = require('../../models/User');
 // Desc		Returns list of all uploaded tutorials
 router.get('/all', (req, res) => {
 	Tutorial.find({})
+		.sort({ title: 1 })
 		.then(tutorials => res.json({ tutorials }))
 		.catch(err => console.log(err));
 });
@@ -22,6 +23,7 @@ router.get('/all', (req, res) => {
 router.get('/tag/:tag', (req, res) => {
 	const tag = req.params.tag.split('-').join(' ');
 	Tutorial.find({ tags: { $regex: tag, $options: 'i' } })
+		.sort({ title: 1 })
 		.then(tutorials => {
 			res.json({ tutorials });
 		})
@@ -44,6 +46,7 @@ router.get('/:tutorial', (req, res) => {
 // Desc		Returns list of uploaded tutorials by the user
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Tutorial.find({ submittedBy: req.user._id })
+		.sort({ title: 1 })
 		.then(tutorials => res.json({ tutorials }))
 		.catch(err => console.log(err));
 });
@@ -134,6 +137,36 @@ router.post('/me/removefavorite/:tutorial', passport.authenticate('jwt', { sessi
 	)
 		.then(user => res.json({ msg: 'Tutorial removed from favorites' }))
 		.catch(err => console.log(err));
+});
+
+// Type		POST
+// URL		/api/tutorials/upvote/add/:tutorial
+// Desc		Adds Upvote to the tutorial
+router.post('/upvote/add/:tutorial', passport.authenticate('jwt', { session: false }), (req, res) => {
+	Tutorial.findByIdAndUpdate(
+		req.params.tutorial,
+		{ $addToSet: { upvotes: req.user._id } },
+		{ new: true }
+	).then(tutorial => {
+		User.findByIdAndUpdate(req.user._id, { $addToSet: { upvotes: tutorial._id } }, { new: true })
+			.then(user => res.json({ msg: 'Upvote Added' }))
+			.catch(err => console.log(err));
+	});
+});
+
+// Type		POST
+// URL		/api/tutorials/upvote/remove/:tutorial
+// Desc		Adds Upvote to the tutorial
+router.post('/upvote/remove/:tutorial', passport.authenticate('jwt', { session: false }), (req, res) => {
+	Tutorial.findByIdAndUpdate(
+		req.params.tutorial,
+		{ $pull: { upvotes: req.user._id } },
+		{ multi: true }
+	).then(tutorial => {
+		User.findByIdAndUpdate(req.user._id, { $pull: { upvotes: tutorial._id } }, { multi: true })
+			.then(user => res.json({ msg: 'Upvote Removed' }))
+			.catch(err => console.log(err));
+	});
 });
 
 module.exports = router;

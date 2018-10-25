@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.1] - 2018-10-25
+
+### Added
+
+-   Upvotes to a tutorial
+-   Email Verification
+
+### Updated
+
+-   Adjusted Submit review button spacing
+-   Login form displays all websites
+
+### Bug Fixes
+
+-   Adjusted height of login screen for small screen devices
+
 ## [1.1.0] - 2018-10-23
 
 ### Updated

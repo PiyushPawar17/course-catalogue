@@ -29,7 +29,8 @@
 		"jsonwebtoken": "^8.3.0",
 		"mongoose": "^5.2.9",
 		"passport": "^0.4.0",
-		"passport-jwt": "^4.0.0"
+		"passport-jwt": "^4.0.0",
+		"quickemailverification": "^1.0.2"
 	},
 	"devDependencies": {
 		"nodemon": "^1.18.3"

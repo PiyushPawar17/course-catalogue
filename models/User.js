@@ -26,6 +26,12 @@ const UserSchema = new Schema({
 			type: Schema.Types.ObjectId,
 			ref: 'tutorial'
 		}
+	],
+	upvotes: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'tutorial'
+		}
 	]
 });
 

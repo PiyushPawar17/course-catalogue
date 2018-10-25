@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Icon, Avatar, Tabs, Row, Col } from 'antd';
+import { Button, Icon, Tabs, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
