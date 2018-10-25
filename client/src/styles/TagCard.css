@@ -44,3 +44,10 @@
 .tag-card-website .website-link:hover {
 	border-bottom: 1px solid #0787e6;
 }
+
+@media screen and (max-width: 768px) {
+	.tag-card:hover {
+		transform: none;
+		box-shadow: none;
+	}
+}

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { getUserProfile } from '../actions/authActions';
 
 import TutorialCard from './TutorialCard';
+import Loader from './Loader';
 
 import '../styles/Profile.css';
 
@@ -17,7 +18,7 @@ class Profile extends React.Component {
 	render() {
 		let profile;
 		if (this.props.auth.loading || !this.props.auth.userProfile) {
-			profile = <Icon type="loading" />;
+			profile = <Loader />;
 		} else {
 			const videos = this.props.auth.userProfile.submittedTutorials.filter(
 				tutorial => tutorial.medium === 'Video'

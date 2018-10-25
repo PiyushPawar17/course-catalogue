@@ -9,6 +9,8 @@ import { addToFavorites, removeFromFavorites, clearMessage } from '../actions/us
 import { addUpvote, removeUpvote, clearUpvoteMessage } from '../actions/tutorialActions';
 import { getUserProfile } from '../actions/authActions';
 
+import Loader from './Loader';
+
 import '../styles/Tutorial.css';
 
 class Tutorial extends React.Component {
@@ -85,7 +87,7 @@ class Tutorial extends React.Component {
 		const { tutorial } = this.props.tutorial;
 		let tutorialPage;
 		if (this.props.tutorial.loading || !tutorial) {
-			tutorialPage = <Icon type="loading" />;
+			tutorialPage = <Loader />;
 		} else {
 			const colors = [
 				'#8443de',
@@ -120,23 +122,13 @@ class Tutorial extends React.Component {
 
 			if (this.props.auth.userProfile.favorites) {
 				this.props.auth.userProfile.favorites.forEach(tutorial => {
-					if (this.props.match.params.tutorial === tutorial._id) {
-						favorite = true;
-						return;
-					} else {
-						favorite = false;
-					}
+					if (this.props.match.params.tutorial === tutorial._id) favorite = true;
 				});
 			}
 
 			if (this.props.auth.userProfile.upvotes) {
 				this.props.auth.userProfile.upvotes.forEach(tutorial => {
-					if (this.props.tutorial.tutorial._id === tutorial) {
-						upvote = true;
-						return;
-					} else {
-						upvote = false;
-					}
+					if (this.props.tutorial.tutorial._id === tutorial) upvote = true;
 				});
 			}
 

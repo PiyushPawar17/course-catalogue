@@ -88,53 +88,40 @@ class TutorialCard extends React.Component {
 
 		if (this.props.auth.userProfile.favorites) {
 			this.props.auth.userProfile.favorites.forEach(tutorial => {
-				if (this.props.tutorial._id === tutorial._id) {
-					favorite = true;
-					return;
-				} else {
-					favorite = false;
-				}
+				if (this.props.tutorial._id === tutorial._id) favorite = true;
 			});
 		}
 
 		if (this.props.auth.userProfile.upvotes) {
 			this.props.auth.userProfile.upvotes.forEach(tutorial => {
-				if (this.props.tutorial._id === tutorial) {
-					upvote = true;
-					return;
-				} else {
-					upvote = false;
-				}
+				if (this.props.tutorial._id === tutorial) upvote = true;
 			});
 		}
 
 		return (
 			<Card className="tutorial-card">
 				<Skeleton loading={!this.props.tutorial} active>
-					<div className="card-title">
-						<Tooltip placement="topLeft" title="Click here for more info">
-							<span
-								className="tutorial-name"
-								onClick={() =>
-									this.props.history.push(`/tutorials/${this.props.tutorial._id}`)
-								}
-							>
-								{this.props.tutorial.title}
-							</span>
-						</Tooltip>
+					<div onClick={() => this.props.history.push(`/tutorials/${this.props.tutorial._id}`)}>
+						<div className="card-title">
+							<Tooltip placement="topLeft" title="Click here for more info">
+								<span className="tutorial-name">{this.props.tutorial.title}</span>
+							</Tooltip>
+						</div>
+						<Row gutter={{ sm: 0, md: 4, xl: 8 }}>
+							<Col xs={24} sm={24} md={12} xl={8}>
+								<div className="card-entries">Medium : {this.props.tutorial.medium}</div>
+							</Col>
+							<Col xs={24} sm={24} md={12} xl={8}>
+								<div className="card-entries">Type : {this.props.tutorial.type}</div>
+							</Col>
+							<Col xs={24} sm={24} md={12} xl={8}>
+								<div className="card-entries">
+									Skill Level : {this.props.tutorial.skillLevel}
+								</div>
+							</Col>
+						</Row>
+						<div className="card-entries">{tags}</div>
 					</div>
-					<Row gutter={{ sm: 0, md: 4, xl: 8 }}>
-						<Col xs={24} sm={24} md={12} xl={8}>
-							<div className="card-entries">Medium : {this.props.tutorial.medium}</div>
-						</Col>
-						<Col xs={24} sm={24} md={12} xl={8}>
-							<div className="card-entries">Type : {this.props.tutorial.type}</div>
-						</Col>
-						<Col xs={24} sm={24} md={12} xl={8}>
-							<div className="card-entries">Skill Level : {this.props.tutorial.skillLevel}</div>
-						</Col>
-					</Row>
-					<div className="card-entries">{tags}</div>
 					<Row>
 						<Col xs={24} sm={24} md={18} lg={20} className="upvote-button">
 							{!upvote ? (

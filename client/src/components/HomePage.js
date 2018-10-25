@@ -1,11 +1,12 @@
 import React from 'react';
-import { Row, Col, Icon, message } from 'antd';
+import { Row, Col, message } from 'antd';
 import { Element } from 'react-scroll';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Header from './Header';
 import TagCard from './TagCard';
+import Loader from './Loader';
 
 import { clearSignUp } from '../actions/authActions';
 import { getTags } from '../actions/tagActions';
@@ -27,13 +28,18 @@ class HomePage extends React.Component {
 	render() {
 		let tags;
 		if (this.props.tag.loading || !this.props.tag.tags) {
-			tags = <Icon type="loading" />;
+			tags = <Loader />;
 		} else {
 			if (this.props.tag.tags.length === 0) {
 				tags = <div className="nothing-to-show">No tutorials submitted yet</div>;
 			} else {
 				tags = this.props.tag.tags.map((tag, i) => (
-					<Col key={i} sm={{ span: 20, offset: 2 }} md={{ span: 10, offset: 1 }} xl={{ span: 8, offset: 0 }}>
+					<Col
+						key={i}
+						sm={{ span: 20, offset: 2 }}
+						md={{ span: 10, offset: 1 }}
+						xl={{ span: 8, offset: 0 }}
+					>
 						<TagCard tag={tag} />
 					</Col>
 				));

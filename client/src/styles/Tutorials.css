@@ -8,8 +8,27 @@
 	text-align: center;
 }
 
+.filter {
+	margin: 0.7rem 0;
+}
+
+.filter-type {
+	text-align: right;
+}
+
+.nothing-matched {
+	margin-top: 2rem;
+	font-size: 1rem;
+}
+
 @media screen and (max-width: 768px) {
 	.tutorial-title {
 		font-size: 1.5rem;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.filter-type {
+		text-align: left;
 	}
 }
