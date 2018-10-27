@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.1] - 2018-10-27
+
+### Bug Fixes
+
+-   Fixed RegEx to match exact words.
+
 ## [1.1.0] - 2018-10-25
 
 ### Added

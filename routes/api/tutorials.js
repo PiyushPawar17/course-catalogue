@@ -21,7 +21,7 @@ router.get('/all', (req, res) => {
 // URL		/api/tutorials/tag/:tag
 // Desc		Returns list of tutorials of the given tag
 router.get('/tag/:tag', (req, res) => {
-	const tag = req.params.tag.split('-').join(' ');
+	const tag = `^${req.params.tag.split('-').join(' ')}$`;
 	Tutorial.find({ tags: { $regex: tag, $options: 'i' } })
 		.sort({ title: 1 })
 		.then(tutorials => {
