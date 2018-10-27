@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 -   Filters to search Tutorials.
 -   Added Loader
+-   Added Favicon
 
 ### Updated
 
