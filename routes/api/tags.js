@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 			res.json({ tags });
 		})
 		.catch(err => {
-			res.json({ error: 'Unable to get tags' });
+			res.status(500).json({ error: 'Unable to get tags', errorMsg: err });
 		});
 });
 
@@ -26,10 +26,11 @@ router.get('/:tag', (req, res) => {
 	const tag = req.params.tag.split('-').join(' ');
 	Tag.findOne({ tag: { $regex: tag, $options: 'i' } })
 		.then(tag => {
-			res.json({ tag });
+			if (tag) res.json({ tag });
+			else res.status(404).json({ error: 'Tag not found' });
 		})
 		.catch(err => {
-			res.json({ error: 'Unable to get tags' });
+			res.json({ error: 'Unable to get the specified tag', errorMsg: err });
 		});
 });
 

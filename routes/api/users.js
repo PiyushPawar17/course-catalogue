@@ -46,7 +46,7 @@ router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) =
 			};
 			res.json({ user: currentUser });
 		})
-		.catch(err => console.log(err));
+		.catch(err => res.status(500).json({ error: 'Unable to get profile', errorMsg: err }));
 });
 
 // Type		POST
@@ -98,7 +98,7 @@ router.post('/register', (req, res) => {
 							newUser
 								.save()
 								.then(user => res.json({ user: 'New User Registered' }))
-								.catch(err => console.log(err));
+								.catch(err => res.json({ error: 'Unable to register', errorMsg: err }));
 						});
 					});
 				} else {
