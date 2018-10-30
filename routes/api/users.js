@@ -106,7 +106,7 @@ router.post('/register', (req, res) => {
 						})
 						.catch(err => res.json({ error: 'Unable to register', errorMsg: err }));
 				} else {
-					res.json({ msg: 'Enter a valid Email' });
+					return res.status(400).json({ msg: 'Enter a valid Email' });
 				}
 			});
 		}

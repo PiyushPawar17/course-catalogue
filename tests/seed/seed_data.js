@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-const { secretOrKey } = require('../../config/keys');
-
 const userOneId = new mongoose.Types.ObjectId();
 const userTwoId = new mongoose.Types.ObjectId();
 
@@ -9,13 +7,13 @@ const userTwoId = new mongoose.Types.ObjectId();
 const users = [
 	{
 		_id: userOneId,
-		email: 'piyushpawar25@gmail.com',
+		email: 'user1@example.com',
 		password: 'userOnePassword',
 		name: 'User1'
 	},
 	{
 		_id: userTwoId,
-		email: 'piyushpawar17@hotmail.com',
+		email: 'user2@example.com',
 		password: 'userTwoPassword',
 		name: 'User2'
 	}

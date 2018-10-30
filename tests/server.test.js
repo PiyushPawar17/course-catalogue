@@ -1,5 +1,6 @@
 const request = require('supertest');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 
 const { app } = require('../server');
 const Tag = require('../models/Tag');
@@ -23,6 +24,7 @@ jwt.sign(payload, secretOrKey, { expiresIn: 12 * 60 * 60 }, (err, token) => {
 	userOneToken = `Bearer ${token}`;
 });
 
+// Tests for Tags
 describe('/api/tags', () => {
 	describe('GET /api/tags', () => {
 		test('should get all tags alphabetically sorted', done => {
@@ -114,5 +116,137 @@ describe('/api/tags', () => {
 				.expect(401)
 				.end(done);
 		});
+	});
+});
+
+// Tests for User
+describe('/api/users', () => {
+	describe('GET /api/users/me', () => {
+		test('should return profile of the authenticated user', done => {
+			request(app)
+				.get('/api/users/me')
+				.set('Authorization', userOneToken)
+				.expect(200)
+				.expect(res => {
+					expect(res.body.user).toBeTruthy();
+					expect(res.body.user.name).toBe(users[0].name);
+					expect(res.body.user.email).toBe(users[0].email);
+				})
+				.end(done);
+		});
+
+		test('should not return profile if user not authenticated', done => {
+			request(app)
+				.get('/api/users/me')
+				.expect(401)
+				.end(done);
+		});
+	});
+
+	describe('POST /api/users/login', () => {
+		test('should return authorization token', done => {
+			const user = {
+				email: users[0].email,
+				password: users[0].password
+			};
+
+			request(app)
+				.post('/api/users/login')
+				.send(user)
+				.expect(200)
+				.expect(res => {
+					expect(res.body.success).toBeTruthy();
+					expect(res.body.token).toBeTruthy();
+				})
+				.end(done);
+		});
+
+		test('should return 404 if user not found', done => {
+			const user = {
+				email: 'user3@example.com',
+				password: 'password'
+			};
+
+			request(app)
+				.post('/api/users/login')
+				.send(user)
+				.expect(404)
+				.end(done);
+		});
+
+		test('should not return authorization token if password is incorrect', done => {
+			const user = {
+				email: users[1].email,
+				password: users[0].password
+			};
+
+			request(app)
+				.post('/api/users/login')
+				.send(user)
+				.expect(400)
+				.expect(res => {
+					expect(res.body.success).toBeFalsy();
+					expect(res.body.token).toBeFalsy();
+				})
+				.end(done);
+		});
+	});
+
+	describe('POST /api/users/register', () => {
+		test('should register a new user', done => {
+			const user = {
+				email: 'piyushpawar25@gmail.com',
+				password: 'password',
+				name: 'Piyush'
+			};
+
+			request(app)
+				.post('/api/users/register')
+				.send(user)
+				.expect(200)
+				.expect(res => {
+					expect(res.body.newUser.name).toBe(user.name);
+					expect(res.body.newUser.email).toBe(user.email);
+				})
+				.end(done);
+		});
+
+		test('should not register the user if already exist', done => {
+			const user = {
+				email: users[0].email,
+				name: users[0].name,
+				password: users[0].password
+			};
+
+			request(app)
+				.post('/api/users/register')
+				.send(user)
+				.expect(400)
+				.expect(res => {
+					expect(res.body.newUser).toBeFalsy();
+				})
+				.end(done);
+		});
+
+		test(
+			'should not register user if email is invalid',
+			done => {
+				const user = {
+					email: 'user3@example.com',
+					password: 'userThreePassword',
+					name: 'User3'
+				};
+
+				request(app)
+					.post('/api/users/register')
+					.send(user)
+					.expect(400)
+					.expect(res => {
+						expect(res.body.newUser).toBeFalsy();
+					})
+					.end(done);
+			},
+			20000
+		);
 	});
 });
