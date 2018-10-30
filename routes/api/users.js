@@ -91,16 +91,20 @@ router.post('/register', (req, res) => {
 						password: req.body.password
 					});
 
-					bcrypt.genSalt(10, (err, salt) => {
-						bcrypt.hash(newUser.password, salt, (err, hash) => {
-							if (err) throw err;
-							newUser.password = hash;
-							newUser
-								.save()
-								.then(user => res.json({ user: 'New User Registered', newUser: user }))
-								.catch(err => res.json({ error: 'Unable to register', errorMsg: err }));
-						});
-					});
+					newUser
+						.save()
+						.then(user => {
+							const newUser = {
+								submittedTutorials: user.submittedTutorials,
+								favorites: user.favorites,
+								upvotes: user.upvotes,
+								_id: user._id,
+								name: user.name,
+								email: user.email
+							};
+							res.json({ user: 'New User Registered', newUser });
+						})
+						.catch(err => res.json({ error: 'Unable to register', errorMsg: err }));
 				} else {
 					res.json({ msg: 'Enter a valid Email' });
 				}

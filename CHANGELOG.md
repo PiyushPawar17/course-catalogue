@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2018-10-30
+
+### Added
+
+-   Tests
+
+### Updated
+
+-   Password is now hashed pre-save rather in end point.
+
 ## [1.1.1] - 2018-10-27
 
 ### Bug Fixes
