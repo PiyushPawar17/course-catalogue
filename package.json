@@ -9,6 +9,8 @@
 		"client-install": "npm install --prefix client",
 		"client": "npm start --prefix client",
 		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"test": "cross-env NODE_ENV=test jest --forceExit",
+		"test:watch": "cross-env NODE_ENV=test jest --watchAll",
 		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
 	},
 	"repository": {
@@ -33,6 +35,9 @@
 		"quickemailverification": "^1.0.2"
 	},
 	"devDependencies": {
-		"nodemon": "^1.18.3"
+		"cross-env": "^5.2.0",
+		"jest": "^23.6.0",
+		"nodemon": "^1.18.3",
+		"supertest": "^3.3.0"
 	}
 }

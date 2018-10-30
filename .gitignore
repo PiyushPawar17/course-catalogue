@@ -62,3 +62,4 @@ typings/
 
 # Custom files
 config/keys_dev.js
+config/keys_test.js

@@ -25,7 +25,8 @@ router.get('/tag/:tag', (req, res) => {
 	Tutorial.find({ tags: { $regex: tag, $options: 'i' } })
 		.sort({ title: 1 })
 		.then(tutorials => {
-			res.json({ tutorials });
+			if (tutorials.length === 0) return res.status(404).json({ error: 'No tutorials found' });
+			else res.json({ tutorials });
 		})
 		.catch(err => res.status(500).json({ error: 'Unable to get tutorials', errorMsg: err }));
 });
@@ -104,7 +105,10 @@ router.post('/review/:tutorial', passport.authenticate('jwt', { session: false }
 	};
 
 	Tutorial.findByIdAndUpdate(req.params.tutorial, { $push: { reviews: newReview } }, { new: true })
-		.then(tutorial => res.json({ tutorial }))
+		.then(tutorial => {
+			if (!tutorial) return res.status(404).json({ error: 'Tutorial not found' });
+			else res.json({ tutorial });
+		})
 		.catch(err => res.status(500).json({ error: 'Unable to post review', errorMsg: err }));
 });
 
@@ -112,8 +116,10 @@ router.post('/review/:tutorial', passport.authenticate('jwt', { session: false }
 // URL		/api/tutorials/me/addfavorite/:tutorial
 // Desc		Adds tutorial to user's favorites
 router.post('/me/addfavorite/:tutorial', passport.authenticate('jwt', { session: false }), (req, res) => {
-	const newFavorite = mongoose.Types.ObjectId(req.params.tutorial);
+	if (!mongoose.Types.ObjectId.isValid(req.params.tutorial))
+		return res.status(400).json({ error: 'Invalid ObjectId' });
 
+	const newFavorite = mongoose.Types.ObjectId(req.params.tutorial);
 	User.findById(req.user._id)
 		.then(user => {
 			let filteredFavorites = user.favorites.filter(favorite => favorite.equals(newFavorite));
@@ -135,6 +141,9 @@ router.post('/me/addfavorite/:tutorial', passport.authenticate('jwt', { session:
 // URL		/api/tutorials/me/removefavorite/:tutorial
 // Desc		Removes tutorial from user's favorites
 router.post('/me/removefavorite/:tutorial', passport.authenticate('jwt', { session: false }), (req, res) => {
+	if (!mongoose.Types.ObjectId.isValid(req.params.tutorial))
+		return res.status(400).json({ error: 'Invalid ObjectId' });
+
 	User.findByIdAndUpdate(
 		req.user._id,
 		{ $pull: { favorites: mongoose.Types.ObjectId(req.params.tutorial) } },
@@ -148,6 +157,9 @@ router.post('/me/removefavorite/:tutorial', passport.authenticate('jwt', { sessi
 // URL		/api/tutorials/upvote/add/:tutorial
 // Desc		Adds Upvote to the tutorial
 router.post('/upvote/add/:tutorial', passport.authenticate('jwt', { session: false }), (req, res) => {
+	if (!mongoose.Types.ObjectId.isValid(req.params.tutorial))
+		return res.status(400).json({ error: 'Invalid ObjectId' });
+
 	Tutorial.findByIdAndUpdate(
 		req.params.tutorial,
 		{ $addToSet: { upvotes: req.user._id } },
@@ -163,6 +175,9 @@ router.post('/upvote/add/:tutorial', passport.authenticate('jwt', { session: fal
 // URL		/api/tutorials/upvote/remove/:tutorial
 // Desc		Adds Upvote to the tutorial
 router.post('/upvote/remove/:tutorial', passport.authenticate('jwt', { session: false }), (req, res) => {
+	if (!mongoose.Types.ObjectId.isValid(req.params.tutorial))
+		return res.status(400).json({ error: 'Invalid ObjectId' });
+
 	Tutorial.findByIdAndUpdate(
 		req.params.tutorial,
 		{ $pull: { upvotes: req.user._id } },

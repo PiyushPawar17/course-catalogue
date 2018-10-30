@@ -49,7 +49,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 			res.json({ tag });
 		})
 		.catch(err => {
-			if (err.code === 11000) res.json({ error: 'Tag already exist' });
+			if (err.code === 11000) res.status(401).json({ error: 'Tag already exist' });
 			else res.json({ err });
 		});
 });
