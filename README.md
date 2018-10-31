@@ -11,6 +11,8 @@ Course Catalogue does all the tedious job and brings all the significant details
 
 -   Fork Repository
 
+-   Create `keys_dev.js` file in config folder
+
 -   Clone Repository
 
 ```sh
@@ -36,6 +38,24 @@ npm run client-install
 
 ```sh
 npm run dev
+```
+
+---
+
+### Testing
+
+-   Create `keys_test.js` file in config folder
+
+-   Run Tests
+
+```sh
+npm test
+```
+
+-   Run Test Watch
+
+```sh
+npm run test:watch
 ```
 
 ---
