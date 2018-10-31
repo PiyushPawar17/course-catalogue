@@ -47,7 +47,7 @@ router.get('/:tutorial', (req, res) => {
 
 // Type		GET
 // URL		/api/tutorials
-// Desc		Returns list of uploaded tutorials by the user
+// Desc		Returns list of tutorials uploaded by the user
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 	Tutorial.find({ submittedBy: req.user._id })
 		.sort({ title: 1 })
@@ -119,20 +119,15 @@ router.post('/me/addfavorite/:tutorial', passport.authenticate('jwt', { session:
 	if (!mongoose.Types.ObjectId.isValid(req.params.tutorial))
 		return res.status(400).json({ error: 'Invalid ObjectId' });
 
-	const newFavorite = mongoose.Types.ObjectId(req.params.tutorial);
 	User.findById(req.user._id)
 		.then(user => {
-			let filteredFavorites = user.favorites.filter(favorite => favorite.equals(newFavorite));
-			if (filteredFavorites.length >= 1) {
-				return res.json({ msg: 'Tutorial already added to favorites' });
-			} else {
-				const favorites = [...user.favorites, newFavorite];
-				User.findByIdAndUpdate(req.user._id, { $set: { favorites } }, { new: true })
-					.then(user => res.json({ msg: 'Tutorial added to favorites' }))
-					.catch(err =>
-						res.status(500).json({ error: 'Unable to add to favorites', errorMsg: err })
-					);
-			}
+			User.findByIdAndUpdate(
+				req.user._id,
+				{ $addToSet: { favorites: req.params.tutorial } },
+				{ new: true }
+			)
+				.then(user => res.json({ msg: 'Tutorial added to favorites' }))
+				.catch(err => res.status(500).json({ error: 'Unable to add to favorites', errorMsg: err }));
 		})
 		.catch(err => res.status(500).json({ error: 'Unable to find user' }));
 });
@@ -173,7 +168,7 @@ router.post('/upvote/add/:tutorial', passport.authenticate('jwt', { session: fal
 
 // Type		POST
 // URL		/api/tutorials/upvote/remove/:tutorial
-// Desc		Adds Upvote to the tutorial
+// Desc		Removes Upvote from the tutorial
 router.post('/upvote/remove/:tutorial', passport.authenticate('jwt', { session: false }), (req, res) => {
 	if (!mongoose.Types.ObjectId.isValid(req.params.tutorial))
 		return res.status(400).json({ error: 'Invalid ObjectId' });
