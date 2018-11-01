@@ -2,11 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2018-11-1
+
+### Updated
+
+-   Changed POST to DELETE when removing element from the array.
+
 ## [1.2.0] - 2018-10-30
 
 ### Added
 
--   Tests
+-   Tests.
 
 ### Updated
 

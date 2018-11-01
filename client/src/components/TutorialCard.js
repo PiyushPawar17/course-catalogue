@@ -46,6 +46,7 @@ class TutorialCard extends React.Component {
 		this.props.addUpvote(this.props.tutorial._id);
 		message.success('Upvote Added');
 		this.props.getUserProfile();
+		window.location.reload();
 		setTimeout(() => this.props.clearUpvoteMessage(), 3000);
 	}
 
@@ -53,6 +54,7 @@ class TutorialCard extends React.Component {
 		this.props.removeUpvote(this.props.tutorial._id);
 		message.success('Upvote Removed');
 		this.props.getUserProfile();
+		window.location.reload();
 		setTimeout(() => this.props.clearUpvoteMessage(), 3000);
 	}
 

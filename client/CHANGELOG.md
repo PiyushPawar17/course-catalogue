@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2018-11-1
+
+### Updated
+
+-   Changed positioning of submit tutorial button to below profile info.
+-   Changed POST to DELETE when removing element from the array.
+
 ## [1.3.0] - 2018-10-26
 
 ### Added

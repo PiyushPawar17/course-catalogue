@@ -51,7 +51,7 @@ export const addUpvote = tutorial => dispatch => {
 
 export const removeUpvote = tutorial => dispatch => {
 	axios
-		.post(`/api/tutorials/upvote/remove/${tutorial}`)
+		.delete(`/api/tutorials/upvote/remove/${tutorial}`)
 		.then(res => dispatch({ type: REMOVE_UPVOTE, payload: res.data }))
 		.catch(err => console.log(err));
 };

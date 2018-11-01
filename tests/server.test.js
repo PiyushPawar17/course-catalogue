@@ -499,40 +499,6 @@ describe('Routes /api/tutorials', () => {
 		});
 	});
 
-	describe('POST /api/tutorials/me/removefavorite/:tutorial', () => {
-		test('should remove tutorial from favorites', done => {
-			const favorites = users[0].favorites.length;
-
-			request(app)
-				.post(`/api/tutorials/me/removefavorite/${tutorials[0]._id}`)
-				.set('Authorization', userOneToken)
-				.expect(200)
-				.end((err, res) => {
-					if (err) return done(err);
-
-					User.findById(users[0]._id).then(user => {
-						expect(user.favorites.length).toBe(favorites - 1);
-						done();
-					});
-				});
-		});
-
-		test('should not remove from favorites if invalid object id', done => {
-			request(app)
-				.post('/api/tutorials/me/removefavorite/abc')
-				.set('Authorization', userOneToken)
-				.expect(400)
-				.end(done);
-		});
-
-		test('should not remove from favorites if not authenticated', done => {
-			request(app)
-				.post(`/api/tutorials/me/removefavorite/${tutorials[0]._id}`)
-				.expect(401)
-				.end(done);
-		});
-	});
-
 	describe('POST /api/tutorials/upvote/add/:tutorial', () => {
 		test('should add upvote to the given tutorial', done => {
 			const upvotes = tutorials[2].upvotes.length;
@@ -584,12 +550,46 @@ describe('Routes /api/tutorials', () => {
 		});
 	});
 
-	describe('POST /api/tutorials/upvote/remove/:tutorial', () => {
+	describe('DELETE /api/tutorials/me/removefavorite/:tutorial', () => {
+		test('should remove tutorial from favorites', done => {
+			const favorites = users[0].favorites.length;
+
+			request(app)
+				.delete(`/api/tutorials/me/removefavorite/${tutorials[0]._id}`)
+				.set('Authorization', userOneToken)
+				.expect(200)
+				.end((err, res) => {
+					if (err) return done(err);
+
+					User.findById(users[0]._id).then(user => {
+						expect(user.favorites.length).toBe(favorites - 1);
+						done();
+					});
+				});
+		});
+
+		test('should not remove from favorites if invalid object id', done => {
+			request(app)
+				.delete('/api/tutorials/me/removefavorite/abc')
+				.set('Authorization', userOneToken)
+				.expect(400)
+				.end(done);
+		});
+
+		test('should not remove from favorites if not authenticated', done => {
+			request(app)
+				.delete(`/api/tutorials/me/removefavorite/${tutorials[0]._id}`)
+				.expect(401)
+				.end(done);
+		});
+	});
+
+	describe('DELETE /api/tutorials/upvote/remove/:tutorial', () => {
 		test('should remove upvote from given tutorial', done => {
 			const upvotes = tutorials[0].upvotes.length;
 
 			request(app)
-				.post(`/api/tutorials/upvote/remove/${tutorials[0]._id}`)
+				.delete(`/api/tutorials/upvote/remove/${tutorials[0]._id}`)
 				.set('Authorization', userOneToken)
 				.expect(200)
 				.end((err, res) => {
@@ -604,7 +604,7 @@ describe('Routes /api/tutorials', () => {
 
 		test('should not remove upvote if invalid object id', done => {
 			request(app)
-				.post('/api/tutorials/upvote/remove/abc')
+				.delete('/api/tutorials/upvote/remove/abc')
 				.set('Authorization', userOneToken)
 				.expect(400)
 				.end(done);
@@ -612,7 +612,7 @@ describe('Routes /api/tutorials', () => {
 
 		test('should not remove upvote if not authenticated', done => {
 			request(app)
-				.post(`/api/tutorials/upvote/remove/${tutorials[0]._id}`)
+				.delete(`/api/tutorials/upvote/remove/${tutorials[0]._id}`)
 				.expect(401)
 				.end(done);
 		});

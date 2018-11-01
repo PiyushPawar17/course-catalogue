@@ -65,6 +65,14 @@ class Profile extends React.Component {
 						</div>
 					</div>
 					<main className="profile-details">
+						<Button
+							type="primary"
+							size="large"
+							onClick={() => this.props.history.push('/addtutorial')}
+							className="submit-tutorial-button"
+						>
+							Submit A Tutorial
+						</Button>
 						<Tabs defaultActiveKey="1" size="large">
 							<Tabs.TabPane tab="Favorites" key="1" className="tab-content">
 								<Row gutter={8}>{favorites}</Row>
@@ -76,13 +84,6 @@ class Profile extends React.Component {
 								<Row gutter={8}>{submittedBlogs}</Row>
 							</Tabs.TabPane>
 						</Tabs>
-						<Button
-							type="primary"
-							size="large"
-							onClick={() => this.props.history.push('/addtutorial')}
-						>
-							Submit A Tutorial
-						</Button>
 					</main>
 				</div>
 			);

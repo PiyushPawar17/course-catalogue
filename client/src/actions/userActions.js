@@ -10,7 +10,7 @@ export const addToFavorites = tutorial => dispatch => {
 
 export const removeFromFavorites = tutorial => dispatch => {
 	axios
-		.post(`/api/tutorials/me/removefavorite/${tutorial}`)
+		.delete(`/api/tutorials/me/removefavorite/${tutorial}`)
 		.then(res => dispatch({ type: REMOVE_FROM_FAVORITES, payload: res.data }))
 		.catch(err => console.log(err));
 };

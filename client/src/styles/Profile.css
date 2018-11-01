@@ -28,6 +28,10 @@
 	padding: 0 1rem;
 }
 
+.submit-tutorial-button {
+	margin-top: 1rem;
+}
+
 .nothing-to-show {
 	text-align: center;
 	color: rgba(0, 0, 0, 0.5);
