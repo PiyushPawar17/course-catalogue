@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Schema for Tutorial
 const TutorialSchema = new Schema({
 	title: {
 		type: String,

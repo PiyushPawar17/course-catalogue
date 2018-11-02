@@ -30,7 +30,6 @@ const users = [
 ];
 
 // Tutorial Data
-
 const tutorials = [
 	{
 		_id: tutorialOneId,
