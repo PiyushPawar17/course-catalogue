@@ -9,32 +9,21 @@ Course Catalogue does all the tedious job and brings all the significant details
 
 ### Development
 
--   Fork Repository
-
--   Create `keys_dev.js` file in config folder
-
--   Clone Repository
-
-```sh
-git clone https://github.com/{Your_Username}/course-catalogue.git
-cd course-catalogue
-```
-
--   Install Backend Dependencies
+-   Install Backend Dependencies.
 
 ```sh
 npm install
 ```
 
--   Install Frontend Dependencies
+-   Install Frontend Dependencies.
 
 ```sh
 npm run client-install
 ```
 
--   Run Local MongoDB Server
+-   Run Local MongoDB Server.
 
--   Run Development Server
+-   Run Development Server.
 
 ```sh
 npm run dev
@@ -44,15 +33,25 @@ npm run dev
 
 ### Testing
 
--   Create `keys_test.js` file in config folder
+-   Create `keys_test.js` file in config folder with the following data:
 
--   Run Tests
+```js
+module.exports = {
+	mongoURI: YOUR_LOCAL_MONGO_SERVER_URI,
+	secretOrKey: YOUR_SECRET,
+	emailVerificationKey: YOUR_EMAIL_VERIFICATION_KEY
+};
+```
+
+-   The `emailVerificationKey` can be found by creating an account [here](https://quickemailverification.com/).
+
+-   Run Tests.
 
 ```sh
 npm test
 ```
 
--   Run Test Watch
+-   Run Test Watch.
 
 ```sh
 npm run test:watch
@@ -78,6 +77,12 @@ npm run test:watch
 ##### State Management
 
 -   [Redux](https://redux.js.org)
+
+---
+
+### Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
