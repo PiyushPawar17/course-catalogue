@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.2] - 2018-11-2
+
+### Bug Fixes
+
+-   Fixed bug where window position of new route opens at bottom.
+
 ## [1.4.1] - 2018-11-2
 
 ### Bug Fixes
