@@ -293,10 +293,12 @@ describe('Routes /api/tutorials', () => {
 				.end(done);
 		});
 
-		test('should return 404 if no tutorials found', done => {
+		test('should return empty array if no tutorials found', done => {
 			request(app)
 				.get(`/api/tutorials/tag/${tags[0].tag}`)
-				.expect(404)
+				.expect(res => {
+					expect(res.body.tutorials.length).toBe(0);
+				})
 				.end(done);
 		});
 	});

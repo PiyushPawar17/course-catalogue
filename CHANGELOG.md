@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2018-11-2
+
+### Bug Fixes
+
+-   Response of `/api/tutorials/tag/:tag` also sends an empty array if no tutorials are uploaded for the given tag.
+
 ## [1.2.1] - 2018-11-1
 
 ### Updated

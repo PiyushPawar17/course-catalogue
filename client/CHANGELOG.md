@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2018-11-2
+
+### Bug Fixes
+
+-   Fixed showing of loader for infinite time if no tutorials for a tag are uploaded.
+
 ## [1.4.0] - 2018-11-1
 
 ### Updated

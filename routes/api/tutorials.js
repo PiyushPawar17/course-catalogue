@@ -25,7 +25,7 @@ router.get('/tag/:tag', (req, res) => {
 	Tutorial.find({ tags: { $regex: tag, $options: 'i' } })
 		.sort({ title: 1 })
 		.then(tutorials => {
-			if (tutorials.length === 0) return res.status(404).json({ error: 'No tutorials found' });
+			if (tutorials.length === 0) return res.json({ tutorials, error: 'No tutorials found' });
 			else res.json({ tutorials });
 		})
 		.catch(err => res.status(500).json({ error: 'Unable to get tutorials', errorMsg: err }));
@@ -153,18 +153,22 @@ router.post('/upvote/add/:tutorial', passport.authenticate('jwt', { session: fal
 // Type		DELETE
 // URL		/api/tutorials/me/removefavorite/:tutorial
 // Desc		Removes tutorial from user's favorites
-router.delete('/me/removefavorite/:tutorial', passport.authenticate('jwt', { session: false }), (req, res) => {
-	if (!mongoose.Types.ObjectId.isValid(req.params.tutorial))
-		return res.status(400).json({ error: 'Invalid ObjectId' });
+router.delete(
+	'/me/removefavorite/:tutorial',
+	passport.authenticate('jwt', { session: false }),
+	(req, res) => {
+		if (!mongoose.Types.ObjectId.isValid(req.params.tutorial))
+			return res.status(400).json({ error: 'Invalid ObjectId' });
 
-	User.findByIdAndUpdate(
-		req.user._id,
-		{ $pull: { favorites: mongoose.Types.ObjectId(req.params.tutorial) } },
-		{ multi: true }
-	)
-		.then(user => res.json({ msg: 'Tutorial removed from favorites' }))
-		.catch(err => res.status(500).json({ error: 'Unable to remove from favorites', errorMsg: err }));
-});
+		User.findByIdAndUpdate(
+			req.user._id,
+			{ $pull: { favorites: mongoose.Types.ObjectId(req.params.tutorial) } },
+			{ multi: true }
+		)
+			.then(user => res.json({ msg: 'Tutorial removed from favorites' }))
+			.catch(err => res.status(500).json({ error: 'Unable to remove from favorites', errorMsg: err }));
+	}
+);
 
 // Type		DELETE
 // URL		/api/tutorials/upvote/remove/:tutorial
