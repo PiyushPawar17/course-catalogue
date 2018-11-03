@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.3] - 2018-11-3
+
+### Bug Fixes
+
+-   Fixed SignUp Tab merging into footer.
+
 ## [1.4.2] - 2018-11-2
 
 ### Bug Fixes

@@ -1,5 +1,5 @@
 .login {
-	min-height: calc(100vh - 8rem);
+	min-height: 100vh;
 }
 
 .login-signup-form {
@@ -17,7 +17,7 @@
 	);
 	color: #ffffff;
 	font-size: 1.5rem;
-	min-height: calc(100vh - 8rem);
+	min-height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -35,6 +35,16 @@
 
 @media screen and (min-width: 576px) {
 	.login {
-		height: calc(100vh - 8rem);
+		min-height: 100vh;
+	}
+
+	.login-info {
+		min-height: 100vh;
+	}
+}
+
+@media screen and (max-height: 600px) {
+	.login-info {
+		min-height: 120vh;
 	}
 }
