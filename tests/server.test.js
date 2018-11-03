@@ -268,7 +268,7 @@ describe('Route /api/users', () => {
 });
 
 // Tests for Tutorials
-describe('Routes /api/tutorials', () => {
+describe('Route /api/tutorials', () => {
 	describe('GET /api/tutorials/all', () => {
 		test('should return list of all tutorials', done => {
 			request(app)
